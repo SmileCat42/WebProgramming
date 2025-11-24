@@ -9,12 +9,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>หลักสูตร</title>
     </head>
-    <body>
-        <h1 align="center">เจเอสพีนะอันนี้</h1>
-        <% String x = "Bunny "; %>
-        <% System.out.println(""+x); %>
-        <a href="../index.html">x</a>
-    </body>
+    
+        <h1 style="text-align: center; font-size: 3em; color: deeppink">หลักสูตร</h1>
+        <% String x = "COS2204 "; %>
+        <p align="center"; color="pink"><%= x + " วิชาการเขียนโปรแกรมบนเว็ป" %></p>
+        <br><br><br><a href="../index.html">กลับไปหน้าแรก</a>
+    
 </html>
