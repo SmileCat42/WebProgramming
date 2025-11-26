@@ -14,6 +14,7 @@
     
         <h1 style="text-align: center; font-size: 3em; color: deeppink">หลักสูตร</h1>
         <% String x = "COS2204 "; %>
+        
         <p align="center"; color="pink"><%= x + " วิชาการเขียนโปรแกรมบนเว็ป" %></p>
         <br><br><br><a href="../index.html">กลับไปหน้าแรก</a>
     
