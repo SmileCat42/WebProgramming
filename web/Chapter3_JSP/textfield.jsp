@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>กรุณากรอกข้อมูล</h1><br>
         <form action="showdata.jsp">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname"><br>

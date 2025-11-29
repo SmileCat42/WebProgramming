@@ -11,10 +11,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    <body align="center">
         <% 
             String name = request.getParameter("fname");
             String surname = request.getParameter("lname"); 
         %>
+        <% out.print("First Name : "+name); %><br>
+        <% out.print("Last Name : "+surname); %>
     </body>
 </html>
