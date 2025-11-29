@@ -17,7 +17,7 @@
             <input type="text" id="fname" name="fname"><br>
             <label for="lname">Last name:</label><br>
             <input type="text" id="lname" name="lname"><br><br><br>
-            <input type="submit" value="Enter" name="input" />
+            <input type= "submit" value="Enter" name="input" />
         </form>
     </body>
 </html>
