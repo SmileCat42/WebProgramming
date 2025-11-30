@@ -14,5 +14,11 @@
     <body background="BG9.jpg">
         <h1 style="font-size: 3em; color: lime">LOGIN SUCCESS</h1>
         <div style="color: black"><h2>WELCOME TO MY WORLD</h2></div>
+        <%
+            String x=request.getParameter("name");
+            String y=request.getParameter("sur");
+        %>
+        <%= (x != null) ? x : "" %>
+        <%= (y != null) ? y : "" %>
     </body>
 </html>

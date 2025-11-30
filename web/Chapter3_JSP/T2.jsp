@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Fail</title>
     </head>
-    <body>
+    <body background="BG10.png">
         <h1 style="color: red">Fail to login</h1><br><br><br>
         *note
         <br>กรุณากรอก ID : 1234
