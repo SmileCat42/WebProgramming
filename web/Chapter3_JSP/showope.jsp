@@ -23,7 +23,7 @@
         %>
         <%
             out.println("number 1 : "+n1+"<br>");
-            out.println("number 2 : "+n2+"<br>");
+            out.println("number 2 : "+n2+"<br><br>");
             out.println("Plus result :  "+result1+"<br>");
             out.println("Minus result : "+result2+"<br>");
             out.println("Multyply result : "+result3+"<br>");
