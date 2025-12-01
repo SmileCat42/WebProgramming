@@ -12,12 +12,12 @@
         <title>Operator</title>
     </head>
     <body>
-        <h1>Sendint Data</h1><br>
+        <h1>Sending Data</h1><br>
         <form name="ope" action="showope.jsp">
-            <label for="num1">Number 1 : </label><br>
-            <input type="text" name="num1" value=""/><br>
-            <label for="num2">Number 2 : </label><br>
-            <input type="text" name="num2" value="" /><br><br>
+            <label for="num1">Input Number 1 : </label><br>
+            <input type="text" name="numberone" value=""/><br>
+            <label for="num2">Input Number 2 : </label><br>
+            <input type="text" name="numbertwo" value=""/><br><br>
             <input type="submit" value="Enter" name="Enter" />
         </form>
     </body>

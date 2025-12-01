@@ -12,18 +12,22 @@
         <title>Show Operator</title>
     </head>
     <body style="font-size: 2em; color: blueviolet">
-        <h1>Result</h1><br>
+        <h1>Result Page</h1><br>
         <%
-            String x1=request.getParameter("num1");
-            String y1=request.getParameter("num2");
-            int x=Integer.parseInt(x1);
-            int y=Integer.parseInt(y1);
+            String n1=request.getParameter("numberone");
+            String n2=request.getParameter("numbertwo");
+            int result1=Integer.parseInt(n1)+Integer.parseInt(n2);
+            int result2=Integer.parseInt(n1)-Integer.parseInt(n2);
+            int result3=Integer.parseInt(n1)*Integer.parseInt(n2);
+            int result4=Integer.parseInt(n1)/Integer.parseInt(n2);
         %>
         <%
-            out.println("num1 + num2 = "+(x+y)+"<br>");
-            out.println("num1 - num2 = "+(x-y)+"<br>");
-            out.println("num1 * num2 = "+(x*y)+"<br>");
-            out.println("num1 / num2 = "+(x/y)+"<br>");
+            out.println("number 1 : "+n1+"<br>");
+            out.println("number 2 : "+n2+"<br>");
+            out.println("Plus result :  "+result1+"<br>");
+            out.println("Minus result : "+result2+"<br>");
+            out.println("Multyply result : "+result3+"<br>");
+            out.println("Divide result : "+result4+"<br>");
         %>
     </body>
 </html>
