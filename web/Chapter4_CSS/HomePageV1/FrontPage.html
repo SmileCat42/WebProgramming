@@ -26,13 +26,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             a.btn{
                 background-color: navy;
                     color: white;
-                    width: 150px;
-                    height: 32px;
+                    width: 170px;
+                    height: 45px;
                     border-radius: 10px;
        	display: flex;      
                     justify-content: center; 
                     align-items: center;  
                 text-decoration: none;
+                font-family: Kanit;
         }
         .pic{
             display: flex;
@@ -47,19 +48,52 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             border: 3px solid blueviolet;
             padding: 20px;
         }
+        .header {
+        background: #003366;
+        color: white;
+        padding: 15px 20px;
+        font-size: 22px;
+    }
+
+    /* ===== Layout หลัก (ซ้าย + ขวา) ===== */
+    .layout {
+        display: flex;
+        height: calc(100vh - 60px); /* 100vh ลบสูงของ header */
+    }
+
+    .sidebar {
+        width: 250px;
+        background: #7dbeff;
+        color: white;
+        padding: 20px;
+        box-sizing: border-box;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .content {
+        flex: 1;
+        padding: 20px;
+        background: #f4f4f4;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
         </style>
         <title>HomePage Version 1</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <div class="header">
         <center>
             <img src="images/sc4.png" width="1200" height="200">
         </center>
         
-        <p align="center"><b>คำขวัญโรงเรียน : เด็กเก่ง เด็กดี เด็กมีความสุข</b></p>
+        <p align="center"><b style="font-family: Prompt">คำขวัญโรงเรียน : เด็กเก่ง เด็กดี เด็กมีความสุข</b></p>
         
         <div id="mainLink">
+            
         <p align="center"><a href="FrontPage.html">หน้าแรก</a>
         <a href="AboutUs.html"> เกี่ยวกับเรา</a>
         <a href="Course.html"> หลักสูตร</a>
@@ -68,23 +102,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <a href="Event.html"> กิจกรรม</a>
         <a href="ContactUs.html"> ติดต่อเรา</a></p>
         </div>
+        </div>
         
-        <div class="pic">
-            <p class="menu">
+        <div class="layout">
+        <div class="sidebar">
                 <a href="#" class="btn">ลงทะเบียน</a><br>
                 <a href="#" class="btn">นักเรียนดีเด่น</a><br>
                 <a href="#" class="btn">O-Net</a><br>
                 <a href="#" class="btn">V-Net</a><br>
                 <a href="#" class="btn">ประกาศรับสมัคร</a>
-            </p>
-                <img src="images/tun.jpg" width="500" height="300" alt="tun"/>
-                <img src="images/sc1.png" width="500" height="300">
-        </div>
+            </div>
+            
+            <div class="content">
+                <img src="images/tun.jpg" width="450" height="250" alt="tun"/>
+                <img src="images/sc1.png" width="450" height="250"><br>
+        
         
         
         <br><br><br>
-        <div id="container1">
-        <h2>ค่าเทอมตลอดหลักสูตร</h2>
+        <h2 style="font-size: 40px; color:#0050ff; font-family: Kanit">ค่าเทอมตลอดหลักสูตร</h2>
         <br><br>
         <table border="1" style="background-color: silver; width: 500px; height: 200px; align-items: center; font-size: 20px">
             <thead style="background-color: darkgrey; color: white;">
@@ -105,6 +141,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </tbody>
         </table>
         </div>
-
+        </div>
     </body>
 </html>
