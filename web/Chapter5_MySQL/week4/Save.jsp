@@ -15,16 +15,16 @@
         <h1>Hello World!</h1>
         <%
              request.setCharacterEncoding("UTF-8");
-            String SQL = "Insert into Resume(id,name,surname,address) values("
-                    + request.getParameter("id") + ",'" + request.getParameter("name")
-                    + "','" + request.getParameter("surname") + "','" + request.getParameter("address") + "')";
+            String SQL = "Insert into stu(id,Name,Room,Teacher) values("
+                    + request.getParameter("id") + ",'" + request.getParameter("Name")
+                    + "','" + request.getParameter("Room") + "','" + request.getParameter("Teacher") + "')";
 //****************************************
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
             } catch (Exception e) {
             }
             try {
-                Connection c = DriverManager.getConnection("jdbc:mysql://localhost/test1?allowPublicKeyRetrieval=true&useSSL=false", "root", "1234");
+                Connection c = DriverManager.getConnection("jdbc:mysql://localhost/students2568?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
                 Statement s = c.createStatement();
                 s.execute(SQL);
                 out.print(SQL+"<br>");

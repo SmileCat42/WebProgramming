@@ -32,13 +32,13 @@
                 try {
                     Connection c = DriverManager.getConnection("jdbc:mysql://localhost/test?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
                     Statement s = c.createStatement();
-                    ResultSet r = s.executeQuery("Select * from Resume1");
+                    ResultSet r = s.executeQuery("Select * from Resume");
                     //out.print("**********************************************************<br>");
                     //out.print("     ID        Name           Surname        Address      <br>");
                     //out.print("**********************************************************<br>");
                    // java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
                     while (r.next()) {
-        %>
+        %> 
     <tr>
         <td><%=r.getString("Id")%></td>
         <td><%=r.getString("Name")%></td>
