@@ -16,13 +16,12 @@
             <jsp:param name="name" value="Krittaya"/>
         </jsp:include>
         <div class="content">
-            <a href="Save2.jsp" target="_blank">save</a>
             <form action="Save2.jsp" method="GET">
-            ID : <input type="text" name="id" value="" size="50" /><br> 
-            First Name :<input type="text" name="fname" value="" size="50" /><br>
-            Last Name :<input type="text" name="lname" value="" size="10" /><br>
-            Grade :<input type="text" name="grade" value="" size="5" /><br><br>
-            <input type="submit" value="sendData"/><br>
+            ID : <br><input type="text" name="id" value="" size="50" /><br> 
+            First Name :<br><input type="text" name="fname" value="" size="50" /><br>
+            Last Name :<br><input type="text" name="lname" value="" size="10" /><br>
+            Grade :<br><input type="text" name="grade" value="" size="5" /><br><br>
+            <input style="background: lightgoldenrodyellowyellow" type="submit" value="ส่ง"/><br>
         </form>
         </div>
     </body>

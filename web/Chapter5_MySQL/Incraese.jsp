@@ -31,7 +31,8 @@
             <hr>
                 <h1 style="font-size: 40px; color: gold; font-family: kanit; text-align: center">นักเรียนดีเด่น</h1>
                 <hr><br>
-                <a href="Input.jsp" class="btn"> เสนอรายชื่อนักเรียน</a>
+                <a href="Input.jsp" class="btn" style="background: brown"> เสนอรายชื่อนักเรียน</a><br>
+                <a href="ShowDel.jsp" class="btn" style="background: pink"> จัดการรายชื่อ</a>
                 <br>
         <table border>
             <tr style="font-size: 30px; background: yellow; color:orange; padding: 25px 35px;">
