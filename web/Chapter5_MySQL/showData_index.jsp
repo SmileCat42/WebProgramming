@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
 
-    <h1 style="text-align: center; font-family: kanit; font-size: 35px; color: firebrick">จัดการรายชื่อ</h1>
+    <h1>Hello World!</h1>
     <%
        // request.setCharacterEncoding("UTF-8");
              // response.setContentType("text/xml;charset=UTF-8");
@@ -30,22 +30,19 @@
             <th width="98"> <div align="center">Name </div></th>
             <th width="198"> <div align="center">Surname </div></th>
             <th width="97"> <div align="center">Grade </div></th>
-            <th width="97"> <div align="center">Edit </div></th>
-            <th width="71"> <div align="center">Delete </div></th>
+            <th width="71"> <div align="center">Edit </div></th>
         </tr>	
         <%while ((rec != null) && (rec.next())) {%>
         <tr>
             <td><div align="center"><%=rec.getString("id")%></div></td>
             <td><%=rec.getString("fname")%></td>
             <td><%=rec.getString("lname")%></td>
-            <td><div align="center"><%=rec.getString("grade")%></div></td>
+            <td><div align="center"><%=rec.getString("Grade")%></div></td>
             <td align="center"> <a href="update_frm.jsp?id=<%=rec.getString("id")%>">Edit</a></td>
-            <td align="center"> <a href="DelDB.jsp?id=<%=rec.getString("id")%>">ลบ</a></td>
         </tr>
         <%}%>
     </table>      
-    <br><br>
-    <a href="Incraese.jsp"> กลับไปที่รายชื่อ</a>
+
     <% //while(r.next()) 
         // out.print("ID:"+r.getString("Id")+"   Name:"+r.getString("Name")+ " Surname:"+r.getString("Surname")+ 
         //     "   Address:"+r.getString("Address")+"<br>");       

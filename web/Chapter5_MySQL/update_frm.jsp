@@ -20,9 +20,9 @@
     Statement s = null;
     //      try {
     Class.forName("com.mysql.jdbc.Driver");
-    connect = DriverManager.getConnection("jdbc:mysql://localhost/test?autoReconnect=true&useSSL=false", "root", "1234");
+    connect =  DriverManager.getConnection("jdbc:mysql://localhost/good?autoReconnect=true&useSSL=false","root", "Golfring02");
     s = connect.createStatement();
-    String sql = "SELECT * FROM  resume WHERE id = '" + request.getParameter("id") + "'  ";
+    String sql = "SELECT * FROM  stu WHERE id = '" + request.getParameter("id") + "'  ";
     ResultSet rec = s.executeQuery(sql);
     if (rec != null) {
        rec.next();
@@ -39,20 +39,20 @@
                 <tr>
                     <th width="181">
                         <div align="left">Name </div></th>
-                    <td><input type="text" name="Name" size="20" 
-                               value="<%=rec.getString("Name")%>"></td>
+                    <td><input type="text" name="fname" size="20" 
+                               value="<%=rec.getString("fname")%>"></td>
                 </tr>
                 <tr>
                     <th width="181">
                         <div align="left">Surname </div></th>
-                <td><input type="text" name="Surname" size="20" 
-                           value="<%=rec.getString("Surname")%>"></td>
+                <td><input type="text" name="lname" size="20" 
+                           value="<%=rec.getString("lname")%>"></td>
                 </tr>
                 <tr>
                     <th width="181">
                         <div align="left">Address </div></th>
-                    <td><input type="text" name="Address" size="2" 
-                               value="<%=rec.getString("Address")%>"></td>
+                    <td><input type="text" name="Grade" size="2" 
+                               value="<%=rec.getString("Grade")%>"></td>
                 </tr>			
             </table> 
             <input type="submit" value="Save">
