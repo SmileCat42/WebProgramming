@@ -41,7 +41,7 @@
                 out.println(sql);
          s.execute(sql);
          out.println("Record Update Successfully");       
-         response.sendRedirect("Incraese.jsp");
+         response.sendRedirect("DataBase.jsp");
 	  		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

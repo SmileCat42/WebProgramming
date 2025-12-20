@@ -16,7 +16,7 @@
         <%
              request.setCharacterEncoding("UTF-8");
             String SQL = "Insert into stu(id,cc,fname,lname,grade) values("
-                    + request.getParameter("id") + ",'" + request.getParameter("เด็กชาย")
+                    + request.getParameter("id") + ",'" + request.getParameter("gender")
                     + "','" + request.getParameter("fname")
                     + "','" + request.getParameter("lname") + "','" + request.getParameter("grade") + "')";
 //****************************************
@@ -35,6 +35,6 @@
             }
         %>
         <br>
-        <a href="Incraese.jsp" target="_blank"> กลับไปหน้าเดิม</a>
+        <a href="DataBase.jsp" target="_blank"> กลับไปหน้าเดิม</a>
     </body>
 </html>

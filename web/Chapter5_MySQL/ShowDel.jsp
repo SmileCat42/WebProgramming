@@ -45,7 +45,7 @@
         <%}%>
     </table>      
     <br><br>
-    <a href="Incraese.jsp"> กลับไปที่รายชื่อ</a>
+    <a href="DataBase.jsp"> กลับไปที่รายชื่อ</a>
     <% //while(r.next()) 
         // out.print("ID:"+r.getString("Id")+"   Name:"+r.getString("Name")+ " Surname:"+r.getString("Surname")+ 
         //     "   Address:"+r.getString("Address")+"<br>");       

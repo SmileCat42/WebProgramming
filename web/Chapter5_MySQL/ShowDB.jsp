@@ -44,7 +44,8 @@
                 } catch (Exception e) {
                 }
                 try {
-                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/news?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
+                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/news?allowPublicKeyRetrieval="
+                            + "true&useSSL=false", "root", "Golfring02");
                     Statement s = c.createStatement();
                     ResultSet r = s.executeQuery("Select * from school");
                     while (r.next()) {

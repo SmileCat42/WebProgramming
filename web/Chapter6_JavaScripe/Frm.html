@@ -1,0 +1,23 @@
+import java.sql.*
+import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.PreparedStatement;
+    
+    
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+          <form action="UploadServlet" method="post" enctype="multipart/form-data">
+        ID : <input type="text" name="id"><br>
+        First Name: <input type="text" name="name"><br>
+        Last Name: <input type="text" name="surname"><br>
+        Address: <input type="text" name="address"><br>
+        Photo: <input type="file" name="picture"><br>
+        <input type="submit" value="Upload Image">
+    </form>
+    </body>
+</html>

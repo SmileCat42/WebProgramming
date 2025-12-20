@@ -13,9 +13,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-         //   response.setContentType("text/xml;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");%>
         <%	
             request.setCharacterEncoding("UTF-8");
 	Connection connect = null;
