@@ -7,17 +7,23 @@ package my;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.*;
-
+import jakarta.servlet.http.Part;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+@MultipartConfig
 /**
  *
- * @author Windows10
+ * @author 66944
  */
-@WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
+@WebServlet(name = "UploadServlet1", urlPatterns = {"/UploadServlet1"})
 public class UploadServlet extends HttpServlet {
 
     /**
@@ -32,17 +38,47 @@ public class UploadServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UploadServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UploadServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+  response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String address = request.getParameter("address");
+        Part filePart = request.getPart("picture");
+
+        try (InputStream photoContent = filePart.getInputStream()) {
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/good?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
+                String sql = "INSERT INTO pic (id, name, surname, address, picture) VALUES (?, ?, ?, ?, ?)";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, id);
+                pstmt.setString(2, name);
+                pstmt.setString(3, surname);
+                pstmt.setString(4, address);
+                pstmt.setBinaryStream(5, photoContent, (int) filePart.getSize());
+
+                int rowsAffected = pstmt.executeUpdate();
+                if (rowsAffected > 0) {
+                    response.getWriter().println("Image uploaded successfully!");
+                } else {
+                    response.getWriter().println("Image upload failed.");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.getWriter().println("Error: " + e.getMessage());
+            } finally {
+                if (pstmt != null) try {
+                    pstmt.close();
+                } catch (SQLException ignore) {
+                }
+                if (conn != null) try {
+                    conn.close();
+                } catch (SQLException ignore) {
+                }
+            }
         }
     }
 
