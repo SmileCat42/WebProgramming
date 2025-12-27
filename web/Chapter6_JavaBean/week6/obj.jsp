@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>JavaBean</title>
     </head>
     <body>
         <%
@@ -18,6 +18,9 @@
             Thailand.setName("Thailand");
             Thailand.setSize(60);
             out.println("Name : "+Thailand.getName()+"<br>Size : "+Thailand.getSize());
+            
+            request.setAttribute("thai1", Thailand);
+            request.getRequestDispatcher("mixed.jsp").forward(request, response);
         %>
     </body>
 </html>
