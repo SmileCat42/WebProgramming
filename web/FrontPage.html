@@ -42,6 +42,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 padding: 15px 20px;
                  font-size: 22px;
         }
+            .header img {
+                width: 100%;
+                height: auto;
+                display: block;
+        }
             .layout {
                 display: flex;
                 height: calc(100vh - 60px); /* 100vh ลบสูงของ header */
@@ -64,6 +69,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 box-sizing: border-box;
                 overflow-y: auto;
         }
+              * {
+                box-sizing: border-box;
+        }
+        @media (max-width: 768px) {
+
+    .layout {
+        flex-direction: column;   /* ซ้าย-ขวา → บน-ล่าง */
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;              /* เต็มจอ */
+        flex-direction: row;      /* ปุ่มเรียงแนวนอน */
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    #mainLink {
+        text-align: center;
+    }
+    #mainLink a {
+        display: block;
+        margin: 10px 0;
+        border-right: none;
+    }
+
+    a.btn {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
         </style>
         <title>HomePage Version 1</title>
         <meta charset="UTF-8">

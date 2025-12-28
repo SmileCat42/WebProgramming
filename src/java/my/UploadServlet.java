@@ -52,7 +52,7 @@ public class UploadServlet extends HttpServlet {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost/good?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
-                String sql = "INSERT INTO pic (id, name, surname, address, picture) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO pic (id, name, surname, address, filePart) VALUES (?, ?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, id);
                 pstmt.setString(2, name);

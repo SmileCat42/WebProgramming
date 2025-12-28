@@ -13,8 +13,8 @@
         <title>JavaBean</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>JSP only</h1>
         <jsp:setProperty id="Thailand" Property="name" Value="Thai"/>
-        <jsp:getProperty id="Thailand" Property="size" value="50">
+        <jsp:getProperty id="Thailand" Property="size" />
     </body>
 </html>
