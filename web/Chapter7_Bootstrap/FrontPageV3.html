@@ -6,132 +6,92 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 <html>
     <head>
         <style>
-            #container1{
-                width: 1000px;
-                min-width: 250px;
-	max-width: 500px;
+            .hero {
+                background-image: url("sc4.png");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+
+                min-height: 40vh; /* เต็มจอ */
             }
-            #mainLink {
-	background: #3399cc;
-            }
-            #mainLink a{
-                color: white;
-                text-decoration: none;
-                margin-left: 20px;
-                padding-right: 20px;
-                border-right: 2px solid #003366;
-        }
-            #mainLink a:hover {
-	color: #ff6600;
-        }
-            a.btn{
-                background-color: navy;
-                    color: white;
-                    width: 170px;
-                    height: 45px;
-                    border-radius: 10px;
-       	display: flex;      
-                    justify-content: center; 
-                    align-items: center;  
-                text-decoration: none;
-                font-family: Kanit;
-        }
-            .header {
-                background: #003366;
-                color: white;
-                padding: 15px 20px;
-                 font-size: 22px;
-        }
-            .header img {
-                width: 100%;
-                height: auto;
-                display: block;
-        }
-            .layout {
-                display: flex;
-                height: calc(100vh - 60px); /* 100vh ลบสูงของ header */
-        }
-            .sidebar {
-                width: 250px;
-                background: #7dbeff;
-                color: white;
-                padding: 20px;
-                box-sizing: border-box;
-        
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-        }
-            .content {
-                flex: 1;
-                padding: 20px;
-                background: #f4f4f4;
-                box-sizing: border-box;
-                overflow-y: auto;
-        }
-              * {
-                box-sizing: border-box;
-        }
-        @media (max-width: 768px) {
-
-    .layout {
-        flex-direction: column;   /* ซ้าย-ขวา → บน-ล่าง */
-        height: auto;
-    }
-
-    .sidebar {
-        width: 100%;              /* เต็มจอ */
-        flex-direction: row;      /* ปุ่มเรียงแนวนอน */
-        justify-content: space-around;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    #mainLink {
-        text-align: center;
-    }
-    #mainLink a {
-        display: block;
-        margin: 10px 0;
-        border-right: none;
-    }
-
-    a.btn {
-        width: 100%;
-        max-width: 200px;
-    }
+            .scroll-box {
+  white-space: nowrap;
+  padding-left: 70%;
+  animation: scroll-left 10s linear infinite;
+  width: 50px;
+   align:center;
 }
-
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
         </style>
         <title>HomePage Version 1</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/bootstrap.min.css" rel="stylesheet" >
     </head>
     <body>
-        <div class="header">
-            <center>
-                <img src="../Chapter1_Link/images/sc4.png" width="1200" height="200">
-            </center>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         
-            <p align="center"><b style="font-family: Prompt">คำขวัญโรงเรียน : เด็กเก่ง เด็กดี เด็กมีความสุข</b></p>
-        
-            <div id="mainLink">
-                <p align="center"><a href="FrontPageV3.html">หน้าแรก</a>
-                <a href="AboutUs.html"> เกี่ยวกับเรา</a>
-                <a href="Course.html"> หลักสูตร</a>
-                <a href="Personal.html"> บุคลากร</a>
-                <a href="News.html"> ข่าวสาร</a>
-                <a href="Event.html"> กิจกรรม</a>
-                <a href="ContactUs.html"> ติดต่อเรา</a></p>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary  fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="FrontPageV3.htmll">หน้าแรก</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="AboutUs.html">เกี่ยวกับเรา</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="News.html">ข่าวสาร</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                หลักสูตร
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="Course.html">มือใหม่</a></li>
+                                <li><a class="dropdown-item" href="Course.html">ขั้นสูง</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="Course.html">รายวิชาอื่นๆ</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ContactUs.html">ติดต่อเรา</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
+        </nav>
+        <br><br><br>
+        <div class="border p-2 overflow-hidden text-success">
+        <p class="scroll-box">
+            <b style="font-family: Prompt">
+                คำขวัญโรงเรียน : เด็กเก่ง เด็กดี เด็กมีความสุข
+            </b>
+        </p>
         </div>
+        <section class="hero">
+        <section class="container">
         
-        <div class="layout">
-            <div class="sidebar">
-                <a href="#" class="btn">ลงทะเบียน</a><br>
-                <a href="#" class="btn">นักเรียนดีเด่น</a><br>
-                <a href="#" class="btn">O-Net</a><br>
-                <a href="#" class="btn">V-Net</a><br>
-                <a href="#" class="btn">ประกาศรับสมัคร</a>
+        <div class="row">
+            <div class="col-2 offset-0">
+                <button type="button" class="btn btn-outline-danger" >ลงทะเบียน</button>
+<button type="button" class="btn btn-outline-warning">นักเรียนดีเด่น</button>
+<button type="button" class="btn btn-outline-info">O-Net</button>
+<button type="button" class="btn btn-outline-light">ติดตาม</button>
+<button type="button" class="btn btn-outline-dark">ประกาศรับสมัคร</button>
+
+
             </div>
+            </section>
+            </section>
     </body>
 </html>
