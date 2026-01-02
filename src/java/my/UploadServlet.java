@@ -23,7 +23,7 @@ import java.sql.SQLException;
  *
  * @author 66944
  */
-@WebServlet(name = "UploadServlet1", urlPatterns = {"/UploadServlet1"})
+@WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
 public class UploadServlet extends HttpServlet {
 
     /**
@@ -52,7 +52,7 @@ public class UploadServlet extends HttpServlet {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost/good?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
-                String sql = "INSERT INTO pic (id, name, surname, address, filePart) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO pic (id, name, surname, address, picture) VALUES (?, ?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, id);
                 pstmt.setString(2, name);
@@ -69,16 +69,7 @@ public class UploadServlet extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
                 response.getWriter().println("Error: " + e.getMessage());
-            } finally {
-                if (pstmt != null) try {
-                    pstmt.close();
-                } catch (SQLException ignore) {
-                }
-                if (conn != null) try {
-                    conn.close();
-                } catch (SQLException ignore) {
-                }
-            }
+            } 
         }
     }
 
@@ -91,25 +82,22 @@ public class UploadServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    response.getWriter().println("Please upload file via form.");
+}
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    request.setCharacterEncoding("UTF-8");
+
+    Part filePart = request.getPart("picture");
+    // โค้ด upload เดิมของคุณ
+}
 
     /**
      * Returns a short description of the servlet.
