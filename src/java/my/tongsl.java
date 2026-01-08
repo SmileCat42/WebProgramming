@@ -5,30 +5,28 @@
 package my;
 
 import jakarta.servlet.RequestDispatcher;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
 import java.sql.*;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 @MultipartConfig
 /**
  *
  * @author 66944
  */
-@WebServlet(name = "UploadServlet", urlPatterns = {"/UploadServlet"})
-public class UploadServlet extends HttpServlet {
+@WebServlet(name = "tongsl", urlPatterns = {"/tongsl"})
+public class tongsl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,9 +42,9 @@ public class UploadServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String surname = request.getParameter("surname");
-        String address = request.getParameter("address");
+        String Name = request.getParameter("name");
+        String Surname = request.getParameter("price");
+        String Address = request.getParameter("brand");
         Part filePart = request.getPart("picture");
 
         try (InputStream photoContent = filePart.getInputStream()) {
@@ -55,21 +53,25 @@ public class UploadServlet extends HttpServlet {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection("jdbc:mysql://localhost/good?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
-                String sql = "INSERT INTO pic (id, name, surname, address, picture) VALUES (?, ?, ?, ?, ?)";
+
+                String sql = "INSERT INTO pic (id, Name, Surname, Address, picture) VALUES (?, ?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, id);
-                pstmt.setString(2, name);
-                pstmt.setString(3, surname);
-                pstmt.setString(4, address);
+                pstmt.setString(2, Name);
+                pstmt.setString(3, Surname);
+                pstmt.setString(4, Address);
                 pstmt.setBinaryStream(5, photoContent, (int) filePart.getSize());
-
+                
                 int rowsAffected = pstmt.executeUpdate();
-                System.out.print("hongg");
+                System.out.println("rowAffected");
                 if (rowsAffected > 0) {
-                    response.getWriter().println("Image uploaded successfully!");
+                    response.getWriter().println("Image upload success.");
+//                    response.sendRedirect(request.getContextPath() + "/index.html");
                 } else {
                     response.getWriter().println("Image upload failed.");
+                    System.out.println("err");
                 }
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 response.getWriter().println("Error: " + e.getMessage());
@@ -89,18 +91,49 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().println("Please upload file via form.");
+        processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-
-        Part filePart = request.getPart("picture");
-        // โค้ด upload เดิมของคุณ
+        processRequest(request, response);
+//       String firstName = request.getParameter("firstName");
+//            String lastName = request.getParameter("lastName");
+//            Part filePart = request.getPart("photo"); 
+//
+//            try (InputStream photoContent = filePart.getInputStream()) {
+//                Connection conn = null;
+//                PreparedStatement pstmt = null;
+//                try {
+//                    Class.forName("com.mysql.cj.jdbc.Driver");
+//                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "your_username", "your_password");
+//
+//                    String sql = "INSERT INTO contacts (first_name, last_name, photo) VALUES (?, ?, ?)";
+//                    pstmt = conn.prepareStatement(sql);
+//                    pstmt.setString(1, firstName);
+//                    pstmt.setString(2, lastName);
+//                    pstmt.setBinaryStream(3, photoContent, (int) filePart.getSize());
+//
+//                    int rowsAffected = pstmt.executeUpdate();
+//                    if (rowsAffected > 0) {
+//                        response.getWriter().println("Image uploaded successfully!");
+//                    } else {
+//                        response.getWriter().println("Image upload failed.");
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    response.getWriter().println("Error: " + e.getMessage());
+//                } 
+//            }
     }
 
     /**
