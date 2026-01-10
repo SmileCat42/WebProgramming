@@ -9,13 +9,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             .kanit{
                 font-family: kanit;
             }
-            .hero {
-                background-image: url("sc4.png");
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
+            .hero-section {
+                position: relative;
+                min-height: 100vh;
+                background: url("bg10.jpg") center/cover no-repeat;
+            }
 
-                min-height: 30vh; /* เต็มจอ */
+            .hero-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    rgba(255,255,255,0.85),
+                    rgba(255,255,255,0.6)
+                    );
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 1;
+                max-width: 700px;
+                padding: 80px 40px;
+                font-family: "Kanit", sans-serif;
             }
             .scroll-box {
                 white-space: nowrap;
@@ -41,16 +55,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>HomePage Version 3</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="32.png">
-        <link href="../css/bootstrap.min.css" rel="stylesheet" >
+        <link rel="icon" type="image/png" href="Chapter7_Bootstrap/32.png">
+        <link href="css/bootstrap.min.css" rel="stylesheet" >
     </head>
     <body>
-        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+
+
         <nav class="navbar navbar-expand-lg bg-body-tertiary  fixed-top kanit">
             <div class="container-fluid">
                 <a class="navbar-brand" href="FrontPageV3.html">
-    <img src="icon3.png" alt="logo" height="40">
-</a>
+                    <img src="Chapter7_Bootstrap/icon3.png" alt="logo" height="40">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -79,15 +95,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <li class="nav-item">
                             <a class="nav-link" href="ContactUs.html">ติดต่อเรา</a>
                         </li>
+                        <li>
+                            <form class="d-flex align-items-center ms-3">
+                                <a href="register.html" class="btn btn-primary rounded-pill">
+                                    สมัครสมาชิก
+                                </a>
+                            </form>
+                        </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    <div class="d-flex align-items-center gap-2">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                👤
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
+                                <li><a class="dropdown-item" href="#">ตั้งค่า</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#">ออกจากระบบ</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
         <br><br><br>
+
+
         <div class="border p-2 overflow-hidden text-success">
             <p class="scroll-box">
                 <b style="font-family: Prompt">
@@ -95,30 +138,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </b>
             </p>
         </div>
-        <section class="hero"></section>
-        <section class="container">
 
-            <div class="row mt-5">
-                <aside class="col-12 col-md-3 col-lg-3 p-0">
-                    <div class="sidebar vh-100 p-4">
 
-                        <div class="d-grid gap-3">
-                            <button class="btn btn-outline-danger">ลงทะเบียน</button>
-                            <button class="btn btn-outline-warning">นักเรียนดีเด่น</button>
-                            <button class="btn btn-outline-info">O-Net</button>
-                            <button class="btn btn-outline-secondary">ติดตาม</button>
-                            <button class="btn btn-outline-dark">ประกาศรับสมัคร</button>
-                        </div>
-                    </div>
-                </aside>
-                <main class="col-12 col-md-9 col-lg-9 p-4">
-                    <a class="card p-3 text-decoration-none"  href="#" style="width: 18rem;">
-                        <img src="sc2.png" class="card-img-top" alt="ภาษาจาวา">
-                        <div class="card-body pt-3 text-dark">
-                            <p class="card-text">ติดตามการประกาศทุนต่างๆ ในแต่ละปีการศึกษาได้ก่อนใคร</p>
-                        </div>
-                    </a>
-                </main>
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <h1>ยินดีต้อนรับ</h1>
+                <p>เว็บไซต์เพื่อการเรียนรู้สำหรับทุกคน</p>
+                <a class="btn btn-primary rounded-pill px-4">เริ่มต้นใช้งาน</a>
             </div>
         </section>
     </body>
