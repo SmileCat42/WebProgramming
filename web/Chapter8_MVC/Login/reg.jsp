@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td>ชื่อจริง</td>
-                        <td><input type="text" name="fnamel" value="" /></td>
+                        <td><input type="text" name="fname" value="" /></td>
                     </tr>
                     <tr>
                         <td>นามสกุล</td>
@@ -39,11 +39,11 @@
                     </tr>
                     <tr>
                         <td>อีเมล</td>
-                        <td><input type="password" name="email" value="" /></td>
+                        <td><input type="text" name="email" value="" /></td>
                     </tr>
                     <tr>
                         <td>วันเดือนปีเกิด</td>
-                        <td><input type="password" name="birth" value="" /></td>
+                        <td><input type="date" name="birth" value="" /></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit" /></td>

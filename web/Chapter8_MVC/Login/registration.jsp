@@ -5,20 +5,31 @@
 --%>
 
 <%@ page import ="java.sql.*" %>
-<%
-    String id = request.getParameter("id");    
-    String no = request.getParameter("no");    
-    String user = request.getParameter("uname");    
-    String pwd = request.getParameter("pass");
-    String fname = request.getParameter("fname");
-    String lname = request.getParameter("lname");
-    String email = request.getParameter("email");
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Registration</title>
+<%  
+    request.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html; charset=UTF-8");
+    String User = request.getParameter("user");    
+    String Pwd = request.getParameter("pass");
+    String Fname = request.getParameter("fname");
+    String Lname = request.getParameter("lname");
+    String Email = request.getParameter("email");
+    String Birth = request.getParameter("birth");
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gradsystem",
-            "root", "");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/login?useSSL=false&serverTimezone=UTC",
+            "root", "Golfring02");
     Statement st = con.createStatement();
     //ResultSet rs;
-    int i = st.executeUpdate("insert into staflogin(no, id, name, password) values("+ no+", '"+ id + "','" + user + "','" + pwd + "')"); // ("+ no ", '" + id + "','" + user + "','" + pwd + "')");
+    int i = st.executeUpdate("insert into list(user, pass, fname, lname, email, birth) values('"
++ User + "', '"
++ Pwd + "', '"
++ Fname + "', '"
++ Lname + "', '"
++ Email + "', '"
++ Birth + "')");
+    
     if (i > 0) {
         //session.setAttribute("userid", user);
         response.sendRedirect("welcome.jsp");
