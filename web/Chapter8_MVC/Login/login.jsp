@@ -10,10 +10,10 @@
     String userid = request.getParameter("uname");    
     String pwd = request.getParameter("pass");
     Class.forName("com.mysql.jdbc.Driver");
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test1?autoReconnect=true&useSSL=false", "root", "1234");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/login?autoReconnect=true&useSSL=false", "root", "Golfring02");
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("select * from resume where name='" + userid + "' and surname='" + pwd + "'");
+    rs = st.executeQuery("select * from list where user='" + userid + "' and pass='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("userid", userid);//rs.getString("name")
         //out.println("welcome " + userid);
