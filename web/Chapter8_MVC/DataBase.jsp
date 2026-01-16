@@ -3,9 +3,10 @@
     Created on : Dec 13, 2025, 4:19:56 PM
     Author     : Windows10
 --%>
-<%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,model.Resume" %>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,38 +42,17 @@
                 <th>นามสกุล</th>
                 <th>เกรด</th>
             </tr>
-            
-
-        <%
-            try {
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                } catch (Exception e) {
-                }
-                try {
-                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/good?allowPublicKeyRetrieval=true&useSSL=false", "root", "Golfring02");
-                    Statement s = c.createStatement();
-                    ResultSet r = s.executeQuery("Select * from stu");
-                    while (r.next()) {
-        %> 
+            <%
+List<Resume> list=(List<Resume>)request.getAttribute("list");
+for(Resume r:list){
+%>
     <tr>
-        <td><%=r.getString("cc")%></td>
-        <td><%=r.getString("fname")%></td>
-        <td><%=r.getString("lname")%></td>
-        <td><%=r.getString("grade")%></td>
+        <td><%=r.getCC()%></td>
+        <td><%=r.getName()%></td>
+        <td><%=r.getSurname()%></td>
+        <td><%=r.getGrade()%></td>
     </tr>
-    <%
-
-                }
-                s.close();
-                r.close();
-            } catch (SQLException e) {
-                out.print(e);
-            }
-        } finally {
-            out.close();
-        }
-    %>
+    <% } %>
     </table>
         </div>
     </body>

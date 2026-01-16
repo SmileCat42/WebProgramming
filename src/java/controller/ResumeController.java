@@ -6,7 +6,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet("/resume")
+@WebServlet("/mvc")
 public class ResumeController extends HttpServlet {
     ResumeDAO dao=new ResumeDAO();
 
@@ -15,11 +15,11 @@ public class ResumeController extends HttpServlet {
         try{
             if("delete".equals(r.getParameter("action"))){
                 dao.delete(Integer.parseInt(r.getParameter("id")));
-                s.sendRedirect("resume");
+                s.sendRedirect("mvc");
                 return;
             }
             r.setAttribute("list", dao.findAll());
-            r.getRequestDispatcher("/WEB-INF/jsp/list.jsp")
+            r.getRequestDispatcher("/Chapter8_MVC/DataBase.jsp")
              .forward(r,s);
         }catch(Exception e){throw new ServletException(e);}
     }
@@ -28,11 +28,12 @@ public class ResumeController extends HttpServlet {
     throws ServletException,IOException{ 
         try{
             Resume x=new Resume();
-            x.setName(r.getParameter("name"));
-            x.setSurname(r.getParameter("surname"));
-            x.setAddress(r.getParameter("address"));
+            x.setCC(r.getParameter("gender"));
+            x.setName(r.getParameter("fname"));
+            x.setSurname(r.getParameter("lname"));
+            x.setGrade(Double.parseDouble(r.getParameter("grade")));
             dao.insert(x);
-            s.sendRedirect("resume");
+            s.sendRedirect("mvc");
         }catch(Exception e){throw new ServletException(e);}
     }
 }

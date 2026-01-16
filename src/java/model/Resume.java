@@ -11,16 +11,18 @@ package model;
 public class Resume {
 
     private int id;
-    private String name, surname, address;
+    private String name, surname, cc;
+    private double grade;
 
     public Resume() {
     }
 
-    public Resume(int id, String n, String s, String a) {
+    public Resume(int id, String c, String n, String s,double b) {
         this.id = id;
+        this.cc=c;
         this.name = n;
-        this.surname = s;
-        this.address = a;
+        this.surname = s; 
+        this.grade=b;
     }
 
     public int getId() {
@@ -33,6 +35,10 @@ public class Resume {
 
     public String getName() {
         return name;
+    }
+    
+    public double getGrade() {
+        return grade;
     }
 
     public void setName(String n) {
@@ -47,11 +53,15 @@ public class Resume {
         this.surname = s;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCC() {
+        return cc;
     }
 
-    public void setAddress(String a) {
-        this.address = a;
+    public void setCC(String a) {
+        this.cc = a;
+    }
+    
+    public void setGrade(double a){
+        this.grade=a;
     }
 }

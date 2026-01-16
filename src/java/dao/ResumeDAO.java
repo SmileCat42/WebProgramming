@@ -8,12 +8,13 @@ public class ResumeDAO {
     public List<Resume> findAll() throws Exception{
         List<Resume> list=new ArrayList<>();
         Connection c=DBUtil.getConnection();
-        ResultSet rs=c.createStatement().executeQuery("SELECT * FROM Resume");
+        ResultSet rs=c.createStatement().executeQuery("SELECT * FROM stu");
         while(rs.next()){
             list.add(new Resume(rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("surname"),
-                rs.getString("address")));
+                rs.getString("cc"),
+                rs.getString("fname"),
+                rs.getString("lname"),
+                rs.getDouble("grade")));
         }
         c.close();
         return list;
@@ -22,10 +23,11 @@ public class ResumeDAO {
     public void insert(Resume r) throws Exception{
         Connection c=DBUtil.getConnection();
         PreparedStatement p=c.prepareStatement(
-            "INSERT INTO Resume(name,surname,address) VALUES(?,?,?)");
+            "INSERT INTO stu(cc,fname,lname,grade) VALUES(?,?,?,?,?)");
         p.setString(1,r.getName());
-        p.setString(2,r.getSurname());
-        p.setString(3,r.getAddress());
+        p.setString(2,r.getCC());
+        p.setString(3,r.getSurname());
+        p.setDouble(4,r.getGrade());
         p.executeUpdate();
         c.close();
     }
@@ -33,7 +35,7 @@ public class ResumeDAO {
     public void delete(int id) throws Exception{
         Connection c=DBUtil.getConnection();
         PreparedStatement p=c.prepareStatement(
-            "DELETE FROM Resume WHERE id=?");
+            "DELETE FROM stu WHERE id=?");
         p.setInt(1,id);
         p.executeUpdate();
         c.close();
