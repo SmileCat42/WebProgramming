@@ -23,9 +23,9 @@ public class ResumeDAO {
     public void insert(Resume r) throws Exception{
         Connection c=DBUtil.getConnection();
         PreparedStatement p=c.prepareStatement(
-            "INSERT INTO stu(cc,fname,lname,grade) VALUES(?,?,?,?,?)");
-        p.setString(1,r.getName());
-        p.setString(2,r.getCC());
+            "INSERT INTO stu(cc,fname,lname,grade) VALUES(?,?,?,?)");
+        p.setString(1,r.getCC());
+        p.setString(2,r.getName());
         p.setString(3,r.getSurname());
         p.setDouble(4,r.getGrade());
         p.executeUpdate();

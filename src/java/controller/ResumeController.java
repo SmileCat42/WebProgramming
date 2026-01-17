@@ -9,9 +9,10 @@ import java.io.IOException;
 @WebServlet("/mvc")
 public class ResumeController extends HttpServlet {
     ResumeDAO dao=new ResumeDAO();
-
+    
     protected void doGet(HttpServletRequest r,HttpServletResponse s)
     throws ServletException,IOException{
+        System.out.println("444444444444444444");
         try{
             if("delete".equals(r.getParameter("action"))){
                 dao.delete(Integer.parseInt(r.getParameter("id")));
@@ -23,6 +24,8 @@ public class ResumeController extends HttpServlet {
              .forward(r,s);
         }catch(Exception e){throw new ServletException(e);}
     }
+    
+    
 
     protected void doPost(HttpServletRequest r,HttpServletResponse s)
     throws ServletException,IOException{ 
