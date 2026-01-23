@@ -21,7 +21,7 @@
                 เพิ่มรายชื่อ
             </h1>
             <hr><br>
-            <form method="post" action="mvc">
+            <form method="post" action="/JSPHtml/mvc">
             <br> 
             <div boder>
             <label>
@@ -29,7 +29,7 @@
                 เด็กชาย
             </label>
             <label>
-                <input type="radio" name="gender" value="เด็กหญิง" checked="checked" />
+                <input type="radio" name="gender" value="เด็กหญิง" />
                 เด็กหญิง
             </label>
              </div><br>
@@ -37,7 +37,7 @@
             First Name :<br><input type="text" name="fname" value="" size="50" /><br>
             Last Name :<br><input type="text" name="lname" value="" size="10" /><br>
             Grade :<br><input type="text" name="grade" value="" size="5" /><br><br>
-            <input style="background: lightgoldenrodyellowyellow" type="submit" value="ส่ง"/><br>
+            <input style="background: chartreuse" type="submit" value="ส่ง"/><br>
         </form>
         </div>
     </body>

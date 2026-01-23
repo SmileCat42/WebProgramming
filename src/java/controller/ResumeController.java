@@ -12,8 +12,9 @@ public class ResumeController extends HttpServlet {
     
     protected void doGet(HttpServletRequest r,HttpServletResponse s)
     throws ServletException,IOException{
-        System.out.println("444444444444444444");
+        r.setCharacterEncoding("UTF-8");
         try{
+            System.out.println("3333333333333333333333");
             if("delete".equals(r.getParameter("action"))){
                 dao.delete(Integer.parseInt(r.getParameter("id")));
                 s.sendRedirect("mvc");
@@ -29,8 +30,11 @@ public class ResumeController extends HttpServlet {
 
     protected void doPost(HttpServletRequest r,HttpServletResponse s)
     throws ServletException,IOException{ 
+        r.setCharacterEncoding("UTF-8");
         try{
+            System.out.println("444444444444444444444");
             Resume x=new Resume();
+            x.setId(Integer.parseInt(r.getParameter("id")));
             x.setCC(r.getParameter("gender"));
             x.setName(r.getParameter("fname"));
             x.setSurname(r.getParameter("lname"));

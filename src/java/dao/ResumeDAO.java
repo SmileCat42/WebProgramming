@@ -23,11 +23,12 @@ public class ResumeDAO {
     public void insert(Resume r) throws Exception{
         Connection c=DBUtil.getConnection();
         PreparedStatement p=c.prepareStatement(
-            "INSERT INTO stu(cc,fname,lname,grade) VALUES(?,?,?,?)");
-        p.setString(1,r.getCC());
-        p.setString(2,r.getName());
-        p.setString(3,r.getSurname());
-        p.setDouble(4,r.getGrade());
+            "INSERT INTO stu(id,cc,fname,lname,grade) VALUES(?,?,?,?,?)");
+        p.setInt(1,r.getId());
+        p.setString(2,r.getCC());
+        p.setString(3,r.getName());
+        p.setString(4,r.getSurname());
+        p.setDouble(5,r.getGrade());
         p.executeUpdate();
         c.close();
     }
