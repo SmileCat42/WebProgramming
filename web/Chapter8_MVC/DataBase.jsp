@@ -33,7 +33,7 @@
                 <h1 style="font-size: 40px; color: gold; font-family: kanit; text-align: center">นักเรียนดีเด่น</h1>
                 <hr><br>
                 <a href="Chapter8_MVC/InputIncrease.jsp" class="btn" style="background: brown"> เสนอรายชื่อนักเรียน</a><br>
-                <a href="Chapter8_MVC/ShowDel.jsp" class="btn" style="background: pink"> จัดการรายชื่อ</a>
+                <a href="<%=request.getContextPath()%>/mvc?action=delete" class="btn" style="background: pink"> จัดการรายชื่อ</a>
                 <br>
         <table border>
             <tr style="font-size: 30px; background: yellow; color:orange; padding: 25px 35px;">

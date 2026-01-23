@@ -5,6 +5,7 @@
 --%>
 <%@page import="java.sql.*" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,model.Resume" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,15 +14,6 @@
     </head>
 
     <h1 style="text-align: center; font-family: kanit; font-size: 35px; color: firebrick">จัดการรายชื่อ</h1>
-    <%
-       // request.setCharacterEncoding("UTF-8");
-             // response.setContentType("text/xml;charset=UTF-8");
-         request.setCharacterEncoding("UTF-8");
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Connection c = DriverManager.getConnection("jdbc:mysql://localhost/good?autoReconnect=true&useSSL=false", "root", "Golfring02");
-        Statement s = c.createStatement();
-        ResultSet rec = s.executeQuery("Select * from stu");
-    %>
 
 
     <table width="600" border="1">
@@ -30,19 +22,21 @@
             <th width="98"> <div align="center">Name </div></th>
             <th width="198"> <div align="center">Surname </div></th>
             <th width="97"> <div align="center">Grade </div></th>
-            <th width="97"> <div align="center">Edit </div></th>
             <th width="71"> <div align="center">Delete </div></th>
-        </tr>	
-        <%while ((rec != null) && (rec.next())) {%>
-        <tr>
-            <td><div align="center"><%=rec.getString("id")%></div></td>
-            <td><%=rec.getString("fname")%></td>
-            <td><%=rec.getString("lname")%></td>
-            <td><div align="center"><%=rec.getString("grade")%></div></td>
-            <td align="center"> <a href="update_frm.jsp?id=<%=rec.getString("id")%>">Edit</a></td>
-            <td align="center"> <a href="mvc?action=delete&id=<%=rec.getId()%>">ลบ</a></td>
         </tr>
-        <%}%>
+        <%
+            List<Resume> list = (List<Resume>) request.getAttribute("list");
+            if (list != null) {
+                for (Resume r : list) {
+        %>	
+        <tr>
+            <td><%=r.getCC()%></td>
+            <td><%=r.getName()%></td>
+            <td><%=r.getSurname()%></td>
+            <td><div align="center"><%=r.getGrade()%></div></td>
+            <td align="center"> <a href="mvc?action=delete&id=<%=r.getId()%>">ลบ</a></td>
+        </tr>
+        <% }} %>
     </table>      
     <br><br>
     <a href="DataBase.jsp"> กลับไปที่รายชื่อ</a>
