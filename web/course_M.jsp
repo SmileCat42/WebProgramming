@@ -14,7 +14,7 @@
 
     </head>
     <body>
-        <jsp:include page="FrontPageF.html">
+        <jsp:include page="FrontPageF_M.html">
             <jsp:param name="name" value="Krittaya"/>
         </jsp:include>
         <script src="js/bootstrap.bundle.min.js"></script>

@@ -14,7 +14,7 @@
 
     </head>
     <body>
-        <jsp:include page="FrontPageF.html">
+        <jsp:include page="FrontPageF_G.html">
             <jsp:param name="name" value="Krittaya"/>
         </jsp:include>
         <script src="js/bootstrap.bundle.min.js"></script>
@@ -47,8 +47,8 @@
 
                             <!-- ปุ่ม -->
                             <div class="card-footer bg-white border-0">
-                                <button class="btn btn-primary w-100">
-                                    ลงทะเบียนเรียน
+                                <button href="login" class="btn btn-outline-secondary" disabled>
+                                    🔒 เข้าสู่ระบบเพื่อจองที่นั่ง
                                 </button>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                     <div class="col-md-3">
                         <!-- card ใบที่ 3 -->
                     </div>
-                    
+
                     <div class="col-md-3">
                         <!-- card ใบที่ 3 -->
                     </div>
