@@ -9,27 +9,34 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
+    protected void doGet(HttpServletRequest r, HttpServletResponse s)
+            throws ServletException, IOException {
+
+        // เข้ามาครั้งแรก → แสดงหน้า login
+        r.getRequestDispatcher("/Login.html").forward(r, s);
+    }
+
     protected void doPost(HttpServletRequest r, HttpServletResponse s)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 
         String user = r.getParameter("uname");
-    String pass = r.getParameter("pass");
+        String pass = r.getParameter("pass");
 
-    try {
-        LoginDAO dao = new LoginDAO();
-        Student st = dao.login(user, pass);
+        try {
+            LoginDAO dao = new LoginDAO();
+            Student st = dao.login(user, pass);
 
-        if (st != null) {
-            HttpSession session = r.getSession();
-            session.setAttribute("user", st);
-            s.sendRedirect("course");
-        } else {
-            r.setAttribute("error", "Username หรือ Password ไม่ถูกต้อง");
-            r.getRequestDispatcher("/login.jsp").forward(r, s);
+            if (st != null) {
+                HttpSession session = r.getSession();
+                session.setAttribute("user", st);
+                s.sendRedirect("course");
+            } else {
+                r.setAttribute("error", "Username หรือ Password ไม่ถูกต้อง");
+                r.getRequestDispatcher("/Login.html").forward(r, s);
+            }
+
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
-
-    } catch (Exception e) {
-        throw new ServletException(e);
     }
-}
 }
