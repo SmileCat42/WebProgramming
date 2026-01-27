@@ -3,7 +3,7 @@
     Created on : Jan 24, 2026, 10:39:27 AM
     Author     : Windows10
 --%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,36 +23,23 @@
             <div class="container mt-4">
                 <div class="row g-4">
 
-                    <div class="col-md-3">
-                        <div class="card shadow-sm h-100">
-
-                            <!-- รูป -->
-                            <img src="img/jv2.png" class="card-img-top" alt="Java Course">
-
-                            <!-- เนื้อหา -->
-                            <div class="card-body">
-                                <h5 class="card-title">Java Programming</h5>
-                                <p class="card-text text-muted">
-                                    เรียนรู้การสร้างเว็บด้วย JSP, MVC และ DAO
-                                </p>
-
-                                <!-- รายละเอียด -->
-                                <ul class="list-unstyled small">
-                                    <li>📅 <strong>Date :</strong> MON WEN</li>
-                                    <li>👥 <strong>Seat :</strong> 
-                                        <span class="text-success fw-bold">remain 5 / 30</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- ปุ่ม -->
-                            <div class="card-footer bg-white border-0">
-                                <button href="login" class="btn btn-outline-secondary" disabled>
-                                    🔒 เข้าสู่ระบบเพื่อจองที่นั่ง
-                                </button>
+                    <c:forEach var="c" items="${courses}">
+                        <div class="col-md-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">${c.courseName}</h5>
+                                    <p class="card-text">วันเรียน: ${c.days}</p>
+                                    <p class="card-text">เวลา: ${c.times}</p>
+                                    <!-- ปุ่ม -->
+                                    <div class="card-footer bg-white border-0">
+                                        <button href="login" class="btn btn-outline-secondary" disabled>
+                                            🔒 เข้าสู่ระบบเพื่อจองที่นั่ง
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:forEach>
 
                     <div class="col-md-3">
                         <div class="card shadow-sm h-100">
@@ -62,7 +49,7 @@
 
                             <!-- เนื้อหา -->
                             <div class="card-body">
-                                <h5 class="card-title">Python Programming</h5>
+                                <h5 class="card-title">Endddddddd</h5>
                                 <p class="card-text text-muted">
                                     เรียนรู้การสร้างเว็บด้วย JSP, MVC และ DAO
                                 </p>

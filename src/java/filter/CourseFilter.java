@@ -7,7 +7,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
-@WebFilter("/course")
+@WebFilter("/course56")
 public class CourseFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse res,
@@ -20,7 +20,7 @@ public class CourseFilter implements Filter {
         HttpSession session = r.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
-            s.sendRedirect("/login"); // หรือ course_guest
+            s.sendRedirect("course_G.jsp"); // หรือ course_guest
             return;
         }
         chain.doFilter(req, res);

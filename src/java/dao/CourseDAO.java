@@ -31,8 +31,16 @@ public class CourseDAO {
                 rs.getString("course_name"),
                 rs.getString("days"),
                 rs.getString("times")
+                    
             );
             list.add(course);
+            System.out.println(
+    "DAO => " +
+    rs.getInt("course_id") + " | " +
+    rs.getString("course_name") + " | " +
+    rs.getString("days") + " | " +
+    rs.getString("times")
+);
         }
 
         c.close();
