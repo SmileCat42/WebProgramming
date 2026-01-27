@@ -11,7 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>All Course</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" >
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/Kanit.css" rel="stylesheet">
     </head>
     <body>
         <jsp:include page="FrontPageF_G.html">
@@ -20,16 +21,22 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <section class="hero-section">
             <div class="hero-overlay"></div>
-            <div class="container mt-4">
+            <div class="container mt-4" style="font-family: kanit;">
                 <div class="row g-4">
 
-                    <c:forEach var="c" items="${courses}">
+                    <c:forEach var="c" items="${courses}" varStatus="s">
                         <div class="col-md-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title">${c.courseName}</h5>
-                                    <p class="card-text">วันเรียน: ${c.days}</p>
-                                    <p class="card-text">เวลา: ${c.times}</p>
+                                    <h5 class="card-title" style="color: #0050ff">${c.courseName}
+                                        <c:if test="${status.index == 0}">
+        <span class="badge-new">NEW</span>
+    </c:if>
+                                    </h5><br>
+                                    <div class="mb-2">
+                                        <p class="card-text mb-1">📅 <strong>วันเรียน : </strong>${c.days}</p>
+                                        <p class="card-text mb-0">👥 <strong>เวลา : </strong>${c.times}</p>
+                                    </div>
                                     <!-- ปุ่ม -->
                                     <div class="card-footer bg-white border-0">
                                         <button href="login" class="btn btn-outline-secondary" disabled>

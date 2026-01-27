@@ -3,7 +3,7 @@
     Created on : Jan 24, 2026, 10:39:27 AM
     Author     : Windows10
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> //เปิดใช้งานฟังก์ชั่น c ในการดึง DB
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>All Course</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" >
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/Kanit.css" rel="stylesheet">
     </head>
     <body>
         <jsp:include page="FrontPageF_M.html">
@@ -20,22 +21,29 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <section class="hero-section">
             <div class="hero-overlay"></div>
-            <div class="container mt-4">
+            <div class="container mt-4" style="font-family: kanit;">
                 <div class="row g-4">
 
-                    <c:forEach var="c" items="${courses}"> //วนลูป List ที่จัดเก็บกลุ่มวิชาจากหน้า CourseDAO ด้วยตัวแปร c
-                        <div class="col-md-3"> //เว้นระยะ
-                            <div class="card h-100"> //ขนาดตามเนื้อหา
+                    <c:forEach var="c" items="${courses}" varStatus="s"> 
+                        <div class="col-md-3" >
+                            <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title">${c.courseName}</h5>
-                                    <p class="card-text">วันเรียน: ${c.days}</p>
-                                    <p class="card-text">เวลา: ${c.times}</p>
+                                    <h5 class="card-title" style="color: #0050ff">
+                                        ${c.courseName}
+                                        <c:if test="${status.index == 0}">
+        <span class="badge-new">NEW</span>
+    </c:if>
+                                    </h5><br>
+                                    <div class="mb-2">
+                                        <p class="card-text mb-1">📅 <strong>วันเรียน : </strong>${c.days}</p>
+                                        <p class="card-text mb-0">👥 <strong>เวลา : </strong>${c.times}</p>
+                                    </div>
                                     <!-- ปุ่ม -->
                                     <div class="card-footer bg-white border-0">
-                                <button class="btn btn-primary w-100">
-                                    ลงทะเบียนเรียน
-                                </button>
-                            </div>
+                                        <button class="btn btn-info w-100">
+                                            ลงทะเบียนเรียน
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
