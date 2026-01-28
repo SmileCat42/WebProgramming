@@ -37,6 +37,7 @@
                                     <div class="mb-2">
                                         <p class="card-text mb-1">📅 <strong>วันเรียน : </strong>${c.days}</p>
                                         <p class="card-text mb-0">👥 <strong>เวลา : </strong>${c.times}</p>
+                                        <p class="card-text mb-0">🖥 <strong>ที่นั่ง : </strong>${course.current}/${course.max}</p>
                                     </div>
                                     <!-- ปุ่ม -->
                                     <div class="card-footer bg-white border-0">

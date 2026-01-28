@@ -13,7 +13,7 @@ public class CourseFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain)
             throws IOException, ServletException {
-
+        System.out.println("FILTER HIT");
         HttpServletRequest r = (HttpServletRequest) req;
         HttpServletResponse s = (HttpServletResponse) res;
 
