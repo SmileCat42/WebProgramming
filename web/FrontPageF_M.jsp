@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
+
         <style>
             .kanit{
                 font-family: kanit;
@@ -86,7 +84,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 Course
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="course">Web Programming</a></li>
+                                <li><a class="dropdown-item" href="coursel">Web Programming</a></li>
                                 <li><a class="dropdown-item" href="course">C++</a></li>
                                 <li><a class="dropdown-item" href="course">Python</a></li>
                                 <li><a class="dropdown-item" href="course">Java</a></li>
@@ -97,13 +95,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <li class="nav-item">
                             <a class="nav-link" href="ContactUs.html">ติดต่อเรา</a>
                         </li>
-                        <li>
-                            <form class="d-flex align-items-center ms-3">
-                                <a href="login" class="btn btn-primary rounded-pill">
-                                    เข้าสู่ระบบ
-                                </a>
-                            </form>
-                        </li>
                     </ul>
                     <div class="d-flex align-items-center gap-2">
                         <form class="d-flex" role="search">
@@ -111,6 +102,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
 
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                👤
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
+                                <li><a class="dropdown-item" href="#">ตั้งค่า</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#">ออกจากระบบ</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,7 +127,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div class="border p-2 overflow-hidden text-success">
             <p class="scroll-box">
                 <b style="font-family: Prompt">
-                    ยินดีต้อนรับเข้าสู่โลกแห่งการเรียนรู้ เข้าสู่ระบบเพื่อเช็คที่นั่ง 
+                    สวัสดีคุณ ${sessionScope.user.fname} ขอให้สนุกกับการเรียนนะ    Invest in yourself. Education is the best interest.
                 </b>
             </p>
         </div>

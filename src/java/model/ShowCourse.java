@@ -11,10 +11,11 @@ package model;
 public class ShowCourse{
    private int courseId;
     private String courseName;
-    private String days;   // Mon, Wed
-    private String times;  // 09:00-12:00
+    private String days;  
+    private String times;  
     private int current;
     private int max;
+    private String picture;
     
     public ShowCourse(){}
     public ShowCourse(int courseId, String courseName, String days, String times){
@@ -29,6 +30,7 @@ public void setDay(String a) { days=a; }
 public void setTime(String a) { times=a; }
     public void setCurrent(int a) { current=a; }
     public void setMax(int a) { max=a; }
+    public void setPicture(String a){picture=a;}
     // getter
     public int getCourseId() { return courseId; }
     public String getCourseName() { return courseName; }
@@ -36,4 +38,5 @@ public void setTime(String a) { times=a; }
     public String getTimes() { return times; }
     public int getCurrent() { return current; }
     public int getMax() { return max; }
+    public String getPicture(){return picture;}
 }

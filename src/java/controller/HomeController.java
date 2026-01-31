@@ -23,7 +23,7 @@ public class HomeController extends HttpServlet {
         }
 
         // === MEMBER ===
-        r.getRequestDispatcher("FrontPageF_M.html")
+        r.getRequestDispatcher("FrontPageF_M.jsp")
          .forward(r, s);
     }
 }
