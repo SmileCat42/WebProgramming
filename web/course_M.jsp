@@ -19,28 +19,28 @@
             <div class="container mt-4" style="font-family: kanit;">
                 <div class="row g-4">
 
-                    <c:forEach var="c" items="${courses}" varStatus="s"> 
+                    <c:forEach var="c" items="${courses}" varStatus="s">
                         <div class="col-md-3" >
                             <div class="card h-100">
                                 <img src="img/${c.picture}" class="card-img-top" alt="${c.courseName}" style="height: 200px; object-fit: cover;">
-                                    <div class="card-body d-flex flex-column flex-grow-1">
-                                        <h5 class="card-title" style="color: #0050ff">
-                                            ${c.courseName}
-                                        </h5>
-                                        <hr> <div class="mb-3"> <p class="card-text mb-2">📅 <strong>วันเรียน : </strong>${c.days}</p>
-                                            <p class="card-text mb-2">⏰ <strong>เวลา : </strong>${c.times}</p>
-                                            <p class="card-text mb-0">🖥 <strong>ที่นั่ง : </strong>${c.current}/${c.max}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer bg-white border-0">
-                                        <button class="btn btn-info w-100 text-white fw-bold" 
-                                                onclick="openBookingModal('${c.courseId}', '${c.courseName}', '${c.days}')">
-                                            ลงทะเบียนเรียน
-                                        </button>
+                                <div class="card-body d-flex flex-column flex-grow-1">
+                                    <h5 class="card-title" style="color: #0050ff">
+                                        ${c.courseName}
+                                    </h5>
+                                    <hr> <div class="mb-3"> <p class="card-text mb-2">📅 <strong>วันเรียน : </strong>${c.days}</p>
+                                        <p class="card-text mb-2">⏰ <strong>เวลา : </strong>${c.times}</p>
+                                        <p class="card-text mb-0">🖥 <strong>ที่นั่ง : </strong>${c.current}/${c.max}</p>
                                     </div>
                                 </div>
+
+                                <div class="card-footer bg-white border-0">
+                                    <button class="btn btn-info w-100 text-white fw-bold" 
+                                            onclick="openBookingModal('${c.courseId}', '${c.courseName}', '${c.days}')">
+                                        ลงทะเบียนเรียน
+                                    </button>
+                                </div>
                             </div>
+                        </div>
                     </c:forEach>
 
                 </div>
@@ -59,7 +59,6 @@
                     <p id="modalCourseDays" class="text-primary fw-bold small"></p>
                     <p class="text-muted">กรุณาเลือกวันที่สะดวกเข้าเรียน</p>
                     <hr>
-
                     <input type="hidden" id="hiddenCourseId">
 
                     <div id="sessionButtonsContainer" class="d-grid gap-3">
@@ -114,6 +113,30 @@
 
             var myModal = new bootstrap.Modal(document.getElementById('bookingModal'));
             myModal.show();
+        }
+
+        function executeBooking(sessionId) {
+            if (!confirm('ยืนยันการลงทะเบียนเรียนรอบนี้?'))
+                return;
+
+            const url = "ReservController?sessionId=" + sessionId;
+
+            fetch(url)
+                    .then(response => response.text()) // ✅ รับค่าเป็นข้อความธรรมดา
+                    .then(data => {
+                        const result = data.trim(); // ตัดช่องว่างส่วนเกินออก
+
+                        if (result === "Success") {
+                            alert("🎉 ลงทะเบียนเรียนสำเร็จแล้ว!");
+                            location.reload();
+                        } else if (result === "Full") {
+                            alert("❌ ขออภัย รอบเรียนนี้ที่นั่งเต็มแล้ว");
+                        } else if (result === "AuthError") {
+                            alert("⚠️ กรุณาเข้าสู่ระบบก่อนจองเรียน");
+                        } else {
+                            alert("เกิดข้อผิดพลาด: " + result);
+                        }
+                    });
         }
     </script>
 </body>
