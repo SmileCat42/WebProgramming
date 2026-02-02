@@ -17,7 +17,6 @@
         <jsp:include page="FrontPageF_G.html">
             <jsp:param name="name" value="Krittaya"/>
         </jsp:include>
-        <script src="js/bootstrap.bundle.min.js"></script>
         <section class="hero-section">
             <div class="hero-overlay"></div>
             <div class="container mt-4" style="font-family: kanit;">

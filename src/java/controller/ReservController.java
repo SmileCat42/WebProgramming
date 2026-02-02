@@ -10,27 +10,33 @@ import java.io.IOException;
 @WebServlet("/ReservController")
 public class ReservController extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    // เปลี่ยนเป็น doGet เพื่อให้รองรับ fetch แบบปกติจาก JS
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        response.setContentType("text/plain"); // ส่งกลับเป็นข้อความธรรมดาให้ AJAX
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
         
         HttpSession session = request.getSession(false);
-        Student student = (Student) session.getAttribute("user");
+        Student student = (session != null) ? (Student) session.getAttribute("user") : null;
         
-        // รับค่า courseId ที่ส่งมาจาก AJAX
-        String courseIdParam = request.getParameter("courseId");
+        // รับค่า sessionId (ที่ส่งมาจาก fetch('ReservController?sessionId=' + id))
+        String sessionIdParam = request.getParameter("sessionId");
         
-        if (student != null && courseIdParam != null) {
-            int studentId = student.getId();
-            int courseId = Integer.parseInt(courseIdParam);
-            
-            // เรียกใช้ DAO
-            ReservDAO dao = new ReservDAO();
-            String result = dao.insertBooking(studentId, courseId);
-            
-            // ส่งผลลัพธ์กลับไปให้ AJAX (Success, Full, หรือ Fail)
-            response.getWriter().write(result);
+        if (student != null && sessionIdParam != null) {
+            try {
+                int studentId = student.getId(); // เช็คชื่อ getter ในคลาส Student ของคุณด้วยนะ
+                int sessionId = Integer.parseInt(sessionIdParam);
+                
+                ReservDAO dao = new ReservDAO();
+                // เรียกใช้ DAO ที่เราทำ Transaction ไว้
+                String result = dao.insertBooking(studentId, sessionId);
+                
+                response.getWriter().write(result);
+            } catch (Exception e) {
+                response.getWriter().write("Error: " + e.getMessage());
+            }
         } else {
             response.getWriter().write("AuthError");
         }

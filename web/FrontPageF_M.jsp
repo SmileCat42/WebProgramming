@@ -57,8 +57,6 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" >
     </head>
     <body>
-        <script src="js/bootstrap.bundle.min.js"></script>
-
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary  fixed-top kanit">
             <div class="container-fluid">
@@ -97,24 +95,29 @@
                         </li>
                     </ul>
                     <div class="d-flex align-items-center gap-2">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+
+                        <form class="d-flex mb-0" role="search"> <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
 
                         <div class="dropdown">
-                            <button class="btn btn-outline-secondary dropdown-toggle"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                👤
+                            <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" 
+                                    type="button" 
+                                    data-bs-toggle="dropdown" 
+                                    aria-expanded="false"
+                                    style="padding: 2px 8px; border-radius: 20px;"> <img src="img/profile3.png" 
+                                                                                 alt="Profile" 
+                                                                                 class="rounded-circle" 
+                                                                                 style="width: 30px; height: 30px; object-fit: cover; border: 1px solid #ddd;">
+
+                                <span class="ms-2 d-none d-lg-inline" style="font-size: 0.9rem;">${user.fname}</span>
                             </button>
 
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">โปรไฟล์</a></li>
-                                <li><a class="dropdown-item" href="#">ตั้งค่า</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                <li><a class="dropdown-item" href="#">👤 โปรไฟล์ของฉัน</a></li>
+                                <li><a class="dropdown-item" href="#">⚙️ ตั้งค่า</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#">ออกจากระบบ</a></li>
+                                <li><a class="dropdown-item text-danger" href="logout">🚪 ออกจากระบบ</a></li>
                             </ul>
                         </div>
                     </div>

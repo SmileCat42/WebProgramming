@@ -1,5 +1,5 @@
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- JSTL tag lib-->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <html>
@@ -14,8 +14,8 @@
             <jsp:param name="name" value="Krittaya"/>
         </jsp:include>
         <script src="js/bootstrap.bundle.min.js"></script>
-        <section class="hero-section">
-            <div class="hero-overlay"></div>
+        <section class="hero-section"> <!-- รูปพื้นหลัง -->
+            <div class="hero-overlay"></div> <!-- ฟิล์มขาว-->
             <div class="container mt-4" style="font-family: kanit;">
                 <div class="row g-4">
 
@@ -42,45 +42,6 @@
                                 </div>
                             </div>
                     </c:forEach>
-
-                    <div class="col-md-3">
-                        <div class="card shadow-sm h-100">
-
-                            <!-- รูป -->
-                            <img src="img/pt2.png" class="card-img-top" alt="Java Course">
-
-                            <!-- เนื้อหา -->
-                            <div class="card-body">
-                                <h5 class="card-title">Python Programming</h5>
-                                <p class="card-text text-muted">
-                                    เรียนรู้การสร้างเว็บด้วย JSP, MVC และ DAO
-                                </p>
-
-                                <!-- รายละเอียด -->
-                                <ul class="list-unstyled small">
-                                    <li>📅 <strong>วันเรียน:</strong> 1–2 มี.ค. 2026</li>
-                                    <li>👥 <strong>ที่นั่ง:</strong> 
-                                        <span class="text-success fw-bold">เหลือ 5 / 30</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- ปุ่ม -->
-                            <div class="card-footer bg-white border-0">
-                                <button class="btn btn-primary w-100">
-                                    ลงทะเบียนเรียน
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- card ใบที่ 3 -->
-                    </div>
-
-                    <div class="col-md-3">
-                        <!-- card ใบที่ 3 -->
-                    </div>
 
                 </div>
             </div>
@@ -140,7 +101,7 @@
                             btn.type = 'button';
                             btn.className = 'btn btn-outline-primary py-2 text-start';
                             // โชว์ทั้ง วัน และ เวลา บนปุ่ม
-                            btn.innerHTML = `🗓️ รอบวัน${s.sessionDate} (${s.sessionTime})`;
+                            btn.innerHTML = '🗓️ รอบวัน ' + s.sessionDate + ' (' + s.sessionTime + ')';
 
                             // เมื่อกดปุ่ม ให้ส่ง sessionId ไปบันทึกการจอง
                             btn.onclick = function () {
