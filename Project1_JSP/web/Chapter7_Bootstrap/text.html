@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <p id="msg">Hello</p>
+        <button onclick="changeText()">Click</button>
+        <script>
+            function changeText() {
+                document.getElementById("text").innerText = "DOM ทำงานแล้ว!";
+            }
+        </script>
+        
+        <p id="box">นี่คือกล่องข้อความ</p>
+        <button onclick="toggle()">ซ่อน / แสดง</button>
+        <script>
+        function toggle() {
+            const box = document.getElementById("box");
+            box.style.display =
+                box.style.display === "none" ? "block" : "none";
+        }
+    </script>
+    </body>
+</html>

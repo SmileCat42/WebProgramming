@@ -1,0 +1,43 @@
+ import javax.servlet.annotation.MultipartConfig;
+    import javax.servlet.http.Part;
+    import java.io.InputStream;
+    import java.sql.Connection;
+    import java.sql.DriverManager;
+    import java.sql.PreparedStatement;
+
+    @MultipartConfig
+    public class UploadServlet extends HttpServlet {
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            Part filePart = request.getPart("photo"); 
+
+            try (InputStream photoContent = filePart.getInputStream()) {
+                Connection conn = null;
+                PreparedStatement pstmt = null;
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "your_username", "your_password");
+
+                    String sql = "INSERT INTO contacts (first_name, last_name, photo) VALUES (?, ?, ?)";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, firstName);
+                    pstmt.setString(2, lastName);
+                    pstmt.setBinaryStream(3, photoContent, (int) filePart.getSize());
+
+                    int rowsAffected = pstmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        response.getWriter().println("Image uploaded successfully!");
+                    } else {
+                        response.getWriter().println("Image upload failed.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.getWriter().println("Error: " + e.getMessage());
+                } finally {
+                    if (pstmt != null) try { pstmt.close(); } catch (SQLException ignore) {}
+                    if (conn != null) try { conn.close(); } catch (SQLException ignore) {}
+                }
+            }
+        }
+    }

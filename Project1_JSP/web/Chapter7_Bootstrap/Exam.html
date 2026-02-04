@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WOW Interactive Web</title>
+    <style>
+/* ===== Global ===== */
+* {
+    box-sizing: border-box;
+    font-family: Kanit, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(120deg, #667eea, #764ba2);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ===== Header ===== */
+.header {
+    padding: 25px;
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+/* ===== Container ===== */
+.container {
+    display: flex;
+    gap: 25px;
+    padding: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ===== Card ===== */
+.card {
+    width: 280px;
+    height: 200px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+
+    transition: 
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-20px) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+/* ===== Button ===== */
+button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.4s;
+}
+
+button:active::after {
+    transform: scale(8);
+}
+
+/* ===== Floating Panel ===== */
+.panel {
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 25px 25px 0 0;
+    padding: 25px;
+    transition: bottom 0.5s ease;
+}
+
+.panel.show {
+    bottom: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+    }
+}
+</style>
+</head>
+   <body>
+
+<div class="header">
+    ✨ WOW Interactive Web ✨
+</div>
+
+<div class="container">
+    <div class="card" onclick="openPanel('card1')">
+        <h3>Card One</h3>
+        <p>คลิกแล้วดูสิ 👀</p>
+    </div>
+
+    <div class="card" onclick="openPanel('card2')">
+        <h3>Card Two</h3>
+        <p>มันดิ้นได้ 😆</p>
+    </div>
+
+    <div class="card" onclick="openPanel('card3')">
+        <h3>Card Three</h3>
+        <p>DOM ทำงาน!</p>
+    </div>
+</div>
+
+<div style="text-align:center">
+    <button onclick="randomBG()">เปลี่ยนสีฉาก</button>
+</div>
+
+<!-- ===== Sliding Panel ===== -->
+<div class="panel" id="panel">
+    <h2 id="panelTitle"></h2>
+    <p id="panelText"></p>
+    <button onclick="closePanel()">ปิด</button>
+</div>
+
+<script>
+/* ===== DOM Interaction ===== */
+
+function openPanel(type) {
+    const panel = document.getElementById("panel");
+    const title = document.getElementById("panelTitle");
+    const text = document.getElementById("panelText");
+
+    if (type === "card1") {
+        title.innerText = "Card One";
+        text.innerText = "นี่คือ panel ที่ slide ขึ้นมาด้วย DOM";
+    } else if (type === "card2") {
+        title.innerText = "Card Two";
+        text.innerText = "ไม่มี reload ไม่มี framework";
+    } else {
+        title.innerText = "Card Three";
+        text.innerText = "นี่แหละ WOW effect ที่เข้าใจได้";
+    }
+
+    panel.classList.add("show");
+}
+
+function closePanel() {
+    document.getElementById("panel").classList.remove("show");
+}
+
+/* เปลี่ยน gradient แบบสุ่ม */
+function randomBG() {
+    const colors = [
+        "#667eea, #764ba2",
+        "#ff758c, #ff7eb3",
+        "#43cea2, #185a9d",
+        "#f7971e, #ffd200"
+    ];
+    const pick = colors[Math.floor(Math.random() * colors.length)];
+    document.body.style.background =
+        `linear-gradient(120deg, ${pick})`;
+}
+</script>
+
+</body>
+</html>
+ 
