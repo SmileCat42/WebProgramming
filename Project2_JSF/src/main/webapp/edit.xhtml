@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<f:metadata>
+    <f:viewAction action="#{resumeBean.loadById}"/>
+</f:metadata>
+
+<h:head><title>Edit Resume</title></h:head>
+<h:body>
+
+<h2>Edit Resume</h2>
+
+<h:messages/>
+
+<h:form>
+    Name:
+    <h:inputText value="#{resumeBean.resume.name}" required="true"/>
+    <br/>
+
+    Surname:
+    <h:inputText value="#{resumeBean.resume.surname}" required="true"/>
+    <br/>
+
+    Address:
+    <h:inputText value="#{resumeBean.resume.address}" required="true"/>
+    <br/>
+
+    <h:commandButton value="Update"
+                     action="#{resumeBean.update}"/>
+    <h:link value="Cancel" outcome="list.xhtml"/>
+</h:form>
+
+</h:body>
+</html>

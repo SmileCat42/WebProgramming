@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+    <h:head><title>Resume List</title></h:head>
+    <h:body>
+
+        <h2>Resume List</h2>
+
+        <h:messages/>
+
+        <h:link value="Add New" outcome="add.xhtml"/>
+        <br/><br/>
+        <h:form>
+            <h:dataTable value="#{resumeBean.list}" var="r" border="1">
+
+                <h:column>#{r.id}</h:column>
+                <h:column>#{r.name}</h:column>
+                <h:column>#{r.surname}</h:column>
+                <h:column>#{r.address}</h:column>
+
+                <h:column>
+                    <h:link value="Edit" outcome="edit.xhtml">
+                        <f:param name="id" value="#{r.id}"/>
+                    </h:link>
+
+                  
+                    <h:commandLink value="Delete"
+                                   action="#{resumeBean.delete(r.id)}"
+                                   onclick="return confirm('Delete?')"/>
+                </h:column>
+
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
