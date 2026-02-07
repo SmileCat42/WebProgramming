@@ -1,6 +1,0 @@
-  <form action="UploadServlet" method="post" enctype="multipart/form-data">
-        First Name: <input type="text" name="firstName"><br>
-        Last Name: <input type="text" name="lastName"><br>
-        Photo: <input type="file" name="photo"><br>
-        <input type="submit" value="Upload Image">
-    </form>
