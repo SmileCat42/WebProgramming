@@ -10,20 +10,17 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
         <!-- Bootstrap CSS -->
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
-        <!-- Custom CSS -->
-        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="Kanit.css"/>
     </h:head>
-    <h:body class="kanit">
-
-
-        <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <h:body>
+        
+        <!-- NAVBAR --> 
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
             <div class="container-fluid">
-                <h:link outcome="home" styleClass="navbar-brand">
-                    <h:graphicImage library="img" name="icon3.png" height="40" />
+                <h:link outcome="index" styleClass="navbar-brand">
+                    <h:graphicImage library="img" name="icon5.png" height="40" />
                 </h:link>
 
 
@@ -33,27 +30,21 @@
 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><h:link outcome="home" styleClass="nav-link">หน้าแรก</h:link></li>
-                        <li class="nav-item"><h:link outcome="about" styleClass="nav-link">เกี่ยวกับเรา</h:link></li>
-                        <li class="nav-item"><h:link outcome="news" styleClass="nav-link">ข่าวสาร</h:link></li>
-                        <li class="nav-item"><h:link outcome="course" styleClass="nav-link">Course</h:link></li>
-                        <li class="nav-item"><h:link outcome="contact" styleClass="nav-link">ติดต่อเรา</h:link></li>
-                        <div class="d-flex align-items-center gap-2">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white">
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">MainPage</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">AboutUs</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">NEWS</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">Course</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">ContactUs    </h:link></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-2">
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-
                     </div>
-                    </ul>
-
-
-                    <h:form styleClass="d-flex">
-                        <h:commandLink value="เข้าสู่ระบบ" action="login" styleClass="btn btn-primary rounded-pill" />
-                    </h:form>
                 </div>
-            </div>
+                </div>
         </nav>
 
 
@@ -63,7 +54,7 @@
         <!-- SCROLL TEXT -->
         <div class="border p-2 overflow-hidden text-success">
             <div class="scroll-box">
-                <b>ยินดีต้อนรับเข้าสู่โลกแห่งการเรียนรู้ เข้าสู่ระบบเพื่อเช็คที่นั่ง</b>
+                <b>Welcome to Administrator mode. Login for editor</b>
             </div>
         </div>
 
