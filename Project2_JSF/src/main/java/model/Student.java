@@ -23,7 +23,7 @@ public class Student {
         this.user = d; 
         this.pass=e;
         this.email=f;
-        this.email=g;
+        this.role=g;
     }
 
     public int getId() {

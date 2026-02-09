@@ -42,10 +42,10 @@ public class LoginBean implements Serializable { // @ViewScoped ต้อง imp
 
             if (st != null) {
                 // เช็คว่า Role เป็น admin หรือไม่
-                if ("admin".equalsIgnoreCase(st.getRole())) {
+                if ("ADMIN".equalsIgnoreCase(st.getRole())) {
                     FacesContext.getCurrentInstance().getExternalContext()
                             .getSessionMap().put("user", st);
-                    return "FrontPage?faces-redirect=true";
+                    return "dashboard?faces-redirect=true";
                 } else {
                     // ถ้าเป็น student แต่พยายามเข้าหน้า admin
                     FacesContext.getCurrentInstance().addMessage(null,

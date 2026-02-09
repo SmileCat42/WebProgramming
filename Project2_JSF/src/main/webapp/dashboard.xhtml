@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="template.xhtml"> <ui:define name="title">Dashboard - Admin System</ui:define>
+
+    <ui:define name="content">
+
+        <div class="container-fluid pt-3">
+            <h1 class="text-white">Dashboard</h1>
+            <p class="text-white-50">ยินดีต้อนรับคุณ #{user.fname} เข้าสู่ระบบจัดการ</p>
+
+            <hr border="1" color="white" />
+
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white shadow">
+                        <div class="card-body">
+                            <h5>TotalStudents</h5>
+                            <h3>#{dashboardBean.totalStudents}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white shadow">
+                        <div class="card-body">
+                            <h5>AllCourses</h5>
+                            <h3>#{dashboardBean.totalCourses}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card bg-success text-white shadow">
+                        <div class="card-body">
+                            <h5>Enrollments</h5>
+                            <h3>#{dashboardBean.totalEnroll}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card bg-danger text-white shadow">
+                        <div class="card-body">
+                            <h5>Reported</h5>
+                            <h3>3</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-lg-8">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-dark">
+                            <h6 class="m-0 font-weight-bold text-white">สถิติจำนวนนักเรียนรายเดือน</h6>
+                        </div>
+                        <div class="card-body text-center py-1"> 
+                            <h:graphicImage value="#{resource['img:gh1.png']}" 
+                styleClass="img-fluid" 
+                style="max-width: 70%; height: auto; display: block; margin: 0 auto;" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 bg-dark">
+                            <h6 class="m-0 font-weight-bold text-white">สถิติจำนวนนักเรียนรายเดือน</h6>
+                        </div>
+                        <div class="card-body text-center p-0"> 
+                            <h:graphicImage value="#{resource['img:gh2.png']}" 
+                styleClass="img-fluid" 
+                style="max-width: 80%; height: auto; display: block; margin: 0 auto;" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

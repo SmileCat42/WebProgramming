@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+        <title><ui:insert name="title">Home</ui:insert></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            .hero-section {
+                position: relative;
+                min-height: 100vh;
+                background: url("#{resource['img/bg11.jpg']}") center/cover no-repeat;
+            }
+
+            .hero-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    rgba(0,0,0,0.85),
+                    rgba(0,0,0,0.6)
+                    );
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 1;
+                max-width: 700px;
+                padding: 80px 40px;
+                font-family: "Kanit", sans-serif;
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 1;
+                max-width: 100%; /* ปรับเป็น 100% สำหรับหน้า Dashboard เพื่อให้กว้างเต็มตา */
+                padding: 40px;
+                font-family: "Kanit", sans-serif;
+
+                /* --- เพิ่มตรงนี้ --- */
+                color: #ffffff; /* บังคับให้เนื้อหาข้างในเป็นสีขาวทั้งหมด */
+            }
+
+            /* แถม: จัดการให้พวกหัวข้อเด่นขึ้น */
+            .hero-content h1, .hero-content h2, .hero-content h3 {
+                color: #ffffff;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* ใส่เงาเล็กน้อยให้อ่านง่ายขึ้นบนรูปภาพ */
+            }
+
+            /* จัดการสีของ Label ใน Form (ถ้ามี) */
+            .hero-content label {
+                color: #ffffff;
+            }
+            /* จัดการแถบข้อความเลื่อน */
+            .scrolling-bar-container {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+                background-color: midnightblue
+            }
+
+            .scroll-box {
+                display: inline-block;
+                white-space: nowrap;
+                padding-left: 100%;
+                animation: my-scroll 15s linear infinite;
+            }
+            .border.p-1.overflow-hidden {
+                margin-top: 0 !important; /* ดันขึ้นไปให้ติดขอบบน */
+                border-top: none;         /* เอาเส้นขอบบนออกเพื่อให้เนียนไปกับเมนู (ถ้าต้องการ) */
+            }
+
+            /* Sidebar Style */
+            .sidebar {
+                width: 280px; /* กำหนดความกว้างให้ชัดเจน */
+                min-width: 280px;
+                background: rgba(0, 0, 0, 0.4); /* ดำโปร่งแสงเพื่อให้เห็นรูปหลังลางๆ */
+                backdrop-filter: blur(10px);    /* เอฟเฟกต์กระจกฝ้าเพื่อให้ดูหรู */
+                min-height: 100vh;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s;
+            }
+
+            .sidebar .nav-link {
+                color: rgba(255, 255, 255, 0.8) !important;
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+                border-left: 4px solid transparent;
+            }
+
+            /* เวลาเอาเมาส์ชี้เมนู หรือหน้าปัจจุบัน */
+            .sidebar .nav-link:hover, .sidebar .nav-link.active {
+                background: rgba(255, 255, 255, 0.1);
+                color: #2fe38e !important; /* สีเขียวสว่างตามสไตล์คุณ */
+                border-left: 4px solid #2fe38e;
+            }
+
+            /* ปรับ Content ไม่ให้โดนกลบ */
+            .hero-content {
+                max-width: 100% !important; /* ให้กว้างเต็มหน้าจอ */
+                padding: 0 !important;
+            }
+            @keyframes my-scroll {
+                0%   {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
+
+            /* ขยับปุ่ม Login */
+            .login-btn-spacing {
+                margin-left: 25px !important;
+            }
+        </style>
+        <!-- Bootstrap CSS -->
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="Kanit.css"/>
+    </h:head>
+    <h:body>
+
+        <!-- NAVBAR --> 
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+            <div class="container-fluid">
+                <h:link outcome="index" styleClass="navbar-brand">
+                    <h:graphicImage library="img" name="icon5.png" height="40" />
+                </h:link>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white">
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">MainPage</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">AboutUs</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">NEWS</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">Course</h:link></li>
+                        <li class="nav-item"><h:link outcome="add" styleClass="nav-link">ContactUs    </h:link></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-2">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-light" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div style="margin-top:80px"></div>
+
+
+        <!-- SCROLL TEXT -->
+        <div class="border p-1 overflow-hidden text-light scrolling-bar-container border.p-1.overflow-hidden">
+            <div class="scroll-box">
+                <b>Hello #{user.fname}, Take your time!</b>
+            </div>
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+
+            <div class="container-fluid hero-content p-0">
+                <div class="d-flex"> <nav class="sidebar shadow-lg">
+                        <div class="sticky-top" style="top: 20px;"> <div class="p-3 mb-4 border-bottom border-secondary">
+                                <h5 class="text-uppercase fw-bold m-0" style="letter-spacing: 2px;">Administrator</h5>
+                            </div>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <h:link outcome="index" styleClass="nav-link">
+                                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-people me-2"></i> Student List
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-folder me-2"></i> Manage Courses
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-people me-2"></i> Student List
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-people me-2"></i> Setting
+                                    </h:link>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <main class="flex-grow-1 p-4">
+                        <ui:insert name="content" />
+                    </main>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bootstrap JS -->
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+
+    </h:body>
+</html>
