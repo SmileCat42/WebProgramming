@@ -24,8 +24,8 @@ public class Course{
         this.days = days;
         this.times = times;
     }
-public void setId(int a) { courseId=a; }
-public void setName(String a) { courseName=a; }
+public void setCourseId(int a) { courseId=a; }
+public void setCourseName(String a) { courseName=a; }
 public void setDay(String a) { days=a; }
 public void setTime(String a) { times=a; }
     public void setCurrent(int a) { current=a; }

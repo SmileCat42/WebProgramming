@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <h:head><title>Add Course &amp; Session</title></h:head>
+    <h:body>
+        <h2>Add New Course</h2>
+        <h:messages style="color:red" id="msg"/>
+
+        <h:form id="courseForm">
+            <h:panelGrid columns="2">
+
+                Course Name:
+                <h:inputText value="#{courseBean2.course.courseName}" required="true"/>
+
+                <hr/><hr/>
+                Day of Week:
+                <h:selectOneMenu value="#{courseBean2.newSession.sessionDate}">
+                    <f:selectItem itemLabel="Monday" itemValue="MON"/>
+                    <f:selectItem itemLabel="Tuesday" itemValue="TUE"/>
+                    <f:selectItem itemLabel="Wednesday" itemValue="WEN"/>
+                    <f:selectItem itemLabel="Thursday" itemValue="THU"/>
+                    <f:selectItem itemLabel="Friday" itemValue="FRI"/>
+                    <f:selectItem itemLabel="Saturday" itemValue="SAT"/>
+                    <f:selectItem itemLabel="Sunday" itemValue="SUN"/>
+                    </h:selectOneMenu>
+
+                Time Slot:
+                <p:inputText value="#{courseBean2.newSession.sessionTime}" placeholder="e.g. 09:00-12:00"/>
+
+            </h:panelGrid>
+
+            <br/>
+            <h:commandButton value="Save Course and Session"
+                             action="#{courseBean2.saveCourseWithSession}"/>
+            
+            <h:link value="Back to List" outcome="list.xhtml" style="margin-left: 10px;"/>
+        </h:form>
+    </h:body>
+</html>

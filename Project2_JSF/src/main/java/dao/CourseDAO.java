@@ -33,8 +33,8 @@ public class CourseDAO {
 
             while (rs.next()) {
                 Course course = new Course();
-                course.setId(rs.getInt("course_id"));
-                course.setName(rs.getString("course_name"));
+                course.setCourseId(rs.getInt("course_id"));
+                course.setCourseName(rs.getString("course_name"));
                 course.setPicture(rs.getString("course_pic"));
                 //ดึงวันที่ที่รวมกันแล้ว (ชื่อคอลัมน์ "days" ตรงกับ GROUP_CONCAT ใน SQL แล้ว)
                 String dayStr = rs.getString("days");
