@@ -2,8 +2,7 @@ package controller;
 
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.RequestScoped;
-import model.Course;
-import model.Session;
+
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,7 +10,7 @@ import jakarta.transaction.UserTransaction;
 
 import java.io.Serializable;
 
-@Named
+/*@Named
 @RequestScoped
 public class CourseBean2 implements Serializable {
     
@@ -48,4 +47,4 @@ public class CourseBean2 implements Serializable {
         return null;
     }
 }
-}
+}*/

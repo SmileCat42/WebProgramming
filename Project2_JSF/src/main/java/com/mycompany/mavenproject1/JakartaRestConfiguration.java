@@ -1,4 +1,4 @@
-package com.mycompany.jsfresumecrud2;
+package com.mycompany.mavenproject1;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

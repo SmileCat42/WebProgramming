@@ -23,22 +23,25 @@ public class DashboardBean {
     private int totalEnroll;
 
     @PostConstruct
-    public void init() {
-        try {
-            StudentDAO sdao = new StudentDAO();
-            totalStudents = sdao.countAllStudents();
-            
-            CourseDAO cDao = new CourseDAO();
-            totalCourses = cDao.countAllCourses();
-            
-            EnrollmentDAO eDao = new EnrollmentDAO();
-            totalEnroll = eDao.countAllEnroll();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+public void init() {
+    try {
+        System.out.println("*****************init*******************");
+        StudentDAO sdao = new StudentDAO();
+        totalStudents = sdao.countAllStudents();
+        System.out.println("++++++++++++++++++++++Students: " + totalStudents);
 
+        CourseDAO cDao = new CourseDAO();
+        totalCourses = cDao.countAllCourses();
+        System.out.println("++++++++++++++++++Courses: " + totalCourses);
+
+        EnrollmentDAO eDao = new EnrollmentDAO();
+        totalEnroll = eDao.countAllEnroll();
+        System.out.println("++++++++++++++++++Enroll: " + totalEnroll);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     // Getter & Setter
     public int getTotalStudents() { return totalStudents; }
     public int getTotalCourses() { return totalCourses; }

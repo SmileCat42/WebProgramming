@@ -2,7 +2,6 @@
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
                 xmlns:f="jakarta.faces.core"
-                xmlns:p="http://primefaces.org/ui"
                 template="template.xhtml">
 
     <ui:define name="title">Course Schedule List</ui:define>
@@ -12,13 +11,6 @@
 
         <h:messages style="color:red"/>
 
-        <div class="mb-3">
-            <br/>
-            <p:button value="Add course" icon="pi pi-plus" 
-                      
-                      outcome="add2.xhtml" styleClass="ui-button-success" />
-
-        </div>
         <br/>
 
         <h:form>
@@ -45,23 +37,7 @@
                         #{c.times}
                 </h:column>
 
-                <h:column>
-                    <f:facet name="header">Manage</f:facet>
 
-                    <div style="display: flex; gap: 10px;">
-                        <p:linkButton icon="pi pi-pencil" 
-                                      outcome="edit.xhtml" 
-                                      styleClass="rounded-button ui-button-warning">
-                            <f:param name="id" value="#{c.courseId}"/>
-                        </p:linkButton>
-
-                        <p:commandButton action="#{courseBean.deleteCourse(c.courseId)}" 
-                                         update="@form" 
-                                         onclick="return confirm('Are you sure to delete this course?')"
-                                         icon="pi pi-trash"
-                                         styleClass="rounded-button ui-button-danger" />
-                    </div>
-                    </h:column>
             </h:dataTable>
         </h:form>
     </ui:define>

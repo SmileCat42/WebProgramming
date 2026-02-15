@@ -1,4 +1,4 @@
-package com.mycompany.jsfresumecrud2.resources;
+package com.mycompany.mavenproject1.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
