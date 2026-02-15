@@ -10,29 +10,37 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
+import util.CSDB;
 
 @Named("courseBean")
-@SessionScoped 
+@SessionScoped
 public class CourseBean implements Serializable {
-    
+
     private List<Course> courseList; // ใช้ ShowCourse ตามที่เขียนใน DAO2
     private CourseDAO dao = new CourseDAO(); // เรียกใช้ DAO ตัวเก่ง
+
+    private Course course = new Course();
+ 
     
     // ส่วนที่ขาดไป: Method นี้จะทำงานอัตโนมัติเมื่อเปิดหน้าเว็บ
     @PostConstruct
     public void init() {
         try {
             // ไปดึงข้อมูลมาจาก Database ผ่าน DAO ที่เขียนไว้
-            courseList = dao.getAllCourses(); 
-            System.out.println("+++++++++++++ = "+courseList.size());
+            courseList = dao.getAllCourses();
+            System.out.println("+++++++++++++ = " + courseList.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public List<Course> getCourseList() {
-        System.out.println("+++++++++++++get = "+courseList.size());
+        System.out.println("+++++++++++++get = " + courseList.size());
         return courseList;
     }
 
@@ -44,6 +52,74 @@ public class CourseBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; 
+        return null;
+    }
+
+    //ใช้สำหรับ add
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public void saveCourse() {
+
+        Connection conn = null;
+
+        try {
+            conn = CSDB.getConnection();
+            conn.setAutoCommit(false); // 🔥 เริ่ม transaction
+
+            // 1️⃣ insert course
+            String sqlCourse = "INSERT INTO course (course_name, course_price, course_pic) VALUES (?, ?, ?)";
+
+            PreparedStatement ps1 = conn.prepareStatement(
+                    sqlCourse,
+                    Statement.RETURN_GENERATED_KEYS
+            );
+
+            ps1.setString(1, course.getCourseName());
+            ps1.setInt(2, 2000);
+            ps1.setString(3, "default.png");
+            ps1.executeUpdate();
+
+            //เป็นการให้ course สร้าง id ก่อน แล้วจึงส่ง id ไปให้ session บันทึก
+            ResultSet rs = ps1.getGeneratedKeys();
+            int generatedId = 0;
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
+            String sqlSession = "INSERT INTO session (course_id, session_date, session_max, session_time) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps2 = conn.prepareStatement(sqlSession);
+            for (String day : course.getSelectedDays()) {
+                ps2.setInt(1, generatedId);
+                ps2.setString(2, day);
+                ps2.setInt(3, course.getMax());
+                ps2.setString(4, course.getTimes());
+                ps2.executeUpdate();
+            }
+
+            conn.commit(); // ✅ สำเร็จ commit
+
+            FacesContext.getCurrentInstance()
+                    .addMessage(null,
+                            new FacesMessage("Course added successfully"));
+
+        } catch (Exception e) {
+            try {
+                if (conn != null) {
+                    conn.rollback(); // ❌ fail rollback
+                }
+            } catch (Exception ex) {
+            }
+
+            FacesContext.getCurrentInstance()
+                    .addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Error saving course", null));
+        }
     }
 }

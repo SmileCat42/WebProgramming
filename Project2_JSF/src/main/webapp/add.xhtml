@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Add Course</title>
+</h:head>
+
+<h:body>
+
+<h:form id="form">
+
+    <p:messages id="msg"/>
+
+    <p:panel header="Add Course">
+
+        <p:inputText value="#{courseBean.course.courseName}" 
+                     placeholder="Course Name" required="true"/>
+
+       
+        <p:selectManyCheckbox value="#{courseBean.course.selectedDays}">
+            <f:selectItem itemLabel="Monday" itemValue="MON"/>
+            <f:selectItem itemLabel="Tueday" itemValue="TUE"/>
+            <f:selectItem itemLabel="Wensday" itemValue="WEN"/>
+            <f:selectItem itemLabel="Thursday" itemValue="THU"/>
+            <f:selectItem itemLabel="Friday" itemValue="FRI"/>
+            <f:selectItem itemLabel="Saturday" itemValue="SAT"/>
+            <f:selectItem itemLabel="Sunday" itemValue="SUN"/>
+        </p:selectManyCheckbox>
+
+        <p:inputText value="#{courseBean.course.max}" 
+                     placeholder="Max Seat" required="true"/>
+        
+        <p:inputText value="#{courseBean.course.times}" 
+                     placeholder="09:00-11:00" required="true"/>
+
+        <p:commandButton value="Save"
+                         action="#{courseBean.saveCourse}"
+                         update="form msg"
+                         icon="pi pi-check"/>
+
+    </p:panel>
+
+</h:form>
+
+</h:body>
+</html>

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author 66944
@@ -16,6 +18,8 @@ public class Course{
     private int current;
     private int max;
     private String picture;
+    private List<String> selectedDays; //สำหรับการจัดเก็บวัน ตอน add
+    
     
     public Course(){}
     public Course(int courseId, String courseName, String days, String times){
@@ -39,4 +43,11 @@ public void setTime(String a) { times=a; }
     public int getCurrent() { return current; }
     public int getMax() { return max; }
     public String getPicture(){return picture;}
+    
+    public List<String> getSelectedDays() {
+    return selectedDays;
+}
+public void setSelectedDays(List<String> selectedDays) {
+    this.selectedDays = selectedDays;
+}
 }
