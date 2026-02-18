@@ -7,6 +7,7 @@ public class Session implements Serializable {
     private int sessionid;
     private String date;
     private String time;
+    private int max;
 
     // Constructors
     public Session() {}
@@ -20,4 +21,7 @@ public class Session implements Serializable {
 
     public String getSessionTime() { return time; }
     public void setSessionTime(String c) { this.time = c; }
+    
+    public int getMax() { return max; }
+    public void setMax(int a) { this.max = a; }
 }

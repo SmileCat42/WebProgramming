@@ -1,48 +1,53 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="jakarta.faces.core">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
 
-<h:head>
-    <title>Add Course</title>
-</h:head>
+    <ui:define name="title">Course Schedule List</ui:define>
 
-<h:body>
+    <ui:define name="content">
+        <h2>Add Course</h2>
+        <h:form id="form">
+            <p:messages id="msg" showDetail="true"/>
+            <p:inputText value="#{courseBean.course.courseName}"
+                         placeholder="Course Name" required="true"/>
 
-<h:form id="form">
+            <ui:repeat value="#{courseBean.course.sessions}" var="s">
 
-    <p:messages id="msg"/>
+                <div class="mb-3">
+                    <div class="session-row">
+                    <p:selectOneMenu value="#{s.sessionDate}">
+                        <f:selectItem itemLabel="Monday" itemValue="MON"/>
+                        <f:selectItem itemLabel="Tuesday" itemValue="TUE"/>
+                        <f:selectItem itemLabel="Wednesday" itemValue="WED"/>
+                        <f:selectItem itemLabel="Thursday" itemValue="THU"/>
+                        <f:selectItem itemLabel="Friday" itemValue="FRI"/>
+                    </p:selectOneMenu>
 
-    <p:panel header="Add Course">
+                    <p:inputText value="#{s.sessionTime}" placeholder="09:00-11:00"/>
 
-        <p:inputText value="#{courseBean.course.courseName}" 
-                     placeholder="Course Name" required="true"/>
+                    <p:inputText value="#{s.max}" placeholder="Max Seat"/>
 
-       
-        <p:selectManyCheckbox value="#{courseBean.course.selectedDays}">
-            <f:selectItem itemLabel="Monday" itemValue="MON"/>
-            <f:selectItem itemLabel="Tueday" itemValue="TUE"/>
-            <f:selectItem itemLabel="Wensday" itemValue="WEN"/>
-            <f:selectItem itemLabel="Thursday" itemValue="THU"/>
-            <f:selectItem itemLabel="Friday" itemValue="FRI"/>
-            <f:selectItem itemLabel="Saturday" itemValue="SAT"/>
-            <f:selectItem itemLabel="Sunday" itemValue="SUN"/>
-        </p:selectManyCheckbox>
+                    <p:commandButton value="Remove"
+                                     action="#{courseBean.removeSession(s)}"
+                                     update="form"
+                                     process="@this"/>
+                </div>
+                    </div>
+            </ui:repeat>
 
-        <p:inputText value="#{courseBean.course.max}" 
-                     placeholder="Max Seat" required="true"/>
-        
-        <p:inputText value="#{courseBean.course.times}" 
-                     placeholder="09:00-11:00" required="true"/>
+            <p:commandButton value="+ Add Session"
+                             action="#{courseBean.addSession}"
+                             update="form"
+                             process="@this"/>
 
-        <p:commandButton value="Save"
-                         action="#{courseBean.saveCourse}"
-                         update="form msg"
-                         icon="pi pi-check"/>
+            <p:commandButton value="Save"
+                             action="#{courseBean.saveCourse}"
+                             process="@form"
+                            update="form"/>
 
-    </p:panel>
-
-</h:form>
-
-</h:body>
-</html>
+        </h:form>
+    </ui:define>
+</ui:composition>

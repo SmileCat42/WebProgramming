@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
+import model.Session;
 import util.CSDB;
 
 @Named("courseBean")
@@ -23,24 +24,20 @@ public class CourseBean implements Serializable {
 
     private List<Course> courseList; // ใช้ ShowCourse ตามที่เขียนใน DAO2
     private CourseDAO dao = new CourseDAO(); // เรียกใช้ DAO ตัวเก่ง
+    private Course course = new Course(); //ใช้ตอนจะ add
 
-    private Course course = new Course();
- 
-    
     // ส่วนที่ขาดไป: Method นี้จะทำงานอัตโนมัติเมื่อเปิดหน้าเว็บ
     @PostConstruct
     public void init() {
         try {
             // ไปดึงข้อมูลมาจาก Database ผ่าน DAO ที่เขียนไว้
             courseList = dao.getAllCourses();
-            System.out.println("+++++++++++++ = " + courseList.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public List<Course> getCourseList() {
-        System.out.println("+++++++++++++get = " + courseList.size());
         return courseList;
     }
 
@@ -63,15 +60,24 @@ public class CourseBean implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
+    
+    public void removeSession(Session s) {
+    course.getSessions().remove(s);
+}
+    
+     public void addSession() {
+        course.getSessions().add(new Session());
+    }
 
     public void saveCourse() {
-
+        System.out.println("SAVE METHOD CALLED !!!!!");
         Connection conn = null;
 
         try {
             conn = CSDB.getConnection();
             conn.setAutoCommit(false); // 🔥 เริ่ม transaction
-
+            System.out.println("++++++++++++Course name++++++++++: " + course.getCourseName());
+            System.out.println("+++++++++++++++Session size+++++++++++: " + course.getSessions().size());
             // 1️⃣ insert course
             String sqlCourse = "INSERT INTO course (course_name, course_price, course_pic) VALUES (?, ?, ?)";
 
@@ -94,11 +100,15 @@ public class CourseBean implements Serializable {
 
             String sqlSession = "INSERT INTO session (course_id, session_date, session_max, session_time) VALUES (?, ?, ?, ?)";
             PreparedStatement ps2 = conn.prepareStatement(sqlSession);
-            for (String day : course.getSelectedDays()) {
-                ps2.setInt(1, generatedId);
-                ps2.setString(2, day);
-                ps2.setInt(3, course.getMax());
-                ps2.setString(4, course.getTimes());
+            System.out.println("+++++++++++++Session size+++++++++++++ = " + course.getSessions().size());
+            System.out.println("********************Generated ID = " + generatedId);
+            for (Session s : course.getSessions()) {
+
+                ps2.setInt(1, generatedId);      // course_id
+                ps2.setString(2, s.getSessionDate());    // day
+                ps2.setInt(3, s.getMax());       // max seat
+                ps2.setString(4, s.getSessionTime());   // time
+
                 ps2.executeUpdate();
             }
 

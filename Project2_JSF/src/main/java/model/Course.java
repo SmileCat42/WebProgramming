@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class Course{
     private int current;
     private int max;
     private String picture;
-    private List<String> selectedDays; //สำหรับการจัดเก็บวัน ตอน add
+    private List<Session> sessions = new ArrayList<>();
     
     
     public Course(){}
@@ -44,10 +45,11 @@ public void setTime(String a) { times=a; }
     public int getMax() { return max; }
     public String getPicture(){return picture;}
     
-    public List<String> getSelectedDays() {
-    return selectedDays;
+    public List<Session> getSessions() {
+    return sessions;
 }
-public void setSelectedDays(List<String> selectedDays) {
-    this.selectedDays = selectedDays;
+
+public void setSessions(List<Session> sessions) {
+    this.sessions = sessions;
 }
 }
