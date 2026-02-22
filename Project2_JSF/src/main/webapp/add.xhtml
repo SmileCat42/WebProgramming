@@ -16,7 +16,7 @@
 
             <ui:repeat value="#{courseBean.course.sessions}" var="s">
 
-                <div class="mb-3">
+                <div class="mb-3 mr-3">
                     <div class="session-row">
                     <p:selectOneMenu value="#{s.sessionDate}">
                         <f:selectItem itemLabel="Monday" itemValue="MON"/>
@@ -24,6 +24,8 @@
                         <f:selectItem itemLabel="Wednesday" itemValue="WED"/>
                         <f:selectItem itemLabel="Thursday" itemValue="THU"/>
                         <f:selectItem itemLabel="Friday" itemValue="FRI"/>
+                        <f:selectItem itemLabel="Saturday" itemValue="SAT"/>
+                        <f:selectItem itemLabel="Sunday" itemValue="SUN"/>
                     </p:selectOneMenu>
 
                     <p:inputText value="#{s.sessionTime}" placeholder="09:00-11:00"/>

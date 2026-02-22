@@ -113,7 +113,8 @@ public class CourseBean implements Serializable {
             }
 
             conn.commit(); // ✅ สำเร็จ commit
-
+            courseList = dao.getAllCourses();
+            
             FacesContext.getCurrentInstance()
                     .addMessage(null,
                             new FacesMessage("Course added successfully"));
