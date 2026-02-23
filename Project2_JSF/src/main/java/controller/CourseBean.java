@@ -41,17 +41,29 @@ public class CourseBean implements Serializable {
         return courseList;
     }
 
-    public String deleteCourse(int id) {
-        try {
-            // เพิ่ม Logic การลบจริงผ่าน DAO ถ้าทำไว้
-            // dao.delete(id); 
-            init(); // โหลดข้อมูลใหม่หลังจากลบเสร็จเพื่อให้ตารางอัปเดต
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+public void deleteCourse(int id) {
 
+    Connection conn = null;
+
+    try {
+        conn = CSDB.getConnection();
+
+        String sql = "DELETE FROM course WHERE course_id = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+
+        // 🔥 reload list ใหม่
+        courseList = dao.getAllCourses();
+
+        FacesContext.getCurrentInstance()
+                .addMessage(null,
+                        new FacesMessage("Course deleted successfully"));
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     //ใช้สำหรับ add
     public Course getCourse() {
         return course;
@@ -75,10 +87,8 @@ public class CourseBean implements Serializable {
 
         try {
             conn = CSDB.getConnection();
-            conn.setAutoCommit(false); // 🔥 เริ่ม transaction
-            System.out.println("++++++++++++Course name++++++++++: " + course.getCourseName());
-            System.out.println("+++++++++++++++Session size+++++++++++: " + course.getSessions().size());
-            // 1️⃣ insert course
+            conn.setAutoCommit(false); // เริ่ม transaction
+ 
             String sqlCourse = "INSERT INTO course (course_name, course_price, course_pic) VALUES (?, ?, ?)";
 
             PreparedStatement ps1 = conn.prepareStatement(
