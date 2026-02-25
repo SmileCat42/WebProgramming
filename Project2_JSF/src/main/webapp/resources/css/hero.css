@@ -103,8 +103,6 @@
 .session-row .ui-selectonemenu {
     min-width: 150px;
 }
-            
-
             @keyframes my-scroll {
                 0%   {
                     transform: translateX(0);

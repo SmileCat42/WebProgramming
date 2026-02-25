@@ -4,12 +4,74 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="template.xhtml"> 
-    
-    <ui:define name="title">Dashboard - Admin System</ui:define>
+                template="template.xhtml"
+                xmlns:p="http://primefaces.org/ui"> 
+
+    <h:outputStylesheet library="css" name="dashboard.css"/>
+
 
     <ui:define name="content">
+        <style>
+            .dashboard-card {
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                background: linear-gradient(135deg, #4e73df, #224abe);
+                color: white;
+            }
 
+            .card-header-custom {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 600;
+            }
+
+            .card-header-custom i {
+                font-size: 1.5rem;
+            }
+
+            .card-value {
+                font-size: 2.5rem;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            .dash-card {
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                color: white;
+            }
+
+            .blue-card {
+                background: linear-gradient(135deg, #4e73df, #224abe) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 12px !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            .orange-card {
+                background: linear-gradient(135deg, #f6c23e, #dda20a) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 12px !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            .green-card {
+                background: linear-gradient(135deg, #1cc88a, #13855c) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 12px !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            .red-card {
+                background: linear-gradient(135deg, #e74a3b, #c0392b) !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 12px !important;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+        </style>
         <div class="container-fluid pt-3">
             <h1 class="text-white">Dashboard</h1>
             <p class="text-white-50">ยินดีต้อนรับคุณ #{user.fname} เข้าสู่ระบบจัดการ</p>
@@ -18,39 +80,57 @@
 
             <div class="row mt-4">
                 <div class="col-md-3">
-                    <div class="card bg-primary text-white shadow">
-                        <div class="card-body">
-                            <h5>TotalStudents</h5>
-                            <h3>#{dashboardBean.totalStudents}</h3>
+                    <p:card styleClass="dash-card blue-card">
+                        <div class="d-flex align-items-center">
+                            <i class="pi pi-users me-3 fs-2"></i>
+                            <div>
+                                <div class="fw-bold">Total Students</div>
+                                <div class="fs-4">
+                                    #{dashboardBean.totalStudents}
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </p:card>
                 </div>
 
                 <div class="col-md-3">
-                    <div class="card bg-warning text-white shadow">
-                        <div class="card-body">
-                            <h5>AllCourses</h5>
-                            <h3>#{dashboardBean.totalCourses}</h3>
+                    <p:card styleClass="dash-card orange-card">
+                        <div class="d-flex align-items-center">
+                            <i class="pi pi-book me-3 fs-2"></i>
+                            <div>
+                                <div class="fw-bold">All Courses</div>
+                                <div class="fs-4">
+                                    #{dashboardBean.totalCourses}
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </p:card>
                 </div>
 
                 <div class="col-md-3">
-                    <div class="card bg-success text-white shadow">
-                        <div class="card-body">
-                            <h5>Enrollments</h5>
-                            <h3>#{dashboardBean.totalEnroll}</h3>
+                    <p:card styleClass="dash-card green-card">
+                        <div class="d-flex align-items-center">
+                            <i class="pi pi-chart-line me-3 fs-2"></i>
+                            <div>
+                                <div class="fw-bold">Enrollment</div>
+                                <div class="fs-4">
+                                    #{dashboardBean.totalEnroll}
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </p:card>
                 </div>
 
                 <div class="col-md-3">
-                    <div class="card bg-danger text-white shadow">
-                        <div class="card-body">
-                            <h5>Reported</h5>
-                            <h3>3</h3>
+                    <p:card styleClass="dash-card red-card">
+                        <div class="d-flex align-items-center">
+                            <i class="pi pi-exclamation-triangle me-3 fs-2"></i>
+                            <div>
+                                <div class="fw-bold">Reported</div>
+                                <div class="fs-4">3</div>
+                            </div>
                         </div>
-                    </div>
+                    </p:card>
                 </div>
             </div>
 
@@ -62,12 +142,12 @@
                         </div>
                         <div class="card-body text-center py-1"> 
                             <h:graphicImage value="#{resource['img:gh1.png']}" 
-                styleClass="img-fluid" 
-                style="max-width: 70%; height: auto; display: block; margin: 0 auto;" />
+                                            styleClass="img-fluid" 
+                                            style="max-width: 70%; height: auto; display: block; margin: 0 auto;" />
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-4">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 bg-dark">
@@ -75,8 +155,8 @@
                         </div>
                         <div class="card-body text-center p-0"> 
                             <h:graphicImage value="#{resource['img:gh2.png']}" 
-                styleClass="img-fluid" 
-                style="max-width: 80%; height: auto; display: block; margin: 0 auto;" />
+                                            styleClass="img-fluid" 
+                                            style="max-width: 80%; height: auto; display: block; margin: 0 auto;" />
                         </div>
                     </div>
                 </div>
