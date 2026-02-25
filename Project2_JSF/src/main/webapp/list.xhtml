@@ -8,6 +8,7 @@
     <ui:define name="title">Course Schedule List</ui:define>
 
     <ui:define name="content">
+
         <h2>Course List</h2>
 
         <h:messages style="color:red"/>
@@ -15,54 +16,53 @@
         <div class="mb-3">
             <br/>
             <p:button value="Add course" icon="pi pi-plus" 
-                      
+
                       outcome="add.xhtml" styleClass="ui-button-success" />
 
         </div>
         <br/>
 
-        <h:form>
-            <h:dataTable value="#{courseBean.courseList}" var="c" border="1" cellpadding="10"
-                         style="width: 100%; border-collapse: collapse;">
+        <h:form id="form">
 
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                        #{c.courseId}
-                </h:column>
+            <p:dataTable value="#{courseBean.courseList}"
+                         var="c"
+                         styleClass="custom-table p-datatable-sm">
 
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
-                        #{c.courseName}
-                </h:column>
-                
-                <h:column>
-                    <f:facet name="header">Date</f:facet>
-                        #{c.days}
-                </h:column>
-                
-                <h:column>
-                    <f:facet name="header">Times</f:facet>
-                        #{c.times}
-                </h:column>
+                <p:column headerText="ID" sortBy="#{c.courseId}">
+                    #{c.courseId}
+                </p:column>
 
-                <h:column>
-                    <f:facet name="header">Manage</f:facet>
+                <p:column headerText="Name" sortBy="#{c.courseName}" filterBy="#{c.courseName}">
+                    #{c.courseName}
+                </p:column>
 
-                    <div style="display: flex; gap: 10px;">
-                        <p:linkButton icon="pi pi-pencil" 
-                                      outcome="list.xhtml" 
-                                      styleClass="rounded-button ui-button-warning">
-                            <f:param name="id" value="#{c.courseId}"/>
-                        </p:linkButton>
+                <p:column headerText="Date">
+                    #{c.days}
+                </p:column>
 
-                        <p:commandButton action="#{courseBean.deleteCourse(c.courseId)}" 
-                                         update="@form" 
-                                         onclick="return confirm('Are you sure to delete this course?')"
-                                         icon="pi pi-trash"
-                                         styleClass="rounded-button ui-button-danger" />
-                    </div>
-                    </h:column>
-            </h:dataTable>
+                <p:column headerText="Times">
+                    #{c.times}
+                </p:column>
+
+                <p:column headerText="Manage" style="width:120px">
+
+                    <p:linkButton 
+                                  icon="pi pi-pencil"
+                                  outcome="edit.xhtml"
+                                  styleClass="rounded-button ui-button-warning">
+                        <f:param name="id" value="#{c.courseId}"/>
+                    </p:linkButton>
+
+                    <p:commandButton action="#{courseBean.deleteCourse(c.courseId)}"
+                                     update="form"
+                                     icon="pi pi-trash"
+                                     styleClass="rounded-button ui-button-danger"
+                                     onclick="return confirm('Are you sure?')"/>
+
+                </p:column>
+
+            </p:dataTable>
+
         </h:form>
     </ui:define>
 </ui:composition>

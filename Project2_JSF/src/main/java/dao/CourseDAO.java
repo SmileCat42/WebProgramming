@@ -85,6 +85,44 @@ public class CourseDAO {
 
         return sessions;
     }
+    
+public List<Session> getSessionsByCourseId2(int id) throws Exception {
+    List<Session> list = new ArrayList<>();
+    Connection conn = CSDB.getConnection();
+
+    String sql = "SELECT * FROM session WHERE course_id = ?";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, id);
+
+    ResultSet rs = ps.executeQuery();
+    while (rs.next()) {
+        Session s = new Session();
+        s.setSessionId(rs.getInt("session_id"));
+        s.setSessionDate(rs.getString("session_date"));
+        s.setSessionTime(rs.getString("session_time"));
+        s.setMax(rs.getInt("session_max"));
+        list.add(s);
+    }
+
+    return list;
+}
+    
+    public Course getCourseById(int id) throws Exception {
+    Course c = new Course();
+    Connection conn = CSDB.getConnection();
+
+    String sql = "SELECT * FROM course WHERE course_id = ?";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, id);
+
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        c.setCourseId(rs.getInt("course_id"));
+        c.setCourseName(rs.getString("course_name"));
+    }
+
+    return c;
+}
 
     public int countAllCourses() throws Exception {
         int total = 0;

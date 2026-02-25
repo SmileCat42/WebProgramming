@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
+
+    <ui:define name="title">Edition</ui:define>
+    
+    <ui:define name="content">
+        
+        <h:form id="form">
+        <f:metadata>
+            <f:viewParam name="id" value="#{courseBean.courseId}" />
+            <f:event type="preRenderView"
+                     listener="#{courseBean.loadCourse(courseBean.courseId)}" />
+        </f:metadata>
+        <h:inputText value="#{courseBean.course.courseName}" />
+
+        <p:dataTable value="#{courseBean.course.sessions}" var="s">
+
+            <p:column headerText="Date">
+                <p:inputText value="#{s.sessionDate}" />
+            </p:column>
+
+            <p:column headerText="Time">
+                <p:inputText value="#{s.sessionTime}" />
+            </p:column>
+
+            <p:column headerText="Max">
+                <p:inputText value="#{s.max}" />
+            </p:column>
+
+            <p:column>
+                <p:commandButton value="Remove"
+                                 action="#{courseBean.removeSession(s)}"
+                                 update="form"
+                                 process="@this"/>
+            </p:column>
+
+        </p:dataTable>
+
+        <p:commandButton value="+ Add Session"
+                         action="#{courseBean.addSession}"
+                         update="form"
+                         process="@this"/>
+
+        <p:commandButton value="Save"
+                         action="#{courseBean.updateCourse}"
+                         update="form"
+                         process="@form"/>
+        </h:form>>
+    </ui:define>
+</ui:composition>

@@ -21,7 +21,8 @@ import util.CSDB;
 @Named("courseBean")
 @SessionScoped
 public class CourseBean implements Serializable {
-
+    
+    private int courseId;
     private List<Course> courseList; // ใช้ ShowCourse ตามที่เขียนใน DAO2
     private CourseDAO dao = new CourseDAO(); // เรียกใช้ DAO ตัวเก่ง
     private Course course = new Course(); //ใช้ตอนจะ add
@@ -40,6 +41,58 @@ public class CourseBean implements Serializable {
     public List<Course> getCourseList() {
         return courseList;
     }
+    
+    public void loadCourse(int id) {
+    try {
+        course = dao.getCourseById(id);      // ดึง course
+        course.setSessions(dao.getSessionsByCourseId(id)); // ดึง session
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    
+    public void updateCourse() {
+    Connection conn = null;
+
+    try {
+        conn = CSDB.getConnection();
+        conn.setAutoCommit(false);
+
+        // 1️⃣ update course
+        String sqlCourse = "UPDATE course SET course_name = ? WHERE course_id = ?";
+        PreparedStatement ps1 = conn.prepareStatement(sqlCourse);
+        ps1.setString(1, course.getCourseName());
+        ps1.setInt(2, course.getCourseId());
+        ps1.executeUpdate();
+
+        // 2️⃣ ลบ session เดิมทั้งหมด
+        String deleteSession = "DELETE FROM session WHERE course_id = ?";
+        PreparedStatement ps2 = conn.prepareStatement(deleteSession);
+        ps2.setInt(1, course.getCourseId());
+        ps2.executeUpdate();
+
+        // 3️⃣ insert session ใหม่
+        String insertSession = "INSERT INTO session (course_id, session_date, session_max, session_time) VALUES (?, ?, ?, ?)";
+        PreparedStatement ps3 = conn.prepareStatement(insertSession);
+
+        for (Session s : course.getSessions()) {
+            ps3.setInt(1, course.getCourseId());
+            ps3.setString(2, s.getSessionDate());
+            ps3.setInt(3, s.getMax());
+            ps3.setString(4, s.getSessionTime());
+            ps3.executeUpdate();
+        }
+
+        conn.commit();
+
+        FacesContext.getCurrentInstance()
+            .addMessage(null, new FacesMessage("Course updated successfully"));
+
+    } catch (Exception e) {
+        try { if (conn != null) conn.rollback(); } catch (Exception ex) {}
+        e.printStackTrace();
+    }
+}
 
 public void deleteCourse(int id) {
 
@@ -63,6 +116,14 @@ public void deleteCourse(int id) {
     } catch (Exception e) {
         e.printStackTrace();
     }
+}
+
+    public int getCourseId() {
+    return courseId;
+}
+
+public void setCourseId(int courseId) {
+    this.courseId = courseId;
 }
     //ใช้สำหรับ add
     public Course getCourse() {
