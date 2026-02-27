@@ -84,9 +84,13 @@ public class CourseBean implements Serializable {
         }
 
         conn.commit();
-
+        courseList = dao.getAllCourses();
+        
         FacesContext.getCurrentInstance()
-            .addMessage(null, new FacesMessage("Course updated successfully"));
+            .addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                 "Success",
+                                 "Course updated successfully"));
 
     } catch (Exception e) {
         try { if (conn != null) conn.rollback(); } catch (Exception ex) {}
