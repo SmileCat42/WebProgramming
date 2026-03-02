@@ -5,9 +5,11 @@
 
 
     <h:head>
-        <title><ui:insert name="title">Home</ui:insert></title>
+        <title><ui:insert name="title">Welcome to Admin mode</ui:insert></title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png"
+              href="#{resource['img:icon.png']}" />
         <style>
             .hero-section {
                 position: relative;
@@ -70,7 +72,7 @@
     <h:body>
 
         <!-- NAVBAR --> 
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top mx-auto">
             <div class="container-fluid">
                 <h:link outcome="index" styleClass="navbar-brand">
                     <h:graphicImage library="img" name="icon5.png" height="40" />
@@ -82,7 +84,7 @@
                 </button>
 
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent ">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white">
                         <li class="nav-item"><h:link outcome="index" styleClass="nav-link">MainPage</h:link></li>
                         <li class="nav-item"><h:link outcome="index" styleClass="nav-link">AboutUs</h:link></li>

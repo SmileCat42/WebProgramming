@@ -9,16 +9,18 @@
 
     <ui:define name="content">
         <h2>Add Course</h2>
+        <hr/><br/>
         <h:form id="form">
             <p:messages id="msg" showDetail="true"/>
-            <p:inputText value="#{courseBean.course.courseName}"
-                         placeholder="Course Name" required="true"/>
+            Course Name : <p:inputText value="#{courseBean.course.courseName}"
+                         placeholder="Course Name" required="true" style="margin-bottom: 15px; margin-left: 5px;"/>
 
             <ui:repeat value="#{courseBean.course.sessions}" var="s">
 
                 <div class="mb-3 mr-3">
                     <div class="session-row">
-                    <p:selectOneMenu value="#{s.sessionDate}">
+                        Date/Times : 
+                    <p:selectOneMenu value="#{s.sessionDate}" style="margin-left: 5px;">
                         <f:selectItem itemLabel="Monday" itemValue="MON"/>
                         <f:selectItem itemLabel="Tuesday" itemValue="TUE"/>
                         <f:selectItem itemLabel="Wednesday" itemValue="WED"/>
@@ -43,7 +45,8 @@
             <p:commandButton value="+ Add Session"
                              action="#{courseBean.addSession}"
                              update="form"
-                             process="@this"/>
+                             process="@this"
+                             style="margin-right: 10px;"/>
 
             <p:commandButton value="Save"
                              action="#{courseBean.saveCourse}"
