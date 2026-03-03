@@ -8,7 +8,7 @@
     <ui:define name="title">Course Schedule List</ui:define>
 
     <ui:define name="content">
-
+        <h:outputStylesheet library="css" name="dashboard.css"/>
         <h2>Course List</h2>
         <hr/>
 
@@ -27,9 +27,9 @@
 
             <p:dataTable value="#{courseBean.courseList}"
                          var="c"
-                         styleClass="custom-table p-datatable-sm">
+                         styleClass="custom-table p-datatable-striped p-datatable-hoverable-rows">
 
-                <p:column headerText="ID" sortBy="#{c.courseId}">
+                <p:column headerText="ID"  sortBy="#{c.courseId}">
                     #{c.courseId}
                 </p:column>
 
