@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core"
-      xmlns:ui="jakarta.faces.facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="jakarta.faces.facelets">
 
 
     <h:head>
@@ -30,11 +29,9 @@
             .hero-content {
                 position: relative;
                 z-index: 1;
-                width: 100%;
-                max-width: 400px;
-                padding: 40px;
-                background: rgba(0,0,0,0.6);
-                border-radius: 15px;
+                max-width: 700px;
+                padding: 80px 40px;
+                font-family: "Kanit", sans-serif;
             }
             /* จัดการแถบข้อความเลื่อน */
             .scrolling-bar-container {
@@ -48,7 +45,7 @@
                 display: inline-block;
                 white-space: nowrap;
                 padding-left: 100%;
-                animation: my-scroll 15s linear infinite;
+                animation: my-scroll 15s linear infinite;     
             }
             .border.p-1.overflow-hidden {
                 margin-top: 0 !important; /* ดันขึ้นไปให้ติดขอบบน */
@@ -94,6 +91,9 @@
                         <li class="nav-item"><h:link outcome="index" styleClass="nav-link">NEWS</h:link></li>
                         <li class="nav-item"><h:link outcome="index" styleClass="nav-link">Course</h:link></li>
                         <li class="nav-item"><h:link outcome="index" styleClass="nav-link">About</h:link></li>
+                        <li class="nav-item"><h:form styleClass="d-flex ms-3">
+                                <h:commandLink value="ADMIN LOGIN" action="login" styleClass="btn btn-primary rounded-pill" />
+                            </h:form></li>
                     </ul>
                     <div class="d-flex align-items-center gap-2" style="margin-top: 10px;">
                         <form class="d-flex" role="search">
@@ -116,43 +116,17 @@
             </div>
         </div>
 
+        <section class="hero-section d-flex align-items-center"> 
+            <div class="hero-overlay"></div> 
 
-        <section class="hero-section d-flex align-items-start">
-            <div class="hero-overlay"></div>
+            <div class="container hero-content" style="font-family: 'Kanit', sans-serif;">
+                
+                <!--เนื้อหาจ้าาาาาาาาาาาาาาาาาาา-->
+                <ui:insert name="content" />
 
-            <div class="container position-relative z-1">
-                <div class="row align-items-center">
-
-                    <!-- รูปด้านซ้าย -->
-                    <div class="col-md-6 text-center " style="margin-top: 40px;">
-                        <img src="#{resource['img:log.png']}" 
-                             class="img-fluid" 
-                             style="max-height:500px;" />
-                    </div>
-
-                    <!-- กล่อง login ด้านขวา -->
-                    <div class="col-md-6 d-flex justify-content-center align-items-center">
-                        <div class="login-box container hero-content" style="font-family: 'Kanit', sans-serif;">
-                            <!-- ฟอร์ม login เดิมของคุณ -->
-                            <h:form>
-                                <p:messages id="messages" showDetail="true" /><h:panelGrid columns="2">
-                                    <h:outputText value="User Name  " />
-                                    <h:inputText value="#{loginBean.username}" /> 
-                                    <h:outputText value="Password" />
-                                    <h:inputSecret value="#{loginBean.password}"/> <br/>
-                                    <p:commandButton style="margin-top: 20px;"
-                                        value="Login"
-                                        action="#{loginBean.login}"
-                                        update="messages"
-                                        styleClass="button" />
-                                </h:panelGrid>
-                            </h:form>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </section>
+
         <!-- Bootstrap JS -->
         <h:outputScript library="js" name="bootstrap.bundle.min.js" />
 
