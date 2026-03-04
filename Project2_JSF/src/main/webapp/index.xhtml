@@ -45,11 +45,15 @@
                 display: inline-block;
                 white-space: nowrap;
                 padding-left: 100%;
-                animation: my-scroll 15s linear infinite;     
+                animation: my-scroll 15s linear infinite;
             }
             .border.p-1.overflow-hidden {
                 margin-top: 0 !important; /* ดันขึ้นไปให้ติดขอบบน */
                 border-top: none;         /* เอาเส้นขอบบนออกเพื่อให้เนียนไปกับเมนู (ถ้าต้องการ) */
+            }
+            .banner-img {
+                object-fit: cover;
+                max-height: 600px;
             }
             @keyframes my-scroll {
                 0%   {
@@ -116,16 +120,57 @@
             </div>
         </div>
 
-        <section class="hero-section d-flex align-items-center"> 
-            <div class="hero-overlay"></div> 
+        <div class="container-fluid p-0">
+            <img src="#{resource['img:content3.jpg']}" 
+                 class="img-fluid w-100 banner-img" />
+        </div>
 
-            <div class="container hero-content" style="font-family: 'Kanit', sans-serif;">
-                
-                <!--เนื้อหาจ้าาาาาาาาาาาาาาาาาาา-->
-                <ui:insert name="content" />
+            <div class="container" style="font-family: 'Kanit', sans-serif;">
 
-            </div>
-        </section>
+                <div class="container my-5">
+                    <div class="row g-4 justify-content-center">
+
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow">
+                                <img src="#{resource['img:content6.jpg']}" class="card-img-top" />
+                                <div class="card-body">
+                                    <h5 class="card-title">How to do enrollment</h5>
+                                    <p class="card-text">Admin ควรศึกษาขั้นตอนการลงทะเบียนเรียน 
+                                        รวมถึงการตรวจสอบข้อมูลการลงทะเบียนนักเรียนผ่านระบบ 
+                                        เพื่อสามารถพิจารณาการกดยอมรับได้ ทางโรงเรียนจะอัพเดทรายละเอียด
+                                        เนื้อหาประจำเดือนนี้ให้อีกครั้ง โปรด Admin ทุกท่าน ศึกษาอย่างละเอียด <br/>(Special thanks to PHINMA University of Iloilo for the image.</p>
+                                    <a href="#" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow">
+                                <img src="#{resource['img:content2.jpg']}" class="card-img-top" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Power up! my English</h5>
+                                    <p class="card-text">ข่าวดีประจำเดือนนี้! 
+                                        ทางโรงเรียนเปิดหลักสูตรภาษาอังกฤษสำหรับพนักงาน 
+                                        เพื่อเพิ่มประสิทธิภาพในการสื่อสารกับลูกค้าและสกิลในการทำงาน</p>
+                                    <a href="#" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow">
+                                <img src="#{resource['img:content4.jpg']}" class="card-img-top" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Performance Evaluation</h5>
+                                    <p class="card-text">ขอบคุณสำนักสร้างสรรค์โอกาสและนวัตกรรม</p>
+                                    <a href="#" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
 
         <!-- Bootstrap JS -->
         <h:outputScript library="js" name="bootstrap.bundle.min.js" />
