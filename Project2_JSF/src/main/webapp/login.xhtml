@@ -96,10 +96,10 @@
                         <li class="nav-item"><h:link outcome="index" styleClass="nav-link">About</h:link></li>
                     </ul>
                     <div class="d-flex align-items-center gap-2" style="margin-top: 10px;">
-                        <form class="d-flex" role="search">
+                        <h:form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                             <button class="btn btn-outline-light" type="submit">Search</button>
-                        </form>
+                        </h:form>
                     </div>
                 </div>
             </div>
@@ -134,17 +134,20 @@
                     <div class="col-md-6 d-flex justify-content-center align-items-center">
                         <div class="login-box container hero-content" style="font-family: 'Kanit', sans-serif;">
                             <!-- ฟอร์ม login เดิมของคุณ -->
+
                             <h:form>
                                 <p:messages id="messages" showDetail="true" /><h:panelGrid columns="2">
                                     <h:outputText value="User Name  " />
                                     <h:inputText value="#{loginBean.username}" /> 
                                     <h:outputText value="Password" />
                                     <h:inputSecret value="#{loginBean.password}"/> <br/>
-                                    <p:commandButton style="margin-top: 20px;"
+                                    <p:commandButton
                                         value="Login"
                                         action="#{loginBean.login}"
-                                        update="messages"
-                                        styleClass="button" />
+                                        update="@form"
+                                        process="@form"
+                                        ajax="true"
+                                        />
                                 </h:panelGrid>
                             </h:form>
                         </div>

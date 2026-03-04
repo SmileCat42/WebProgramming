@@ -4,7 +4,7 @@ public class CSDB {
     public static Connection getConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/comsci?useSSL=false",
+            "jdbc:mysql://localhost:3306/comsci?allowPublicKeyRetrieval=true&useSSL=false",
             "root","Golfring02");
     }
 }
