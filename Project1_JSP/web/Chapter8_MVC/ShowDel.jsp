@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="icon" type="image/png" href="../img/book.png">
     </head>
 
     <h1 style="text-align: center; font-family: kanit; font-size: 35px; color: firebrick">จัดการรายชื่อ</h1>
@@ -22,6 +23,7 @@
             <th width="98"> <div align="center">Name </div></th>
             <th width="198"> <div align="center">Surname </div></th>
             <th width="97"> <div align="center">Grade </div></th>
+            <th width="71"> <div align="center">Edit </div></th>
             <th width="71"> <div align="center">Delete </div></th>
         </tr>
         <%
@@ -34,18 +36,12 @@
             <td><%=r.getName()%></td>
             <td><%=r.getSurname()%></td>
             <td><div align="center"><%=r.getGrade()%></div></td>
+            <td align="center"> <a href="mvc?action=edit&id=<%=r.getId()%>">Edit</a></td>
             <td align="center"> <a href="mvc?action=delete&id=<%=r.getId()%>">ลบ</a></td>
         </tr>
         <% }} %>
     </table>      
     <br><br>
     <a href="DataBase.jsp"> กลับไปที่รายชื่อ</a>
-    <% //while(r.next()) 
-        // out.print("ID:"+r.getString("Id")+"   Name:"+r.getString("Name")+ " Surname:"+r.getString("Surname")+ 
-        //     "   Address:"+r.getString("Address")+"<br>");       
-        // s.close(); 
-        // r.close(); 
-
-    %>
 
 </html>

@@ -10,7 +10,7 @@ for(Resume r:list){
 <td><%=r.getId()%></td>
 <td><%=r.getName()%></td>
 <td><%=r.getSurname()%></td>
-<td><%=r.getAddress()%></td>
+<td><%=r.getGrade()%></td>
 <td><a href="resume?action=delete&id=<%=r.getId()%>">Delete</a></td>
 </tr>
 <% } %>
