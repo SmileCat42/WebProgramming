@@ -39,9 +39,7 @@ public class LoginBean implements Serializable { // @ViewScoped ต้อง imp
         try {
             LoginDAO dao = new LoginDAO();
             Student st = dao.login(username, password);
-            System.out.println("11111111111111111"+username+password);
             if (st != null) {
-                System.out.println("222222222222222222"+username+password);
                 // เช็คว่า Role เป็น admin หรือไม่
                 if ("ADMIN".equalsIgnoreCase(st.getRole())) {
                     FacesContext.getCurrentInstance().getExternalContext()

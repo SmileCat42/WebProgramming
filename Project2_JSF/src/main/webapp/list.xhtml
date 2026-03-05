@@ -33,7 +33,7 @@
                     #{c.courseId}
                 </p:column>
 
-                <p:column headerText="Name" sortBy="#{c.courseName}" filterBy="#{c.courseName}">
+                <p:column headerText="Name" sortBy="#{c.courseName}">
                     #{c.courseName}
                 </p:column>
 
@@ -55,6 +55,7 @@
                     </p:linkButton>
 
                     <p:commandButton action="#{courseBean.deleteCourse(c.courseId)}"
+                                     style="margin-left: 5px;"
                                      update="form"
                                      icon="pi pi-trash"
                                      styleClass="rounded-button ui-button-danger"
