@@ -1,39 +1,35 @@
 import { Controller, Get, Render, Param, Post, Body, Delete, Put } from '@nestjs/common';
-import { ResumeService } from './resume.service';
+import { DollService } from './doll.service';
 
 @Controller()
-export class ResumeController {
+export class DollController {
 
-  constructor(private service: ResumeService) {}
+  constructor(private service: DollService) {}
 
-  // หน้าเว็บ
   @Get()
   @Render('index')
   async page() {
     return { list: await this.service.findAll() };
   }
 
-  // GET one (AJAX)
-  @Get('api/resume/:id')
+  @Get('api/doll/:id')
   getOne(@Param('id') id: number) {
     return this.service.findOne(id);
   }
 
-  // CREATE
-  @Post('api/resume')
+  @Post('api/doll')
   create(@Body() body) {
     return this.service.create(body);
   }
 
-  // UPDATE
-  @Put('api/resume/:id')
+  @Put('api/doll/:id')
   update(@Param('id') id: number, @Body() body) {
     return this.service.update(id, body);
   }
 
-  // DELETE
-  @Delete('api/resume/:id')
+  @Delete('api/doll/:id')
   delete(@Param('id') id: number) {
     return this.service.remove(id);
   }
+
 }

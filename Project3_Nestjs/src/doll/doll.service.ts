@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Resume } from './resume.entity';
+import { Doll } from './doll.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class ResumeService {
+export class DollService {
 
   constructor(
-    @InjectRepository(Resume)
-    private repo: Repository<Resume>,
+    @InjectRepository(Doll)
+    private repo: Repository<Doll>,
   ) {}
 
   findAll() {
@@ -16,7 +16,7 @@ export class ResumeService {
   }
 
   findOne(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.repo.findOneBy({ doll_id: id });
   }
 
   create(data) {
