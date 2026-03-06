@@ -1,1 +1,32 @@
-/dist/
+# =========================
+# Project3_Nestjs (Node/Nest)
+# =========================
+Project3_Nestjs/node_modules/
+Project3_Nestjs/dist/
+Project3_Nestjs/.env
+Project3_Nestjs/.env.*
+
+# log files
+Project3_Nestjs/npm-debug.log*
+Project3_Nestjs/yarn-debug.log*
+Project3_Nestjs/yarn-error.log*
+
+# =========================
+# Project1_JSP (NetBeans)
+# =========================
+Project1_JSP/build/
+Project1_JSP/dist/
+Project1_JSP/nbproject/private/
+
+# =========================
+# Project2_JSF (NetBeans)
+# =========================
+Project2_JSF/build/
+Project2_JSF/dist/
+Project2_JSF/nbproject/private/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db

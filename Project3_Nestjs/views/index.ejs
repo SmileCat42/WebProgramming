@@ -1,0 +1,87 @@
+<h2>Resume AJAX CRUD</h2>
+
+<select id="select">
+  <option value="">-- choose id --</option>
+  <% list.forEach(r => { %>
+    <option value="<%= r.id %>"><%= r.id %></option>
+  <% }) %>
+</select>
+
+<hr>
+
+ID: <span id="a"></span><br>
+Name: <span id="b"></span><br>
+SurName: <span id="c"></span><br>
+Address: <span id="d"></span>
+
+<hr>
+
+<input id="name" placeholder="name">
+<input id="surname" placeholder="surname">
+<input id="address" placeholder="address">
+<button onclick="create()">Add</button>
+<button onclick="update()">Update</button>
+<button onclick="remove()">Delete</button>
+
+<script>
+
+// LOAD ONE (แทน XML AJAX เดิม)
+document.getElementById('select').onchange = async function() {
+  const id = this.value;
+  if(!id) return;
+
+  const r = await fetch('/api/resume/' + id);
+  const data = await r.json();
+
+  document.getElementById('a').innerText = data.id;
+  document.getElementById('b').innerText = data.name;
+  document.getElementById('c').innerText = data.surname;
+  document.getElementById('d').innerText = data.address;
+
+  name.value = data.name;
+  address.value = data.address;
+}
+
+// CREATE
+async function create() {
+
+  const nameEl = document.getElementById('name');
+  const surnameEl = document.getElementById('surname');
+  const addressEl = document.getElementById('address');
+
+  const payload = {
+    name: nameEl.value,
+    surname: surnameEl.value,
+    address: addressEl.value
+  };
+
+  console.log(payload); // ⭐ ต้องมี name
+
+  await fetch('/api/resume', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(payload)
+  });
+
+  location.reload();
+}
+
+// UPDATE
+async function update() {
+  const id = document.getElementById('a').innerText;
+  await fetch('/api/resume/'+id,{
+    method:'PUT',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:name.value,surname:surname.value, address:address.value})
+  });
+  location.reload();
+}
+
+// DELETE
+async function remove() {
+  const id = document.getElementById('a').innerText;
+  await fetch('/api/resume/'+id,{method:'DELETE'});
+  location.reload();
+}
+
+</script>

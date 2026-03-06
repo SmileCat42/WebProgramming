@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core">
+
+    <h:head>
+        <title><ui:insert name="title">Home</ui:insert></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png"
+              href="#{resource['img:icon.png']}" />
+        <!-- Bootstrap CSS -->
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="Kanit.css"/>
+        <h:outputStylesheet library="css" name="hero.css"/>
+    </h:head>
+    <h:body>
+
+        <!-- NAVBAR --> 
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+            <div class="container-fluid">
+                <h:link outcome="index" styleClass="navbar-brand">
+                    <h:graphicImage library="img" name="icon5.png" height="40" />
+                </h:link>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse align-items-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white">
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">Home</h:link></li>
+                        <li class="nav-item"><h:link outcome="dashboard" styleClass="nav-link">About</h:link></li>
+                        <li class="nav-item"><h:link outcome="dashboard" styleClass="nav-link">NEWS</h:link></li>
+                        <li class="nav-item"><h:link outcome="dashboard" styleClass="nav-link">Course</h:link></li>
+                        <li class="nav-item"><h:link outcome="dashboard" styleClass="nav-link">Contact</h:link></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-2" style="margin-top: 10px;">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-light" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div style="margin-top:90px"></div>
+
+
+        <!-- SCROLL TEXT -->
+        <div class="border p-1 overflow-hidden text-light scrolling-bar-container border.p-1.overflow-hidden">
+            <div class="scroll-box">
+                <b>Hello #{user.fname}, Take your time!</b>
+            </div>
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-overlay"></div>
+
+            <div class="container-fluid hero-content p-0">
+                <div class="d-flex"> <nav class="sidebar shadow-lg">
+                        <div class="sticky-top" style="top: 20px;"> <div class="p-3 mb-4 border-bottom border-secondary">
+                                <h5 class="text-uppercase fw-bold m-0" style="letter-spacing: 2px;">Administrator</h5>
+                            </div>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <h:link outcome="dashboard" styleClass="nav-link">
+                                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-people me-2"></i> Student List
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="list" styleClass="nav-link">
+                                        <i class="bi bi-folder me-2"></i> Manage Courses
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-people me-2"></i> Enrollments
+                                    </h:link>
+                                </li>
+                                <li class="nav-item">
+                                    <h:link outcome="template" styleClass="nav-link">
+                                        <i class="bi bi-people me-2"></i> Setting
+                                    </h:link>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <main class="flex-grow-1 p-4">
+                        <ui:insert name="content" />
+                    </main>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Bootstrap JS -->
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+
+    </h:body>
+</html>

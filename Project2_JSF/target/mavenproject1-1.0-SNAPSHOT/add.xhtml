@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
+
+    <ui:define name="title">Course Schedule List</ui:define>
+
+    <ui:define name="content">
+        <h2>Add Course</h2>
+        <hr/><br/>
+        <h:form id="form">
+            <p:messages id="msg" showDetail="true"/>
+            Course Name : <p:inputText value="#{courseBean.course.courseName}"
+                         placeholder="Course Name" required="true" style="margin-bottom: 15px; margin-left: 5px; margin-right: 5px;"/>
+
+            <ui:repeat value="#{courseBean.course.sessions}" var="s">
+
+                <div class="mb-3 mr-3">
+                    <div class="session-row">
+                        Date/Times : 
+                    <p:selectOneMenu value="#{s.sessionDate}" style="margin-left: 5px;">
+                        <f:selectItem itemLabel="Monday" itemValue="MON"/>
+                        <f:selectItem itemLabel="Tuesday" itemValue="TUE"/>
+                        <f:selectItem itemLabel="Wednesday" itemValue="WED"/>
+                        <f:selectItem itemLabel="Thursday" itemValue="THU"/>
+                        <f:selectItem itemLabel="Friday" itemValue="FRI"/>
+                        <f:selectItem itemLabel="Saturday" itemValue="SAT"/>
+                        <f:selectItem itemLabel="Sunday" itemValue="SUN"/>
+                    </p:selectOneMenu>
+
+                    <p:inputText value="#{s.sessionTime}" placeholder="09:00-11:00"/>
+
+                    <p:inputText value="#{s.max}" placeholder="Max Seat"/>
+
+                    <p:commandButton value="Remove"
+                                     action="#{courseBean.removeSession(s)}"
+                                     update="form"
+                                     process="@this"/>
+                </div>
+                    </div>
+            </ui:repeat>
+
+            <p:commandButton value="+ Add Session"
+                             action="#{courseBean.addSession}"
+                             update="form"
+                             process="@this"
+                             style="margin-right: 10px;"/>
+
+            <p:commandButton value="Save"
+                             action="#{courseBean.saveCourse}"
+                             process="@form"
+                            update="form"/>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

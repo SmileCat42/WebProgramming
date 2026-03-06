@@ -1,0 +1,163 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:head>
+        <title><ui:insert name="title">Welcome to Admin mode</ui:insert></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png"
+              href="#{resource['img:icon.png']}" />
+        <style>
+            .hero-section {
+                position: relative;
+                min-height: 100vh;
+                background: url("#{resource['img/bg11.jpg']}") center/cover no-repeat;
+            }
+
+            .hero-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    rgba(0,0,0,0.85),
+                    rgba(0,0,0,0.6)
+                    );
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                max-width: 400px;
+                padding: 40px;
+                background: rgba(0,0,0,0.6);
+                border-radius: 15px;
+            }
+            /* จัดการแถบข้อความเลื่อน */
+            .scrolling-bar-container {
+                margin-top: 0;
+                padding-top: 0;
+                border-top: none;
+                background-color: midnightblue
+            }
+
+            .scroll-box {
+                display: inline-block;
+                white-space: nowrap;
+                padding-left: 100%;
+                animation: my-scroll 15s linear infinite;
+            }
+            .border.p-1.overflow-hidden {
+                margin-top: 0 !important; /* ดันขึ้นไปให้ติดขอบบน */
+                border-top: none;         /* เอาเส้นขอบบนออกเพื่อให้เนียนไปกับเมนู (ถ้าต้องการ) */
+            }
+            @keyframes my-scroll {
+                0%   {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
+
+            /* ขยับปุ่ม Login */
+            .login-btn-spacing {
+                margin-left: 25px !important;
+            }
+        </style>
+        <!-- Bootstrap CSS -->
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="Kanit.css"/>
+    </h:head>
+    <h:body>
+
+        <!-- NAVBAR --> 
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top mx-auto">
+            <div class="container-fluid">
+                <h:link outcome="index" styleClass="navbar-brand">
+                    <h:graphicImage library="img" name="icon5.png" height="40" />
+                </h:link>
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse items-center" id="navbarSupportedContent ">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white" style="margin-top: 10px;">
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">Home</h:link></li>
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">About</h:link></li>
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">NEWS</h:link></li>
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">Course</h:link></li>
+                        <li class="nav-item"><h:link outcome="index" styleClass="nav-link">About</h:link></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-2" style="margin-top: 10px;">
+                        <h:form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button class="btn btn-outline-light" type="submit">Search</button>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        <div style="margin-top:90px"></div>
+
+
+        <!-- SCROLL TEXT -->
+        <div class="border p-1 overflow-hidden text-light scrolling-bar-container border.p-1.overflow-hidden">
+            <div class="scroll-box">
+                <b>Welcome to Administrator mode. Login for editor</b>
+            </div>
+        </div>
+
+
+        <section class="hero-section d-flex align-items-start">
+            <div class="hero-overlay"></div>
+
+            <div class="container position-relative z-1">
+                <div class="row align-items-center">
+
+                    <!-- รูปด้านซ้าย -->
+                    <div class="col-md-6 text-center " style="margin-top: 40px;">
+                        <img src="#{resource['img:log.png']}" 
+                             class="img-fluid" 
+                             style="max-height:500px;" />
+                    </div>
+
+                    <!-- กล่อง login ด้านขวา -->
+                    <div class="col-md-6 d-flex justify-content-center align-items-center">
+                        <div class="login-box container hero-content" style="font-family: 'Kanit', sans-serif;">
+                            <!-- ฟอร์ม login เดิมของคุณ -->
+
+                            <h:form>
+                                <p:messages id="messages" showDetail="true" /><h:panelGrid columns="2">
+                                    <h:outputText value="User Name  " />
+                                    <h:inputText value="#{loginBean.username}" /> 
+                                    <h:outputText value="Password" />
+                                    <h:inputSecret value="#{loginBean.password}"/> <br/>
+                                    <p:commandButton style="margin-top: 7px;"
+                                        value="Login"
+                                        action="#{loginBean.login}"
+                                        update="@form"
+                                        process="@form"
+                                        ajax="true"
+                                        />
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap JS -->
+        <h:outputScript library="js" name="bootstrap.bundle.min.js" />
+
+    </h:body>
+</html>

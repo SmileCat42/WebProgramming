@@ -1,0 +1,13 @@
+body {
+    font-family: 'Kanit', sans-serif;
+    color: white;
+}
+
+/* ปรับ bootstrap เพิ่ม */
+.card-title {
+    font-weight: 600;
+}
+
+.card-text {
+    font-size: 14px;
+}

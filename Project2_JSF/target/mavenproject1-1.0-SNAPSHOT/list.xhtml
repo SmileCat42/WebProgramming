@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template.xhtml">
+
+    <ui:define name="title">Course Schedule List</ui:define>
+
+    <ui:define name="content">
+        <h:outputStylesheet library="css" name="dashboard.css"/>
+        <h2>Course List</h2>
+        <hr/>
+
+        <h:messages style="color:red"/>
+
+        <div class="mb-3">
+            <br/>
+            <p:button value="Add course" icon="pi pi-plus" 
+
+                      outcome="add.xhtml" styleClass="ui-button-success" />
+
+        </div>
+        <br/>
+
+        <h:form id="form">
+
+            <p:dataTable value="#{courseBean.courseList}"
+                         var="c"
+                         styleClass="custom-table p-datatable-striped p-datatable-hoverable-rows">
+
+                <p:column headerText="ID"  sortBy="#{c.courseId}">
+                    #{c.courseId}
+                </p:column>
+
+                <p:column headerText="Name" sortBy="#{c.courseName}">
+                    #{c.courseName}
+                </p:column>
+
+                <p:column headerText="Date">
+                    #{c.days}
+                </p:column>
+
+                <p:column headerText="Times">
+                    #{c.times}
+                </p:column>
+
+                <p:column headerText="Manage" style="width:120px">
+
+                    <p:linkButton 
+                                  icon="pi pi-pencil"
+                                  outcome="edit.xhtml"
+                                  styleClass="rounded-button ui-button-warning">
+                        <f:param name="id" value="#{c.courseId}"/>
+                    </p:linkButton>
+
+                    <p:commandButton action="#{courseBean.deleteCourse(c.courseId)}"
+                                     style="margin-left: 5px;"
+                                     update="form"
+                                     icon="pi pi-trash"
+                                     styleClass="rounded-button ui-button-danger"
+                                     onclick="return confirm('Are you sure?')"/>
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
