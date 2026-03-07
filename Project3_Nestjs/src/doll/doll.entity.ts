@@ -4,14 +4,14 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 export class Doll {
 
   @PrimaryGeneratedColumn()
-  doll_id: number;
+  doll_id!: number;
 
   @Column()
-  doll_name: string;
+  doll_name!: string;
 
   @Column("decimal", { precision: 10, scale: 2 })
-  doll_price: number;
+  doll_price!: number;
 
   @Column()
-  doll_picture: string;
+  doll_picture!: string;
 }

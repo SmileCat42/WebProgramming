@@ -1,20 +1,30 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ResumeModule } from './doll/doll.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { DollModule } from './doll/doll.module';
 
 @Module({
   imports: [
+
+    // โหลดไฟล์รูปจาก public
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+
+    // เชื่อม database
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '1234',
-      database: 'test3',
+      password: 'Golfring02',
+      database: 'gift',
       autoLoadEntities: true,
       synchronize: true,
     }),
-    ResumeModule, // ⭐ ตรงนี้แหละที่ต้องมี
+
+    DollModule,
   ],
 })
 export class AppModule {}

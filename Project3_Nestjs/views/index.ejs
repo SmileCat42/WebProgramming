@@ -1,9 +1,11 @@
-<h2>Resume AJAX CRUD</h2>
+<h2>🧸 Doll Shop</h2>
 
 <select id="select">
-  <option value="">-- choose id --</option>
-  <% list.forEach(r => { %>
-    <option value="<%= r.id %>"><%= r.id %></option>
+  <option value="">-- choose doll --</option>
+  <% list.forEach(d => { %>
+    <option value="<%= d.doll_id %>">
+      <%= d.doll_name %>
+    </option>
   <% }) %>
 </select>
 
@@ -11,53 +13,56 @@
 
 ID: <span id="a"></span><br>
 Name: <span id="b"></span><br>
-SurName: <span id="c"></span><br>
-Address: <span id="d"></span>
+Price: <span id="c"></span><br>
+Picture: 
+<span id="d"></span><br><br>
+<img id="img" width="150">
 
 <hr>
+<h2>จัดการข้อมูล</h2><br><br>
 
-<input id="name" placeholder="name">
-<input id="surname" placeholder="surname">
-<input id="address" placeholder="address">
+<input id="name" placeholder="doll name">
+<input id="price" placeholder="price">
+<input id="picture" placeholder="picture file name"><br><br>
+
 <button onclick="create()">Add</button>
 <button onclick="update()">Update</button>
 <button onclick="remove()">Delete</button>
 
 <script>
 
-// LOAD ONE (แทน XML AJAX เดิม)
+// LOAD ONE
 document.getElementById('select').onchange = async function() {
+
   const id = this.value;
   if(!id) return;
 
-  const r = await fetch('/api/resume/' + id);
+  const r = await fetch('/api/doll/' + id);
   const data = await r.json();
 
-  document.getElementById('a').innerText = data.id;
-  document.getElementById('b').innerText = data.name;
-  document.getElementById('c').innerText = data.surname;
-  document.getElementById('d').innerText = data.address;
+  document.getElementById('a').innerText = data.doll_id;
+  document.getElementById('b').innerText = data.doll_name;
+  document.getElementById('c').innerText = data.doll_price;
+  document.getElementById('d').innerText = data.doll_picture;
+  document.getElementById("img").src =
+  "/img/" + data.doll_picture;
 
-  name.value = data.name;
-  address.value = data.address;
+  name.value = data.doll_name;
+  price.value = data.doll_price;
+  picture.value = data.doll_picture;
 }
+
 
 // CREATE
 async function create() {
 
-  const nameEl = document.getElementById('name');
-  const surnameEl = document.getElementById('surname');
-  const addressEl = document.getElementById('address');
-
   const payload = {
-    name: nameEl.value,
-    surname: surnameEl.value,
-    address: addressEl.value
+    doll_name: name.value,
+    doll_price: price.value,
+    doll_picture: picture.value
   };
 
-  console.log(payload); // ⭐ ต้องมี name
-
-  await fetch('/api/resume', {
+  await fetch('/api/doll',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify(payload)
@@ -66,21 +71,35 @@ async function create() {
   location.reload();
 }
 
+
 // UPDATE
 async function update() {
+
   const id = document.getElementById('a').innerText;
-  await fetch('/api/resume/'+id,{
+
+  await fetch('/api/doll/'+id,{
     method:'PUT',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name.value,surname:surname.value, address:address.value})
+    body: JSON.stringify({
+      doll_name:name.value,
+      doll_price:price.value,
+      doll_picture:picture.value
+    })
   });
+
   location.reload();
 }
 
+
 // DELETE
 async function remove() {
+
   const id = document.getElementById('a').innerText;
-  await fetch('/api/resume/'+id,{method:'DELETE'});
+
+  await fetch('/api/doll/'+id,{
+    method:'DELETE'
+  });
+
   location.reload();
 }
 
