@@ -10,6 +10,8 @@ async function bootstrap() {
   // ⭐ บอก NestJS ว่าใช้ Express
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
+  app.use(express.json()); 
+
   // ⭐ โฟลเดอร์ views (EJS)
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
 

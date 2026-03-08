@@ -21,9 +21,9 @@ Picture:
 <hr>
 <h2>จัดการข้อมูล</h2><br><br>
 
-<input id="name" placeholder="doll name">
-<input id="price" placeholder="price">
-<input id="picture" placeholder="picture file name"><br><br>
+<input id="doll_name" placeholder="doll name">
+<input id="doll_price" placeholder="price">
+<input id="doll_picture" placeholder="picture file name"><br><br>
 
 <button onclick="create()">Add</button>
 <button onclick="update()">Update</button>
@@ -47,9 +47,9 @@ document.getElementById('select').onchange = async function() {
   document.getElementById("img").src =
   "/img/" + data.doll_picture;
 
-  name.value = data.doll_name;
-  price.value = data.doll_price;
-  picture.value = data.doll_picture;
+  document.getElementById("doll_name").value = data.doll_name;
+document.getElementById("doll_price").value = data.doll_price;
+document.getElementById("doll_picture").value = data.doll_picture;
 }
 
 
@@ -57,20 +57,23 @@ document.getElementById('select').onchange = async function() {
 async function create() {
 
   const payload = {
-    doll_name: name.value,
-    doll_price: price.value,
-    doll_picture: picture.value
+    doll_name: document.getElementById("doll_name").value,
+    doll_price: document.getElementById("doll_price").value,
+    doll_picture: document.getElementById("doll_picture").value
   };
 
-  await fetch('/api/doll',{
+  console.log(payload);
+
+  const r = await fetch('/api/doll',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify(payload)
   });
 
+  console.log(await r.text());
+
   location.reload();
 }
-
 
 // UPDATE
 async function update() {
