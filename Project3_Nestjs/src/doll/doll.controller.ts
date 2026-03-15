@@ -1,10 +1,11 @@
-import { Controller, Get, Render, Param, Post, Body, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Render, Param, Post, Body, Delete, Put, Res } from '@nestjs/common';
+import { Response } from 'express';
 import { DollService } from './doll.service';
 
 @Controller()
 export class DollController {
 
-  constructor(private service: DollService) {}
+  constructor(private service: DollService) { }
 
   @Get()
   @Render('index')
@@ -30,6 +31,12 @@ export class DollController {
   @Delete('api/doll/:id')
   delete(@Param('id') id: number) {
     return this.service.remove(id);
+  }
+
+  @Get('/show')
+  @Render('show')
+  async showPage() {
+    return { products: await this.service.findAll() };
   }
 
 }
