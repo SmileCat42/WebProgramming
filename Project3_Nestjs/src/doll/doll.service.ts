@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Doll } from './doll.entity';
+import { Key } from '../key/key.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+
 
 @Injectable()
 export class DollService {
 
   constructor(
-    @InjectRepository(Doll)
-    private repo: Repository<Doll>,
-  ) {}
+  @InjectRepository(Doll)
+  private repo: Repository<Doll>,
+
+  @InjectRepository(Key)
+  private keyRepo: Repository<Key>,
+) { }
 
   findAll() {
     return this.repo.find();
@@ -29,6 +34,10 @@ export class DollService {
 
   remove(id: number) {
     return this.repo.delete(id);
+  }
+
+  getKeys() {
+    return this.keyRepo.find();
   }
 
 }

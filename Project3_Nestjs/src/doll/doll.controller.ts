@@ -36,7 +36,18 @@ export class DollController {
   @Get('/show')
   @Render('show')
   async showPage() {
-    return { products: await this.service.findAll() };
+    return {
+      dolls: await this.service.findAll(),
+      keys: await this.service.getKeys()
+    };
   }
+
+  @Get('/key')
+  @Render('show')
+  async getKey() {
+    return { products: await this.service.getKeys() };
+  }
+
+
 
 }
