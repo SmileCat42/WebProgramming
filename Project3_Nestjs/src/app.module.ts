@@ -5,6 +5,7 @@ import { join } from 'path';
 import { Doll } from './doll/doll.entity';
 import { Key } from './key/key.entity';
 import { DollModule } from './doll/doll.module';
+import { KeyModule } from './key/key.module';
 
 @Module({
   imports: [

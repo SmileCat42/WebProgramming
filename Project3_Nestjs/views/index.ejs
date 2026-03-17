@@ -2,11 +2,22 @@
 
 <h2>เลือกดูรายละเอียดสินค้า</h2>
 
-<select id="select">
+<select id="DollSelect">
   <option value="">-- choose doll --</option>
   <% list.forEach(d => { %>
     <option value="<%= d.doll_id %>">
       <%= d.doll_name %>
+    </option>
+  <% }) %>
+</select>
+
+<h2>Keychains</h2>
+
+<select id="KeySelect">
+  <option value="">-- choose key --</option>
+  <% keys.forEach(k => { %>
+    <option value="<%= k.key_id %>">
+      <%= k.key_name %>
     </option>
   <% }) %>
 </select>

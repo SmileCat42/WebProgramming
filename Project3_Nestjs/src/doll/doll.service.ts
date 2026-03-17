@@ -11,9 +11,6 @@ export class DollService {
   constructor(
   @InjectRepository(Doll)
   private repo: Repository<Doll>,
-
-  @InjectRepository(Key)
-  private keyRepo: Repository<Key>,
 ) { }
 
   findAll() {
@@ -34,10 +31,6 @@ export class DollService {
 
   remove(id: number) {
     return this.repo.delete(id);
-  }
-
-  getKeys() {
-    return this.keyRepo.find();
   }
 
 }
