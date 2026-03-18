@@ -13,17 +13,20 @@ async function bootstrap() {
   app.use(express.json()); 
 
   // ⭐ โฟลเดอร์ views (EJS)
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setBaseViewsDir(join(process.cwd(), 'views')); // OK
 
   // ⭐ ใช้ ejs
   app.setViewEngine('ejs');
+
 
   // ⭐ ให้ AJAX อ่าน JSON ได้
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
   // ⭐ static files (css/js)
-  app.use('/public', express.static(join(__dirname, '..', 'public')));
+  app.useStaticAssets(join(__dirname, '..', 'public'), {
+  prefix: '/public/',
+});
 
   await app.listen(3000);
 }

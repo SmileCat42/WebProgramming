@@ -1,124 +1,179 @@
 <%- include('partials/header') %>
 
-<h2>เลือกดูรายละเอียดสินค้า</h2>
+  <h2>เลือกดูรายละเอียดสินค้า</h2>
 
-<select id="DollSelect">
-  <option value="">-- choose doll --</option>
-  <% list.forEach(d => { %>
-    <option value="<%= d.doll_id %>">
-      <%= d.doll_name %>
-    </option>
-  <% }) %>
-</select>
+  <select id="DollSelect">
+    <option value="">-- choose doll --</option>
+    <% dolls.forEach(d=> { %>
+      <option value="<%= d.doll_id %>">
+        <%= d.doll_name %>
+      </option>
+      <% }) %>
+  </select>
 
-<h2>Keychains</h2>
+  <h2>Keychains</h2>
 
-<select id="KeySelect">
-  <option value="">-- choose key --</option>
-  <% keys.forEach(k => { %>
-    <option value="<%= k.key_id %>">
-      <%= k.key_name %>
-    </option>
-  <% }) %>
-</select>
+  <select id="KeySelect">
+    <option value="">-- choose key --</option>
+    <% keys.forEach(k=> { %>
+      <option value="<%= k.key_id %>">
+        <%= k.key_name %>
+      </option>
+      <% }) %>
+  </select>
 
-<hr>
+  <hr>
 
-ID: <span id="a"></span><br>
-Name: <span id="b"></span><br>
-Price: <span id="c"></span><br>
-Picture: 
-<span id="d"></span><br><br>
-<img id="img" width="150">
+  ID: <span id="a"></span><br>
+  Name: <span id="b"></span><br>
+  Price: <span id="c"></span><br>
+  Picture:
+  <span id="d"></span><br><br>
+  <img id="img" width="150">
 
-<hr>
-<h2>จัดการข้อมูล</h2><br><br>
+  <hr>
+  <h2>จัดการข้อมูล</h2><br><br>
 
-<input id="doll_name" placeholder="doll name">
-<input id="doll_price" placeholder="price">
-<input id="doll_picture" placeholder="picture file name"><br><br>
+  <input id="doll_name" placeholder="doll name">
+  <input id="doll_price" placeholder="price">
+  <input id="doll_picture" placeholder="picture file name"><br><br>
 
-<button onclick="create()">Add</button>
-<button onclick="update()">Update</button>
-<button onclick="remove()">Delete</button>
+  <button onclick="create()">Add</button>
+  <button onclick="update()">Update</button>
+  <button onclick="remove()">Delete</button>
 
-<%- include('partials/footer') %>
+  <%- include('partials/footer') %>
 
-<script>
+    <script>
 
-// LOAD ONE
-document.getElementById('select').onchange = async function() {
+      let currentType = '';
+      // LOAD ONE
+      document.getElementById('DollSelect').onchange = async function () {
 
-  const id = this.value;
-  if(!id) return;
+        currentType = 'doll';
 
-  const r = await fetch('/api/doll/' + id);
-  const data = await r.json();
+        const id = this.value;
+        if (!id) return;
 
-  document.getElementById('a').innerText = data.doll_id;
-  document.getElementById('b').innerText = data.doll_name;
-  document.getElementById('c').innerText = data.doll_price;
-  document.getElementById('d').innerText = data.doll_picture;
-  document.getElementById("img").src =
-  "/img/" + data.doll_picture;
+        const r = await fetch('/api/doll/' + id);
+        const data = await r.json();
 
-  document.getElementById("doll_name").value = data.doll_name;
-document.getElementById("doll_price").value = data.doll_price;
-document.getElementById("doll_picture").value = data.doll_picture;
-}
+        document.getElementById('a').innerText = data.doll_id;
+        document.getElementById('b').innerText = data.doll_name;
+        document.getElementById('c').innerText = data.doll_price;
+        document.getElementById('d').innerText = data.doll_picture;
+        document.getElementById("img").src =
+          "/public/" + data.doll_picture;
+
+        document.getElementById("doll_name").value = data.doll_name;
+        document.getElementById("doll_price").value = data.doll_price;
+        document.getElementById("doll_picture").value = data.doll_picture;
+      }
+
+      document.getElementById('KeySelect').onchange = async function () {
+
+         currentType = 'key';
+
+        const id = this.value;
+        if (!id) return;
+
+        const r = await fetch('/api/key/' + id);
+        const data = await r.json();
+
+        document.getElementById('a').innerText = data.key_id;
+        document.getElementById('b').innerText = data.key_name;
+        document.getElementById('c').innerText = data.key_price;
+        document.getElementById('d').innerText = data.key_picture;
+        document.getElementById("img").src =
+          "/public/" + data.key_picture;
+
+          document.getElementById("doll_name").value = data.key_name;
+  document.getElementById("doll_price").value = data.key_price;
+  document.getElementById("doll_picture").value = data.key_picture;
+      }
 
 
-// CREATE
-async function create() {
+      // CREATE
+      async function create() {
 
-  const payload = {
-    doll_name: document.getElementById("doll_name").value,
-    doll_price: document.getElementById("doll_price").value,
-    doll_picture: document.getElementById("doll_picture").value
-  };
+  const url = currentType === 'key'
+    ? '/api/key'
+    : '/api/doll';
 
-  console.log(payload);
+  const payload = currentType === 'key'
+    ? {
+        key_name: document.getElementById("doll_name").value,
+        key_price: document.getElementById("doll_price").value,
+        key_picture: document.getElementById("doll_picture").value
+      }
+    : {
+        doll_name: document.getElementById("doll_name").value,
+        doll_price: document.getElementById("doll_price").value,
+        doll_picture: document.getElementById("doll_picture").value
+      };
 
-  const r = await fetch('/api/doll',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
 
-  console.log(await r.text());
-
   location.reload();
 }
 
-// UPDATE
-async function update() {
+      // UPDATE
+      async function update() {
+        const id = document.getElementById('a').innerText;
 
-  const id = document.getElementById('a').innerText;
-
-  await fetch('/api/doll/'+id,{
-    method:'PUT',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({
-      doll_name:name.value,
-      doll_price:price.value,
-      doll_picture:picture.value
-    })
-  });
-
-  location.reload();
+        if (!id) {
+  alert('กรุณาเลือกข้อมูลก่อน');
+  return;
 }
 
+        const url = currentType === 'doll'
+          ? '/api/doll/' + id
+          : '/api/key/' + id;
 
-// DELETE
-async function remove() {
+        const payload = currentType === 'doll'
+          ? {
+            doll_name: document.getElementById("doll_name").value,
+            doll_price: document.getElementById("doll_price").value,
+            doll_picture: document.getElementById("doll_picture").value
+          }
+          : {
+            key_name: document.getElementById("doll_name").value,
+            key_price: document.getElementById("doll_price").value,
+            key_picture: document.getElementById("doll_picture").value
+          };
 
-  const id = document.getElementById('a').innerText;
+        await fetch(url, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-  await fetch('/api/doll/'+id,{
-    method:'DELETE'
-  });
+        location.reload();
+      }
 
-  location.reload();
+
+      // DELETE
+      async function remove() {
+        
+        const id = document.getElementById('a').innerText;
+
+        if (!id) {
+  alert('กรุณาเลือกข้อมูลก่อน');
+  return;
 }
+        const url = currentType === 'doll'
+          ? '/api/doll/' + id
+          : '/api/key/' + id;
 
-</script>
+        await fetch(url, {
+          method: 'DELETE'
+        });
+
+        location.reload();
+      }
+
+    </script>

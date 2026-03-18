@@ -13,5 +13,6 @@ import { KeyModule } from '../key/key.module';
   ],
   controllers: [DollController],
   providers: [DollService],
+  exports: [DollService]
 })
 export class DollModule {}
