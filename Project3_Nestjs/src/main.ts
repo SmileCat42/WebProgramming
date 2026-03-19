@@ -25,7 +25,6 @@ async function bootstrap() {
 
   // ⭐ static files (css/js)
   app.useStaticAssets(join(__dirname, '..', 'public'), {
-  prefix: '/public/',
 });
 
   await app.listen(3000);

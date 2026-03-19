@@ -14,7 +14,7 @@ import { AppService } from './app.service';
   imports: [
     // โหลดไฟล์รูปจาก public
     ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), 'public'), // ใช้ process.cwd() จะชัวร์กว่าครับ
+      rootPath: join(process.cwd(), 'public'), 
       serveRoot: '/public', // ให้เข้าถึงผ่าน /public/filename.jpg
     }),
 
@@ -32,9 +32,9 @@ import { AppService } from './app.service';
     }),
 
     DollModule,
-    KeyModule, // ⚠️ เพิ่ม KeyModule เข้ามาตรงนี้ด้วยครับ
+    KeyModule, 
   ],
-  controllers: [AppController], // ⚠️ ต้องมีตัวนี้ Route / ถึงจะทำงาน
-  providers: [AppService],     // ⚠️ และตัวนี้ด้วย
+  controllers: [AppController], 
+  providers: [AppService],  
 })
 export class AppModule {}

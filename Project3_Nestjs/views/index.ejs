@@ -1,8 +1,9 @@
 <%- include('partials/header') %>
 
-  <h2>เลือกดูรายละเอียดสินค้า</h2>
+  <h2 class="font-bold text-3xl text-pink-600">เลือกดูรายละเอียดสินค้า</h2><br/>
+  <h2 class="mt-5">Dools</h2>
 
-  <select id="DollSelect">
+  <select id="DollSelect" class="bg-pink-300 mb-5">
     <option value="">-- choose doll --</option>
     <% dolls.forEach(d=> { %>
       <option value="<%= d.doll_id %>">
@@ -13,7 +14,7 @@
 
   <h2>Keychains</h2>
 
-  <select id="KeySelect">
+  <select id="KeySelect" class="bg-pink-300 mb-5">
     <option value="">-- choose key --</option>
     <% keys.forEach(k=> { %>
       <option value="<%= k.key_id %>">
@@ -31,16 +32,20 @@
   <span id="d"></span><br><br>
   <img id="img" width="150">
 
-  <hr>
-  <h2>จัดการข้อมูล</h2><br><br>
+  <hr class="mt-5">
+  <h2 class="mt-5 text-purple-700 text-3xl font-bold">จัดการข้อมูล</h2><br><br>
 
-  <input id="doll_name" placeholder="doll name">
-  <input id="doll_price" placeholder="price">
-  <input id="doll_picture" placeholder="picture file name"><br><br>
+  <div>
+  edit name : <input id="doll_name" placeholder="doll name">
+  edit price : <input id="doll_price" placeholder="price">
+  edit address : <input id="doll_picture" placeholder="picture file name"><br><br>
+  </div>
 
-  <button onclick="create()">Add</button>
-  <button onclick="update()">Update</button>
-  <button onclick="remove()">Delete</button>
+  <span class="gap-4 text-xl font-semibold text-white">
+  <button onclick="create()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Add</button>
+  <button onclick="update()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Update</button>
+  <button onclick="remove()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Delete</button>
+  </span>
 
   <%- include('partials/footer') %>
 
@@ -63,7 +68,7 @@
         document.getElementById('c').innerText = data.doll_price;
         document.getElementById('d').innerText = data.doll_picture;
         document.getElementById("img").src =
-          "/public/" + data.doll_picture;
+          "/img/" + data.doll_picture;
 
         document.getElementById("doll_name").value = data.doll_name;
         document.getElementById("doll_price").value = data.doll_price;
@@ -85,7 +90,7 @@
         document.getElementById('c').innerText = data.key_price;
         document.getElementById('d').innerText = data.key_picture;
         document.getElementById("img").src =
-          "/public/" + data.key_picture;
+          "/img/" + data.key_picture;
 
           document.getElementById("doll_name").value = data.key_name;
   document.getElementById("doll_price").value = data.key_price;
