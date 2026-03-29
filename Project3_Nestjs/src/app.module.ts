@@ -8,7 +8,8 @@ import { Promotion } from './promotion/promotion.entity';
 import { DollModule } from './doll/doll.module';
 import { KeyModule } from './key/key.module';
 import { PromotionModule } from './promotion/promotion.module';
-// ⚠️ อย่าลืม Import 2 ตัวนี้
+import { UserModule } from './user/user.module';
+
 import { AppController } from './app.controller'; 
 import { AppService } from './app.service';
 
@@ -37,6 +38,7 @@ import { AppService } from './app.service';
     DollModule,
     KeyModule, 
     PromotionModule,
+    UserModule,
   ],
   controllers: [AppController], 
   providers: [AppService],  

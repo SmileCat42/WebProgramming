@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+    <div
+        class="min-h-[80-screen] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-pink-50">
+        <div
+            class="max-w-md w-full space-y-8 bg-white p-10 rounded-3xl shadow-xl shadow-pink-100 border border-pink-50">
+
+            <div class="text-center">
+                <span class="text-4xl">🧸</span>
+                <h2 class="mt-4 text-3xl font-extrabold text-gray-900 tracking-tight">
+                    ยินดีต้อนรับกลับมา!
+                </h2>
+                <p class="mt-2 text-sm text-pink-400 font-medium">
+                    เข้าสู่ระบบ Doll Gift Shop ของเรา
+                </p>
+            </div>
+
+            <% if (typeof error !=='undefined' && error) { %>
+                <div
+                    class="bg-red-50 border border-red-100 text-red-500 px-4 py-2 rounded-xl text-xs font-medium text-center animate-shake">
+                    ⚠️ <%= error %>
+                </div>
+                <% } %>
+
+                    <form class="mt-8 space-y-6" action="/auth/login" method="POST">
+                        <div class="rounded-md space-y-4">
+                            <div>
+                                <label for="user_id" class="block text-sm font-semibold text-gray-700 mb-1">ID
+                                    ผู้ใช้งาน</label>
+                                <input id="user_id" name="user_id" type="text" required
+                                    class="appearance-none relative block w-full px-4 py-3 border border-pink-100 placeholder-gray-400 text-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                                    placeholder="กรอก ID ของคุณ">
+                            </div>
+                            <div>
+                                <label for="user_pass"
+                                    class="block text-sm font-semibold text-gray-700 mb-1">รหัสผ่าน</label>
+                                <input id="user_pass" name="user_pass" type="password" required
+                                    class="appearance-none relative block w-full px-4 py-3 border border-pink-100 placeholder-gray-400 text-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                                    placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center">
+                                <input id="remember-me" name="remember-me" type="checkbox"
+                                    class="h-4 w-4 text-pink-500 focus:ring-pink-400 border-gray-300 rounded">
+                                <label for="remember-me" class="ml-2 block text-gray-500">จำฉันไว้</label>
+                            </div>
+                            <a href="#"
+                                class="font-bold text-pink-500 hover:text-pink-600 transition-colors">ลืมรหัสผ่าน?</a>
+                        </div>
+
+                        <div>
+                            <button type="submit"
+                                class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-2xl text-white bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 shadow-lg shadow-pink-200 transition-all duration-300 transform hover:-translate-y-1">
+                                เข้าสู่ระบบ ✨
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="text-sm text-gray-500">
+                            ยังไม่มีบัญชี?
+                            <a href="#"
+                                class="font-bold text-pink-500 hover:text-pink-600 underline">สมัครสมาชิกที่นี่</a>
+                        </p>
+                    </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
