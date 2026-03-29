@@ -36,7 +36,8 @@ export class DollController {
 async showPage() {
   return {
     dolls: await this.service.findAll(),
-    keys: await this.keyService.findAll()
+    keys: await this.keyService.findAll(),
+    user: null
   };
 }
 

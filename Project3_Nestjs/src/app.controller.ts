@@ -13,10 +13,18 @@ export class AppController {
 
   @Get()
   @Render('index')
-  async page() {
+  async getIndex() {
+    return { user: null, // ส่งค่า null ไปก่อนเพื่อให้ EJS รู้จักตัวแปรนี้
+    title: 'Home' };
+  }
+
+  @Get('manage')
+  @Render('manage')
+  async getManage() {
     return { 
       dolls: await this.dollService.findAll(),
-      keys: await this.keyService.findAll()
+      keys: await this.keyService.findAll(),
+      user: null
     };
   }
 

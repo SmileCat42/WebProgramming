@@ -1,184 +1,35 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doll Gift Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
 
-  <h2 class="font-bold text-3xl text-pink-600">เลือกดูรายละเอียดสินค้า</h2><br/>
-  <h2 class="mt-5">Dools</h2>
+    <%- include('partials/header') %>
 
-  <select id="DollSelect" class="bg-pink-300 mb-5">
-    <option value="">-- choose doll --</option>
-    <% dolls.forEach(d=> { %>
-      <option value="<%= d.doll_id %>">
-        <%= d.doll_name %>
-      </option>
-      <% }) %>
-  </select>
+    <header class="py-16 px-4 text-center">
+        <h1 class="text-5xl md:text-6xl font-black tracking-widest text-black uppercase mb-6">
+            GIFTSHOPS
+        </h1>
+        <p class="max-w-2xl mx-auto text-gray-600 leading-relaxed text-lg">
+            Shop cute collectibles at Gift Shops! Tumblers, bottles, pins, stickers, totes & keychains 
+            to collect or gift. Brighten your day with something fun!
+        </p>
+    </header>
 
-  <h2>Keychains</h2>
+    <section class="w-full">
+        <div class="max-w-7xl mx-auto px-4">
+            <img src="/img/51.jpg" alt="May the luck be with you" class="w-full h-auto rounded-none md:rounded-xl shadow-sm">
+        </div>
+    </section>
+    
 
-  <select id="KeySelect" class="bg-pink-300 mb-5">
-    <option value="">-- choose key --</option>
-    <% keys.forEach(k=> { %>
-      <option value="<%= k.key_id %>">
-        <%= k.key_name %>
-      </option>
-      <% }) %>
-  </select>
-
-  <hr>
-
-  ID: <span id="a"></span><br>
-  Name: <span id="b"></span><br>
-  Price: <span id="c"></span><br>
-  Picture:
-  <span id="d"></span><br><br>
-  <img id="img" width="150">
-
-  <hr class="mt-5">
-  <h2 class="mt-5 text-purple-700 text-3xl font-bold">จัดการข้อมูล</h2><br><br>
-
-  <div>
-  edit name : <input id="doll_name" placeholder="doll name">
-  edit price : <input id="doll_price" placeholder="price">
-  edit address : <input id="doll_picture" placeholder="picture file name"><br><br>
-  </div>
-
-  <span class="gap-4 text-xl font-semibold text-white">
-  <button onclick="create()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Add</button>
-  <button onclick="update()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Update</button>
-  <button onclick="remove()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Delete</button>
-  </span>
-
-  <%- include('partials/footer') %>
-
-    <script>
-
-      let currentType = '';
-      // LOAD ONE
-      document.getElementById('DollSelect').onchange = async function () {
-
-        currentType = 'doll';
-
-        const id = this.value;
-        if (!id) return;
-
-        const r = await fetch('/api/doll/' + id);
-        const data = await r.json();
-
-        document.getElementById('a').innerText = data.doll_id;
-        document.getElementById('b').innerText = data.doll_name;
-        document.getElementById('c').innerText = data.doll_price;
-        document.getElementById('d').innerText = data.doll_picture;
-        document.getElementById("img").src =
-          "/img/" + data.doll_picture;
-
-        document.getElementById("doll_name").value = data.doll_name;
-        document.getElementById("doll_price").value = data.doll_price;
-        document.getElementById("doll_picture").value = data.doll_picture;
-      }
-
-      document.getElementById('KeySelect').onchange = async function () {
-
-         currentType = 'key';
-
-        const id = this.value;
-        if (!id) return;
-
-        const r = await fetch('/api/key/' + id);
-        const data = await r.json();
-
-        document.getElementById('a').innerText = data.key_id;
-        document.getElementById('b').innerText = data.key_name;
-        document.getElementById('c').innerText = data.key_price;
-        document.getElementById('d').innerText = data.key_picture;
-        document.getElementById("img").src =
-          "/img/" + data.key_picture;
-
-          document.getElementById("doll_name").value = data.key_name;
-  document.getElementById("doll_price").value = data.key_price;
-  document.getElementById("doll_picture").value = data.key_picture;
-      }
-
-
-      // CREATE
-      async function create() {
-
-  const url = currentType === 'key'
-    ? '/api/key'
-    : '/api/doll';
-
-  const payload = currentType === 'key'
-    ? {
-        key_name: document.getElementById("doll_name").value,
-        key_price: document.getElementById("doll_price").value,
-        key_picture: document.getElementById("doll_picture").value
-      }
-    : {
-        doll_name: document.getElementById("doll_name").value,
-        doll_price: document.getElementById("doll_price").value,
-        doll_picture: document.getElementById("doll_picture").value
-      };
-
-  await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-
-  location.reload();
-}
-
-      // UPDATE
-      async function update() {
-        const id = document.getElementById('a').innerText;
-
-        if (!id) {
-  alert('กรุณาเลือกข้อมูลก่อน');
-  return;
-}
-
-        const url = currentType === 'doll'
-          ? '/api/doll/' + id
-          : '/api/key/' + id;
-
-        const payload = currentType === 'doll'
-          ? {
-            doll_name: document.getElementById("doll_name").value,
-            doll_price: document.getElementById("doll_price").value,
-            doll_picture: document.getElementById("doll_picture").value
-          }
-          : {
-            key_name: document.getElementById("doll_name").value,
-            key_price: document.getElementById("doll_price").value,
-            key_picture: document.getElementById("doll_picture").value
-          };
-
-        await fetch(url, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        location.reload();
-      }
-
-
-      // DELETE
-      async function remove() {
-        
-        const id = document.getElementById('a').innerText;
-
-        if (!id) {
-  alert('กรุณาเลือกข้อมูลก่อน');
-  return;
-}
-        const url = currentType === 'doll'
-          ? '/api/doll/' + id
-          : '/api/key/' + id;
-
-        await fetch(url, {
-          method: 'DELETE'
-        });
-
-        location.reload();
-      }
-
-    </script>
+</body>
+</html>

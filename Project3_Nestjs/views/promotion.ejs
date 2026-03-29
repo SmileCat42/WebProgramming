@@ -1,0 +1,49 @@
+<%- include('partials/header') %> 
+
+<div class="max-w-7xl mx-auto p-6 md:p-10">
+    <header class="mb-12 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-pink-600 tracking-tight">
+            ✨ โปรโมชั่นพิเศษ ✨
+        </h1>
+    </header>
+
+    <% if (promotions && promotions.length > 0) { %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% promotions.forEach(promo => { %>
+                <div class="bg-white rounded-3xl shadow-lg shadow-pink-100 overflow-hidden group transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    
+                    <div class="aspect-video overflow-hidden">
+                        <img src="<%= promo.promotion_picture %>" 
+                             alt="<%= promo.promotion_name %>" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+
+                    <div class="p-6">
+                        <div class="text-xs text-pink-400 font-medium mb-1">
+                            🗓️ ประกาศเมื่อ: <%= promo.promotion_date %>
+                        </div> <h2 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-pink-500 transition-colors">
+                            <%= promo.promotion_name %>
+                        </h2>
+
+                        <p class="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4">
+                            <%= promo.promotion_detail %>
+                        </p>
+                        
+                        <div class="text-right">
+                            <a href="/promotion/<%= promo.promotion_id %>" class="inline-block text-xs font-bold text-pink-500 hover:text-pink-600 underline">
+                                ดูรายละเอียดเพิ่มเติม →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="text-center py-20 bg-white rounded-3xl shadow-md">
+            <span class="text-6xl">🎁</span>
+            <p class="mt-4 text-lg text-gray-500">ยังไม่มีโปรโมชั่นในขณะนี้ ติดตามไว้นะคะ!</p>
+        </div>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>

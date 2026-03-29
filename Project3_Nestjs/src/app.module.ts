@@ -4,8 +4,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { Doll } from './doll/doll.entity';
 import { Key } from './key/key.entity';
+import { Promotion } from './promotion/promotion.entity';
 import { DollModule } from './doll/doll.module';
 import { KeyModule } from './key/key.module';
+import { PromotionModule } from './promotion/promotion.module';
 // ⚠️ อย่าลืม Import 2 ตัวนี้
 import { AppController } from './app.controller'; 
 import { AppService } from './app.service';
@@ -26,13 +28,15 @@ import { AppService } from './app.service';
       username: 'root',
       password: 'Golfring02',
       database: 'gift',
-      entities: [Doll, Key],
+      entities: [Doll, Key, Promotion],
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
+      
     }),
 
     DollModule,
     KeyModule, 
+    PromotionModule,
   ],
   controllers: [AppController], 
   providers: [AppService],  

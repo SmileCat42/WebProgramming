@@ -38,7 +38,7 @@
             text-decoration: none;
             color: #c2185b;
             font-weight: 500;
-            
+
         }
 
         .nav a:hover {
@@ -55,19 +55,68 @@
 
 <body>
 
-    <div class="header">
+    <nav class="sticky top-0 z-50 bg-pink-200 backdrop-blur-md border-b border-pink-100 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
 
-        <div class="logo">
-            🎁 Doll Gift Shop
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <span class="text-2xl transform group-hover:rotate-12 transition-transform duration-300">🎁</span>
+                <span
+                    class="text-2xl font-black tracking-tight bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+                    DOLL GIFT SHOP
+                </span>
+            </div>
+
+            
+
+            <div class="hidden md:flex items-center gap-8">
+
+                <div class="flex items-center gap-4">
+                <% if (!user) { %>
+                    <a href="/login"
+                        class="transition-all duration-300 hover:scale-110 bg-pink-400 hover:bg-pink-500 text-white px-6 py-2 rounded-full font-bold transition-all shadow-md">
+                        เข้าสู่ระบบ
+                    </a>
+                    <% } else { %>
+                        <span class="text-pink-600 font-medium">สวัสดี, <%= user.username %></span>
+                        <a href="/logout" class="text-gray-500 hover:text-red-500 text-sm underline">
+                            ออกจากระบบ
+                        </a>
+                        <% } %>
+            </div>
+                <a href="/"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                    หน้าแรก
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="/show"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                    สินค้า
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="/promotion"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                    โปรโมชั่น
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <a href="/manage"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                    ติดต่อเรา
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <div class="md:hidden text-pink-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </div>
         </div>
-
-        <div class="nav">
-            <a href="/">หน้าแรก</a>
-            <a href="/show">สินค้า</a>
-            <a href="#">เกี่ยวกับเรา</a>
-            <a href="#">ติดต่อ</a>
-        </div>
-
-    </div>
+    </nav>
 
     <div class="max-w-7xl mx-auto p-10">
