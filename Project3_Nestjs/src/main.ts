@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as express from 'express';
+import session from 'express-session';
 import 'reflect-metadata';
 
 async function bootstrap() {
@@ -22,6 +23,15 @@ async function bootstrap() {
   // ⭐ ให้ AJAX อ่าน JSON ได้
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  app.use(
+    session({
+      secret: 'doll-gift-shop-secret', // รหัสลับตั้งอะไรก็ได้จ่ะ
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 3600000 }, // จำไว้ 1 ชั่วโมง
+    }),
+  );
 
   // ⭐ static files (css/js)
   app.useStaticAssets(join(__dirname, '..', 'public'), {

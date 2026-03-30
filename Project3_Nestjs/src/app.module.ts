@@ -4,6 +4,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { Doll } from './doll/doll.entity';
 import { Key } from './key/key.entity';
+import { User } from './user/user.entity';
 import { Promotion } from './promotion/promotion.entity';
 import { DollModule } from './doll/doll.module';
 import { KeyModule } from './key/key.module';
@@ -29,7 +30,7 @@ import { AppService } from './app.service';
       username: 'root',
       password: 'Golfring02',
       database: 'gift',
-      entities: [Doll, Key, Promotion],
+      entities: [Doll, Key, Promotion, User],
       autoLoadEntities: true,
       synchronize: false,
       

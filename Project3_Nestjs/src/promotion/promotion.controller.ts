@@ -1,18 +1,19 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Req, Session } from '@nestjs/common';
 import { PromotionService } from './promotion.service';
+import { Request } from 'express'; // ต้อง import Request จาก express มาด้วยนะจ๊ะ
 
-@Controller('promotion') // Route: /promotion
+@Controller('promotion')
 export class PromotionController {
-  constructor(private readonly promotionService: PromotionService) {}
+  constructor(private readonly promotionService: PromotionService) { }
 
-  @Get() // GET /promotion
-  @Render('promotion') // เรนเดอร์ไฟล์ promotion.ejs
-  async getPromotionPage() {
-    const promotions = await this.promotionService.findAll();
-    return { 
-      promotions: promotions, // ส่งข้อมูลไปหน้า EJS
-      title: 'โปรโมชั่นพิเศษ',
-      user: null
+  @Get()
+  @Render('promotion')
+  async getPromotion(@Session() session: any) {
+    const allPromotions = await this.promotionService.findAll();
+
+    return {
+      promotions: allPromotions,
+      user: session.user || null // ✅ ดึงจาก Session ถ้าไม่มีจะเป็น null
     };
   }
 }
