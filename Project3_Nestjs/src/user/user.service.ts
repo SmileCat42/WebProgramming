@@ -18,9 +18,13 @@ export class UserService {
 
   // user.service.ts
 async signup(userData: Partial<User>) {
-    // 1. สร้างก้อนข้อมูลใหม่จาก Class User
-    const newUser = this.userRepository.create(userData); 
-    // 2. บันทึกลง DB (ตัวแปร repo คือที่ฉีดยาเข้ามาจ่ะ)
+    const newUser = this.userRepository.create({
+      ...userData,
+      // ✨ ใส่ต่อท้ายแบบนี้ เพื่อให้มั่นใจว่าต่อให้ userData มี role อะไรมา 
+      // เราจะบังคับใช้ 'MEMBER' (หรือ 'CUSTOM' ตามที่เทอชอบ) เสมอ
+      user_role: userData.user_role || 'MEMBER', 
+    });
+    
     return await this.userRepository.save(newUser); 
 }
 }

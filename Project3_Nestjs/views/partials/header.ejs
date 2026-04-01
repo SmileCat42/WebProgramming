@@ -51,6 +51,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -76,49 +77,58 @@
                             <div
                                 class="flex items-center gap-3 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-100">
                                 <span class="text-pink-600 font-bold text-sm">
-                                    🧸 สวัสดี, <%= user.user_fname %>
+                                    🧸 สวัสดี, <span id="display-fname">ผู้เยี่ยมชม</span>
                                 </span>
-                                <div class="w-px h-4 bg-pink-200"></div> <a href="/auth/logout"
-                                    class="text-gray-400 hover:text-red-500 text-xs font-semibold transition-colors">
-                                    ออกจากระบบ
-                                </a>
                             </div>
-                            <% } %>
+                            <div class="w-px h-4 bg-pink-200"></div> <a href="/auth/logout"
+                                class="text-gray-400 hover:text-red-500 text-xs font-semibold transition-colors">
+                                ออกจากระบบ
+                            </a>
                 </div>
-                <a href="/"
-                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                    หน้าแรก
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/show"
-                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                    สินค้า
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="/promotion"
-                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                    โปรโมชั่น
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-                </a>
-
-                <a href="/manage"
-                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                    ติดต่อเรา
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                <% } %>
             </div>
+            <a href="/"
+                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                หน้าแรก
+                <span
+                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="/show"
+                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                สินค้า
+                <span
+                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="/promotion"
+                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                โปรโมชั่น
+                <span
+                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
 
-            <div class="md:hidden text-pink-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </div>
+            <a href="/manage"
+                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
+                ติดต่อเรา
+                <span
+                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </div>
+
+        <div class="md:hidden text-pink-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </div>
         </div>
     </nav>
+    <script>
+        // ดึงชื่อที่เทอเก็บไว้ตอน Login สำเร็จออกมา
+        const userName = localStorage.getItem('user_fname');
 
+        if (userName) {
+            // ถ้าเจอชื่อ ให้เปลี่ยนคำว่า "ผู้เยี่ยมชม" เป็นชื่อลูกค้า
+            document.getElementById('display-fname').innerText = userName;
+        }
+    </script>
     <div class="max-w-7xl mx-auto p-10">

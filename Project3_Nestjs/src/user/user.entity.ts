@@ -20,6 +20,6 @@ export class User {
   @Column()
   user_email: string;
 
-  @Column({ default: 'CUSTOM' })
-  user_role: string;
+  @Column({ default: 'MEMBER' }) // แนะนำให้ใช้ MEMBER ตามที่คุยกันนะจ๊ะ
+  user_role: string = 'MEMBER'; // กำหนดค่าเริ่มต้นที่ระดับ Class Property เลย
 }

@@ -1,6 +1,6 @@
-// เพิ่ม Post, Body, Res, Render เข้าไปใน { ... }
-import { Controller, Get, Post, Body, Res, Render, Session } from '@nestjs/common';
+import { Controller, Get, Post, Body, Res, Render, Session, HttpStatus } from '@nestjs/common';
 import { UserService } from './user.service';
+import { Response } from 'express';
 
 @Controller('auth')
 export class UserController {
@@ -44,9 +44,21 @@ export class UserController {
     return res.redirect('/auth/login'); // เด้งกลับไปหน้า Login
   }
 
-  @Post('signup') // URL จะกลายเป็น /auth/signup
-  async handleSignup(@Body() body, @Res() res) {
-    await this.userService.signup(body);
-    return res.redirect('/auth/login'); // สมัครเสร็จให้ไปหน้า login
+  @Post('signup')
+  async handleSignup(@Body() body: any, @Res() res: any) {
+    try {
+      await this.userService.signup(body);
+
+      // ✅ แก้ตรงนี้: HttpStatus.OK เฉยๆ ไม่มีวงเล็บจ่ะ
+      return res.status(HttpStatus.OK).json({
+        message: 'สมัครสมาชิกสำเร็จแล้วจ้า! 🧸'
+      });
+
+    } catch (error) {
+      // ❌ ตรงนี้ก็เหมือนกันจ่ะ: HttpStatus.BAD_REQUEST เฉยๆ
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: 'สมัครไม่สำเร็จนะจ๊ะ อาจจะมี ID นี้อยู่แล้ว'
+      });
+    }
   }
 }

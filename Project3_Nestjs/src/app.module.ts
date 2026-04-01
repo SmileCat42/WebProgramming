@@ -10,6 +10,7 @@ import { DollModule } from './doll/doll.module';
 import { KeyModule } from './key/key.module';
 import { PromotionModule } from './promotion/promotion.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './JWT/auth.module';
 
 import { AppController } from './app.controller'; 
 import { AppService } from './app.service';
@@ -40,6 +41,7 @@ import { AppService } from './app.service';
     KeyModule, 
     PromotionModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController], 
   providers: [AppService],  
