@@ -4,14 +4,24 @@ import { UserService } from './user.service';
 
 @Controller('auth')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Get('login')
   @Render('login') // ตรวจสอบว่ามีไฟล์ views/login.ejs แล้ว
   getLogin() {
-    return { error: null,
-        user: null
-     }; // ส่ง error เป็น null ไปก่อนเพื่อไม่ให้ EJS พัง
+    return {
+      error: null,
+      user: null
+    }; // ส่ง error เป็น null ไปก่อนเพื่อไม่ให้ EJS พัง
+  }
+
+  @Get('regis')
+  @Render('regis')
+  toregis() {
+    return {
+      error: null,
+      user: null
+    };
   }
 
   @Post('login')
@@ -29,8 +39,14 @@ export class UserController {
   }
 
   @Get('logout')
-logout(@Session() session: any, @Res() res) {
-  session.destroy(); // 💥 สั่งทำลายสมุดจดบันทึก (ลบข้อมูลการ Login)
-  return res.redirect('/auth/login'); // เด้งกลับไปหน้า Login
-}
+  logout(@Session() session: any, @Res() res) {
+    session.destroy(); // 💥 สั่งทำลายสมุดจดบันทึก (ลบข้อมูลการ Login)
+    return res.redirect('/auth/login'); // เด้งกลับไปหน้า Login
+  }
+
+  @Post('signup') // URL จะกลายเป็น /auth/signup
+  async handleSignup(@Body() body, @Res() res) {
+    await this.userService.signup(body);
+    return res.redirect('/auth/login'); // สมัครเสร็จให้ไปหน้า login
+  }
 }
