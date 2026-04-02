@@ -76,6 +76,7 @@
     <%- include('partials/footer') %>
 
     <script>
+        const token = getAuthToken();
     function togglePassword() {
         const passwordInput = document.getElementById('user_pass');
         const eyeIcon = document.getElementById('eye-icon');

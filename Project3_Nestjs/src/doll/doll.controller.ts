@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Render } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, Render, Session } from '@nestjs/common';
 import { Response } from 'express';
 import { DollService } from './doll.service';
 import { KeyService } from '../key/key.service';
@@ -38,11 +38,11 @@ export class DollController {
 
 @Get('/show')
 @Render('show')
-async showPage() {
+async showPage(@Session() session: any) {
   return {
     dolls: await this.service.findAll(),
     keys: await this.keyService.findAll(),
-    user: null
+    user: session.user || null
   };
 }
 }

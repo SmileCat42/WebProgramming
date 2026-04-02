@@ -5,7 +5,23 @@
     <meta charset="UTF-8">
     <title>Doll Gift Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    function getAuthToken() {
+        // 1. ลองดูใน URL ก่อน (กรณีเพิ่ง Redirect มาจาก Login)
+        const urlParams = new URLSearchParams(window.location.search);
+            const tokenFromUrl = urlParams.get('access_token');
 
+            if (tokenFromUrl) {
+                localStorage.setItem('my_token', tokenFromUrl);
+            // ลบ token ออกจาก URL เพื่อความปลอดภัย/สวยงาม
+            window.history.replaceState({ }, document.title, window.location.pathname);
+            return tokenFromUrl;
+        }
+
+            // 2. ถ้าใน URL ไม่มี ให้ไปดูใน LocalStorage
+            return localStorage.getItem('my_token');
+    }
+    </script>
     <style>
         body {
             margin: 0;
@@ -77,7 +93,9 @@
                             <div
                                 class="flex items-center gap-3 bg-pink-50 px-4 py-1.5 rounded-full border border-pink-100">
                                 <span class="text-pink-600 font-bold text-sm">
-                                    🧸 สวัสดี, <span id="display-fname">ผู้เยี่ยมชม</span>
+                                    🧸 สวัสดี, <span id="display-fname">
+                                        <%= user.user_fname %>
+                                    </span>
                                 </span>
                             </div>
                             <div class="w-px h-4 bg-pink-200"></div> <a href="/auth/logout"
@@ -130,5 +148,7 @@
             // ถ้าเจอชื่อ ให้เปลี่ยนคำว่า "ผู้เยี่ยมชม" เป็นชื่อลูกค้า
             document.getElementById('display-fname').innerText = userName;
         }
+
+
     </script>
     <div class="max-w-7xl mx-auto p-10">

@@ -2,7 +2,7 @@
 
   <h2 class="font-bold text-3xl text-pink-600">เลือกดูรายละเอียดสินค้า</h2><br />
   <h2 class="mt-5">Dools</h2>
-
+  
   <select id="DollSelect" class="bg-pink-300 mb-5">
     <option value="">-- choose doll --</option>
     <% dolls.forEach(d=> { %>
@@ -71,7 +71,9 @@
 
 <script>
     let currentType = '';
-    const token = localStorage.getItem('my_token');
+    const token = getAuthToken();
+
+    console.log("Final Token for CRUD:", token);
 
     // --- 1. ส่วนแสดงข้อมูล (LOAD DATA) ---
     document.getElementById('DollSelect').onchange = async function () {

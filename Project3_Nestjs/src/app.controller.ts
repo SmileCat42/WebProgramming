@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Render, Session } from '@nestjs/common';
 import { AppService } from './app.service';
 import { DollService } from './doll/doll.service';
 import { KeyService } from './key/key.service';
@@ -13,18 +13,18 @@ export class AppController {
 
   @Get()
   @Render('index')
-  async getIndex() {
-    return { user: null, // ส่งค่า null ไปก่อนเพื่อให้ EJS รู้จักตัวแปรนี้
+  async getIndex(@Session() session: any) {
+    return { user: session.user || null, // ส่งค่า null ไปก่อนเพื่อให้ EJS รู้จักตัวแปรนี้
     title: 'Home' };
   }
 
   @Get('manage')
   @Render('manage')
-  async getManage() {
+  async getManage(@Session() session: any) {
     return { 
       dolls: await this.dollService.findAll(),
       keys: await this.keyService.findAll(),
-      user: null
+      user: session.user || null
     };
   }
 

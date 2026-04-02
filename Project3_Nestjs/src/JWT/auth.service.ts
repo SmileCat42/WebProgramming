@@ -21,6 +21,15 @@ export class AuthService {
     return null; // ถ้าไม่ผ่าน ส่ง null กลับไป
   }
 
+  async generateToken(user: any) {
+  const payload = { 
+    username: user.user_id, 
+    sub: user.user_id, 
+    role: user.user_role // ✨ เช็คชื่อฟิลด์ให้ตรงกับ entity นะ (user_role หรือ role)
+  };
+  return this.jwtService.sign(payload);
+}
+
   // 2. ฟังก์ชันออกบัตร JWT (ที่คุยกันรอบที่แล้ว)
   async login(user: any) {
     const payload = { 
