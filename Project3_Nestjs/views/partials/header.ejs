@@ -6,21 +6,21 @@
     <title>Doll Gift Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    function getAuthToken() {
-        // 1. ลองดูใน URL ก่อน (กรณีเพิ่ง Redirect มาจาก Login)
-        const urlParams = new URLSearchParams(window.location.search);
+        function getAuthToken() {
+            // 1. ลองดูใน URL ก่อน (กรณีเพิ่ง Redirect มาจาก Login)
+            const urlParams = new URLSearchParams(window.location.search);
             const tokenFromUrl = urlParams.get('access_token');
 
             if (tokenFromUrl) {
                 localStorage.setItem('my_token', tokenFromUrl);
-            // ลบ token ออกจาก URL เพื่อความปลอดภัย/สวยงาม
-            window.history.replaceState({ }, document.title, window.location.pathname);
-            return tokenFromUrl;
-        }
+                // ลบ token ออกจาก URL เพื่อความปลอดภัย/สวยงาม
+                window.history.replaceState({}, document.title, window.location.pathname);
+                return tokenFromUrl;
+            }
 
             // 2. ถ้าใน URL ไม่มี ให้ไปดูใน LocalStorage
             return localStorage.getItem('my_token');
-    }
+        }
     </script>
     <style>
         body {
@@ -76,13 +76,13 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
 
             <div class="flex items-center gap-2 group cursor-pointer">
-                <img src="/img/logo2.jpg">
+                <img src="/img/logo2.jpg"
+                alt="Gift Me โลโก้ร้านขายตุ๊กตาและของขวัญ">
             </div>
 
 
 
             <div class="hidden md:flex items-center gap-8">
-
                 <div class="flex items-center gap-4">
                     <% if (!user) { %>
                         <a href="/auth/login"
@@ -98,39 +98,23 @@
                                     </span>
                                 </span>
                             </div>
-                            <div class="w-px h-4 bg-pink-200"></div> <a href="/auth/logout"
+                            <div class="w-px h-4 bg-pink-200"></div>
+                            <a href="/auth/logout"
                                 class="text-gray-400 hover:text-red-500 text-xs font-semibold transition-colors">
                                 ออกจากระบบ
                             </a>
+                            <% } %>
                 </div>
-                <% } %>
-            </div>
-            <a href="/"
-                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                หน้าแรก
-                <span
-                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="/show"
-                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                สินค้า
-                <span
-                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="/promotion"
-                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                โปรโมชั่น
-                <span
-                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
 
-            <a href="/manage"
-                class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium transition-all duration-300 relative group">
-                ติดต่อเรา
-                <span
-                    class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-        </div>
+                <a href="/"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium relative group">หน้าแรก</a>
+                <a href="/show"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium relative group">สินค้า</a>
+                <a href="/promotion"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium relative group">โปรโมชั่น</a>
+                <a href="/manage"
+                    class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium relative group">ติดต่อเรา</a>
+            </div>
 
         <div class="md:hidden text-pink-500">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"

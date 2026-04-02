@@ -15,7 +15,9 @@ export class AppController {
   @Render('index')
   async getIndex(@Session() session: any) {
     return { user: session.user || null, // ส่งค่า null ไปก่อนเพื่อให้ EJS รู้จักตัวแปรนี้
-    title: 'Home' };
+    title: 'Gift me - ร้านตุ๊กตา พวงกุญแจ กล่องสุ่ม',
+    description: 'ขายตุ๊กตาทุกชนิด ตุ๊กตาหมี ตุ๊กตาแมว คุณภาพดี ส่งไว ได้ของแน่นอน',
+    canonical: 'https://yourstore.com/' };
   }
 
   @Get('manage')
