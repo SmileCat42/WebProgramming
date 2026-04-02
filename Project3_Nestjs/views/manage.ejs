@@ -65,136 +65,153 @@
 
   <%- include('partials/footer') %>
 
-    <script>
+  
 
-      let currentType = '';
-      // LOAD ONE
-      document.getElementById('DollSelect').onchange = async function () {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+    let currentType = '';
+    const token = localStorage.getItem('my_token');
+
+    // --- 1. ส่วนแสดงข้อมูล (LOAD DATA) ---
+    document.getElementById('DollSelect').onchange = async function () {
         currentType = 'doll';
-
         const id = this.value;
         if (!id) return;
 
         const r = await fetch('/api/doll/' + id);
         const data = await r.json();
 
-        document.getElementById('a').innerText = data.doll_id;
-        document.getElementById('b').innerText = data.doll_name;
-        document.getElementById('c').innerText = data.doll_price;
-        document.getElementById('d').innerText = data.doll_picture;
-        document.getElementById("img").src =
-          "/img/" + data.doll_picture;
+        displayData(data, 'doll');
+    }
 
-        document.getElementById("doll_name").value = data.doll_name;
-        document.getElementById("doll_price").value = data.doll_price;
-        document.getElementById("doll_picture").value = data.doll_picture;
-      }
-
-      document.getElementById('KeySelect').onchange = async function () {
-
+    document.getElementById('KeySelect').onchange = async function () {
         currentType = 'key';
-
         const id = this.value;
         if (!id) return;
 
         const r = await fetch('/api/key/' + id);
         const data = await r.json();
 
-        document.getElementById('a').innerText = data.key_id;
-        document.getElementById('b').innerText = data.key_name;
-        document.getElementById('c').innerText = data.key_price;
-        document.getElementById('d').innerText = data.key_picture;
-        document.getElementById("img").src =
-          "/img/" + data.key_picture;
+        displayData(data, 'key');
+    }
 
-        document.getElementById("doll_name").value = data.key_name;
-        document.getElementById("doll_price").value = data.key_price;
-        document.getElementById("doll_picture").value = data.key_picture;
-      }
+    function displayData(data, type) {
+        const prefix = type === 'doll' ? 'doll_' : 'key_';
+        
+        document.getElementById('a').innerText = data[prefix + 'id'];
+        document.getElementById('b').innerText = data[prefix + 'name'];
+        document.getElementById('c').innerText = data[prefix + 'price'];
+        document.getElementById('d').innerText = data[prefix + 'picture'];
+        document.getElementById("img").src = "/img/" + data[prefix + 'picture'];
 
+        document.getElementById("doll_name").value = data[prefix + 'name'];
+        document.getElementById("doll_price").value = data[prefix + 'price'];
+        document.getElementById("doll_picture").value = data[prefix + 'picture'];
+    }
 
-      // CREATE
-      async function create() {
+    // --- 2. ส่วนจัดการข้อมูล (CRUD) ---
 
-        const url = currentType === 'key'
-          ? '/api/key'
-          : '/api/doll';
+    async function create() {
+        const url = currentType === 'key' ? '/api/key' : '/api/doll';
+        const payload = currentType === 'key' 
+            ? {
+                key_name: document.getElementById("doll_name").value,
+                key_price: document.getElementById("doll_price").value,
+                key_picture: document.getElementById("doll_picture").value
+            }
+            : {
+                doll_name: document.getElementById("doll_name").value,
+                doll_price: document.getElementById("doll_price").value,
+                doll_picture: document.getElementById("doll_picture").value
+            };
 
-        const payload = currentType === 'key'
-          ? {
-            key_name: document.getElementById("doll_name").value,
-            key_price: document.getElementById("doll_price").value,
-            key_picture: document.getElementById("doll_picture").value
-          }
-          : {
-            doll_name: document.getElementById("doll_name").value,
-            doll_price: document.getElementById("doll_price").value,
-            doll_picture: document.getElementById("doll_picture").value
-          };
-
-        await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(payload)
         });
 
-        location.reload();
-      }
+        handleResponse(response, 'เพิ่มข้อมูลสำเร็จแล้ว');
+    }
 
-      // UPDATE
-      async function update() {
+    async function update() {
         const id = document.getElementById('a').innerText;
+        if (!id) { Swal.fire('แจ้งเตือน', 'กรุณาเลือกข้อมูลก่อน', 'info'); return; }
 
-        if (!id) {
-          alert('กรุณาเลือกข้อมูลก่อน');
-          return;
-        }
-
-        const url = currentType === 'doll'
-          ? '/api/doll/' + id
-          : '/api/key/' + id;
-
+        const url = currentType === 'doll' ? '/api/doll/' + id : '/api/key/' + id;
         const payload = currentType === 'doll'
-          ? {
-            doll_name: document.getElementById("doll_name").value,
-            doll_price: document.getElementById("doll_price").value,
-            doll_picture: document.getElementById("doll_picture").value
-          }
-          : {
-            key_name: document.getElementById("doll_name").value,
-            key_price: document.getElementById("doll_price").value,
-            key_picture: document.getElementById("doll_picture").value
-          };
+            ? { 
+                doll_name: document.getElementById("doll_name").value, 
+                doll_price: document.getElementById("doll_price").value, 
+                doll_picture: document.getElementById("doll_picture").value 
+              }
+            : { 
+                key_name: document.getElementById("doll_name").value, 
+                key_price: document.getElementById("doll_price").value, 
+                key_picture: document.getElementById("doll_picture").value 
+              };
 
-        await fetch(url, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(payload)
         });
 
-        location.reload();
-      }
+        handleResponse(response, 'อัปเดตข้อมูลเรียบร้อย!');
+    }
 
-
-      // DELETE
-      async function remove() {
-
+    async function remove() {
         const id = document.getElementById('a').innerText;
+        if (!id) { Swal.fire('แจ้งเตือน', 'กรุณาเลือกข้อมูลก่อน', 'info'); return; }
 
-        if (!id) {
-          alert('กรุณาเลือกข้อมูลก่อน');
-          return;
-        }
-        const url = currentType === 'doll'
-          ? '/api/doll/' + id
-          : '/api/key/' + id;
-
-        await fetch(url, {
-          method: 'DELETE'
+        const confirm = await Swal.fire({
+            title: 'ยืนยันการลบ?',
+            text: "ข้อมูลนี้จะไม่สามารถกู้คืนได้",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ec4899',
+            confirmButtonText: 'ใช่, ลบเลย!',
+            cancelButtonText: 'ยกเลิก'
         });
 
-        location.reload();
-      }
+        if (confirm.isConfirmed) {
+            const url = currentType === 'doll' ? '/api/doll/' + id : '/api/key/' + id;
+            const response = await fetch(url, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
 
-    </script>
+            handleResponse(response, 'ลบข้อมูลสำเร็จ 🗑️');
+        }
+    }
+
+    // --- 3. ส่วนจัดการการตอบกลับ (RESPONSE HANDLING) ---
+    async function handleResponse(response, successMsg) {
+        let data = {};
+        try { data = await response.json(); } catch(e) { console.log('Not a JSON response'); }
+
+        if (response.ok) {
+            Swal.fire('สำเร็จ!', successMsg, 'success').then(() => location.reload());
+        } else {
+            if (response.status === 403) {
+                Swal.fire({
+                    title: 'สิทธิ์ไม่ได้รับการอนุญาต',
+                    text: data.message || 'เฉพาะ ADMIN เท่านั้น',
+                    icon: 'error',
+                    confirmButtonColor: '#ec4899'
+                });
+            } else if (response.status === 401) {
+                Swal.fire('ดำเนินการไม่สำเร็จ', 'กรุณา Login โดย ADMIN ก่อนค่ะ', 'warning');
+            } else {
+                Swal.fire('ผิดพลาด', data.message || 'เกิดข้อผิดพลาดบางอย่าง', 'error');
+            }
+        }
+    }
+</script>

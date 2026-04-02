@@ -1,19 +1,25 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport'; // 👈 1. เพิ่มอันนี้
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { JwtModule } from '@nestjs/jwt'; // ต้องมีตัวนี้
-import { UserModule } from '../user/user.module'; // นำเข้า UserModule มาใช้ร่วมกัน
+import { UserModule } from '../user/user.module'; // เช็ค Path เทอด้วยนะจ๊ะ
+import { JwtStrategy } from './auth.strategy'; // 👈 2. เพิ่มไฟล์ Strategy ที่เราเขียนกัน
 
 @Module({
   imports: [
     UserModule,
+    // 👈 3. ลงทะเบียน Passport และบอกว่าเราจะใช้ 'jwt' เป็นหลัก
+    PassportModule.register({ defaultStrategy: 'jwt' }), 
     JwtModule.register({
-      secret: 'MY_SECRET_PINK_DOLL', // รหัสลับสำหรับเซ็นชื่อบัตร
-      signOptions: { expiresIn: '1d' }, // บัตรมีอายุ 1 วัน
+      secret: 'MY_SECRET_PINK_DOLL',
+      signOptions: { expiresIn: '1d' },
     }),
   ],
-  providers: [AuthService],
+  // 👈 4. ต้องใส่ JwtStrategy ใน providers เพื่อให้ระบบเรียกใช้ได้
+  providers: [AuthService, JwtStrategy], 
   controllers: [AuthController],
-  exports: [AuthService], // เผื่อ Module อื่นอยากเรียกใช้
+  // 👈 5. Export PassportModule ออกไป เผื่อ Module อื่น (เช่น KeyModule) จะใช้ Guard
+  exports: [AuthService, PassportModule], 
 })
 export class AuthModule {}
