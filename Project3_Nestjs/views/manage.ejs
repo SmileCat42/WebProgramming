@@ -1,219 +1,219 @@
 <%- include('partials/header') %>
+<script>
+    // ดักหน้าประตู: ถ้าไม่มี Token ให้ดีดออกไปหน้า Login ทันที
+    const checkToken = localStorage.getItem('my_token');
+    if (!checkToken) {
+        alert('พื้นที่เฉพาะ ADMIN เท่านั้น กรุณาเข้าสู่ระบบค่ะ');
+        window.location.href = '/auth/login';
+    }
+</script>
 
-  <h2 class="font-bold text-3xl text-pink-600">เลือกดูรายละเอียดสินค้า</h2><br />
-  <h2 class="mt-5">Dools</h2>
-  
-  <select id="DollSelect" class="bg-pink-300 mb-5">
-    <option value="">-- choose doll --</option>
-    <% dolls.forEach(d=> { %>
-      <option value="<%= d.doll_id %>">
-        <%= d.doll_name %>
-      </option>
-      <% }) %>
-  </select>
+<div class="flex justify-between items-center mb-8">
+    <h2 class="font-bold text-3xl text-purple-700">ระบบจัดการข้อมูลสินค้า (CMS)</h2>
+    <button onclick="prepareCreate()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-bold shadow-lg transition-all">
+        + เพิ่มสินค้าใหม่
+    </button>
+</div>
 
-  <h2>Keychains</h2>
-
-  <select id="KeySelect" class="bg-pink-300 mb-5">
-    <option value="">-- choose key --</option>
-    <% keys.forEach(k=> { %>
-      <option value="<%= k.key_id %>">
-        <%= k.key_name %>
-      </option>
-      <% }) %>
-  </select>
-
-  <hr>
-
-  ID: <span id="a"></span><br>
-  Name: <span id="b"></span><br>
-  Price: <span id="c"></span><br>
-  Picture:
-  <span id="d"></span><br><br>
-  <img id="img" width="150">
-
-  <hr class="mt-5">
-  <div class="bg-purple-200 w-full p-8 mt-0">
-    <h2 class="mt-5 text-purple-700 text-3xl font-bold">จัดการข้อมูล</h2><br><br>
-
-    <div>
-      <div class="flex flex-col">
-        <label class="text-lg font-semibold text-purple-700 mb-2"> Edit name : </label>
-        <input id="doll_name" placeholder="doll name" type="text"
-          class="border-2 border-purple-100 focus:border-purple-300 outline-none p-3 rounded-lg bg-white transition-all">
-      </div>
-      <div class="flex flex-col">
-        <label class="text-lg font-semibold text-purple-700 mb-2">Edit price : </label>
-        <input id="doll_price" placeholder="price"
-          class="border-2 border-purple-100 focus:border-purple-300 outline-none p-3 rounded-lg bg-white transition-all">
-      </div>
-      <div class="flex flex-col">
-        <label class="text-lg font-semibold text-purple-700 mb-2">
-        Edit address : </label>
-        <input id="doll_picture" placeholder="picture file name"
-          class="border-2 border-purple-100 focus:border-purple-300 outline-none p-3 rounded-lg bg-white transition-all">
-      </div><br><br>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-pink-100">
+        <h3 class="text-xl font-bold text-pink-600 mb-4 flex items-center">🧸 รายการตุ๊กตา (Dolls)</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b-2 border-pink-50 text-pink-400">
+                        <th class="py-3 px-2">รูป</th>
+                        <th class="py-3 px-2">ชื่อสินค้า</th>
+                        <th class="py-3 px-2 text-right">ราคา</th>
+                        <th class="py-3 px-2 text-center">จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% dolls.forEach(d => { %>
+                    <tr class="border-b border-pink-50 hover:bg-pink-50 transition-colors">
+                        <td class="py-3 px-2"><img src="/img/<%= d.doll_picture %>" class="w-12 h-12 rounded-lg object-cover shadow-sm"></td>
+                        <td class="py-3 px-2 font-medium"><%= d.doll_name %></td>
+                        <td class="py-3 px-2 text-right text-purple-600 font-bold"><%= d.doll_price %>.-</td>
+                        <td class="py-3 px-2 text-center">
+                            <button onclick="editData('<%= d.doll_id %>', 'doll')" class="text-blue-500 hover:text-blue-700 mx-1"><i class="fas fa-edit"></i></button>
+                            <button onclick="removeData('<%= d.doll_id %>', 'doll')" class="text-red-500 hover:text-red-700 mx-1"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <div class="bg-white p-6 rounded-2xl shadow-md border border-purple-100">
+        <h3 class="text-xl font-bold text-purple-600 mb-4 flex items-center">🔑 รายการพวงกุญแจ (Keychains)</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b-2 border-purple-50 text-purple-400">
+                        <th class="py-3 px-2">รูป</th>
+                        <th class="py-3 px-2">ชื่อสินค้า</th>
+                        <th class="py-3 px-2 text-right">ราคา</th>
+                        <th class="py-3 px-2 text-center">จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% keys.forEach(k => { %>
+                    <tr class="border-b border-purple-50 hover:bg-purple-50 transition-colors">
+                        <td class="py-3 px-2"><img src="/img/<%= k.key_picture %>" class="w-12 h-12 rounded-lg object-cover shadow-sm"></td>
+                        <td class="py-3 px-2 font-medium"><%= k.key_name %></td>
+                        <td class="py-3 px-2 text-right text-purple-600 font-bold"><%= k.key_price %>.-</td>
+                        <td class="py-3 px-2 text-center">
+                            <button onclick="editData('<%= k.key_id %>', 'key')" class="text-blue-500 hover:text-blue-700 mx-1"><i class="fas fa-edit"></i></button>
+                            <button onclick="removeData('<%= k.key_id %>', 'key')" class="text-red-500 hover:text-red-700 mx-1"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-    <span class="gap-4 text-xl font-semibold text-white mt-5">
-      <button onclick="create()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Add</button>
-      <button onclick="update()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Update</button>
-      <button onclick="remove()" class="px-4 py-2 mr-7 ml-7 hover:bg-pink-300 bg-purple-500 rounded">Delete</button>
-    </span>
-  </div>
+<div id="editor-section" class="hidden bg-purple-100 w-full p-8 rounded-3xl shadow-inner mb-20 border-2 border-purple-200">
+    <div class="flex justify-between items-center mb-6">
+        <h2 id="editor-title" class="text-2xl font-bold text-purple-800 underline">📝 แก้ไขข้อมูล</h2>
+        <button onclick="closeEditor()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+    </div>
 
-  <%- include('partials/footer') %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+            <input type="hidden" id="item_id">
+            <div>
+                <label class="block text-sm font-bold text-purple-700">ชื่อสินค้า :</label>
+                <input id="doll_name" type="text" class="w-full border-2 border-white focus:border-purple-400 outline-none p-3 rounded-xl bg-white/70 shadow-sm transition-all">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-purple-700">ราคา :</label>
+                <input id="doll_price" type="number" class="w-full border-2 border-white focus:border-purple-400 outline-none p-3 rounded-xl bg-white/70 shadow-sm transition-all">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-purple-700">ชื่อไฟล์รูปภาพ (เช่น doll1.png) :</label>
+                <input id="doll_picture" type="text" class="w-full border-2 border-white focus:border-purple-400 outline-none p-3 rounded-xl bg-white/70 shadow-sm transition-all">
+            </div>
+        </div>
+        <div class="flex flex-col items-center justify-center border-2 border-dashed border-purple-300 rounded-3xl p-4 bg-white/50">
+            <p class="text-sm text-purple-400 mb-2">ตัวอย่างรูปภาพ</p>
+            <img id="img-preview" src="/img/no-image.png" class="w-40 h-40 object-cover rounded-2xl shadow-lg border-4 border-white">
+        </div>
+    </div>
 
-  
+    <div class="mt-8 flex justify-end gap-4">
+        <button id="btn-save" onclick="saveData()" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">บันทึกข้อมูล</button>
+        <button onclick="closeEditor()" class="bg-gray-400 hover:bg-gray-500 text-white px-8 py-3 rounded-xl font-bold shadow-lg transition-all">ยกเลิก</button>
+    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%- include('partials/footer') %>
 
 <script>
     let currentType = '';
+    let mode = 'create'; // 'create' or 'edit'
     const token = getAuthToken();
 
-    console.log("Final Token for CRUD:", token);
-
-    // --- 1. ส่วนแสดงข้อมูล (LOAD DATA) ---
-    document.getElementById('DollSelect').onchange = async function () {
-        currentType = 'doll';
-        const id = this.value;
-        if (!id) return;
-
-        const r = await fetch('/api/doll/' + id);
-        const data = await r.json();
-
-        displayData(data, 'doll');
-    }
-
-    document.getElementById('KeySelect').onchange = async function () {
-        currentType = 'key';
-        const id = this.value;
-        if (!id) return;
-
-        const r = await fetch('/api/key/' + id);
-        const data = await r.json();
-
-        displayData(data, 'key');
-    }
-
-    function displayData(data, type) {
-        const prefix = type === 'doll' ? 'doll_' : 'key_';
-        
-        document.getElementById('a').innerText = data[prefix + 'id'];
-        document.getElementById('b').innerText = data[prefix + 'name'];
-        document.getElementById('c').innerText = data[prefix + 'price'];
-        document.getElementById('d').innerText = data[prefix + 'picture'];
-        document.getElementById("img").src = "/img/" + data[prefix + 'picture'];
-
-        document.getElementById("doll_name").value = data[prefix + 'name'];
-        document.getElementById("doll_price").value = data[prefix + 'price'];
-        document.getElementById("doll_picture").value = data[prefix + 'picture'];
-    }
-
-    // --- 2. ส่วนจัดการข้อมูล (CRUD) ---
-
-    async function create() {
-        const url = currentType === 'key' ? '/api/key' : '/api/doll';
-        const payload = currentType === 'key' 
-            ? {
-                key_name: document.getElementById("doll_name").value,
-                key_price: document.getElementById("doll_price").value,
-                key_picture: document.getElementById("doll_picture").value
+    // ฟังก์ชันเปิดฟอร์มสำหรับ เพิ่มใหม่
+    function prepareCreate() {
+        mode = 'create';
+        Swal.fire({
+            title: 'เลือกประเภทสินค้า',
+            input: 'select',
+            inputOptions: { 'doll': 'ตุ๊กตา (Doll)', 'key': 'พวงกุญแจ (Key)' },
+            confirmButtonText: 'ตกลง',
+            confirmButtonColor: '#9333ea'
+        }).then((result) => {
+            if (result.value) {
+                currentType = result.value;
+                resetForm();
+                document.getElementById('editor-title').innerText = "➕ เพิ่ม" + (currentType === 'doll' ? 'ตุ๊กตา' : 'พวงกุญแจ');
+                document.getElementById('editor-section').classList.remove('hidden');
+                document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
             }
-            : {
-                doll_name: document.getElementById("doll_name").value,
-                doll_price: document.getElementById("doll_price").value,
-                doll_picture: document.getElementById("doll_picture").value
-            };
-
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            },
-            body: JSON.stringify(payload)
         });
-
-        handleResponse(response, 'เพิ่มข้อมูลสำเร็จแล้ว');
     }
 
-    async function update() {
-        const id = document.getElementById('a').innerText;
-        if (!id) { Swal.fire('แจ้งเตือน', 'กรุณาเลือกข้อมูลก่อน', 'info'); return; }
+    // ฟังก์ชันดึงข้อมูลมา แก้ไข
+    async function editData(id, type) {
+        mode = 'edit';
+        currentType = type;
+        const response = await fetch(`/api/${type}/${id}`);
+        const data = await response.json();
+        
+        const prefix = type === 'doll' ? 'doll_' : 'key_';
+        document.getElementById('item_id').value = data[prefix + 'id'];
+        document.getElementById('doll_name').value = data[prefix + 'name'];
+        document.getElementById('doll_price').value = data[prefix + 'price'];
+        document.getElementById('doll_picture').value = data[prefix + 'picture'];
+        document.getElementById('img-preview').src = "/img/" + data[prefix + 'picture'];
 
-        const url = currentType === 'doll' ? '/api/doll/' + id : '/api/key/' + id;
-        const payload = currentType === 'doll'
-            ? { 
-                doll_name: document.getElementById("doll_name").value, 
-                doll_price: document.getElementById("doll_price").value, 
-                doll_picture: document.getElementById("doll_picture").value 
-              }
-            : { 
-                key_name: document.getElementById("doll_name").value, 
-                key_price: document.getElementById("doll_price").value, 
-                key_picture: document.getElementById("doll_picture").value 
-              };
-
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            },
-            body: JSON.stringify(payload)
-        });
-
-        handleResponse(response, 'อัปเดตข้อมูลเรียบร้อย!');
+        document.getElementById('editor-title').innerText = "📝 แก้ไข" + (type === 'doll' ? 'ตุ๊กตา' : 'พวงกุญแจ');
+        document.getElementById('editor-section').classList.remove('hidden');
+        document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
     }
 
-    async function remove() {
-        const id = document.getElementById('a').innerText;
-        if (!id) { Swal.fire('แจ้งเตือน', 'กรุณาเลือกข้อมูลก่อน', 'info'); return; }
+    function resetForm() {
+        document.getElementById('item_id').value = '';
+        document.getElementById('doll_name').value = '';
+        document.getElementById('doll_price').value = '';
+        document.getElementById('doll_picture').value = '';
+        document.getElementById('img-preview').src = '/img/no-image.png';
+    }
 
+    function closeEditor() {
+        document.getElementById('editor-section').classList.add('hidden');
+    }
+
+    // ฟังก์ชัน Save (รวมทั้ง Create และ Update)
+    async function saveData() {
+        const id = document.getElementById('item_id').value;
+        const url = mode === 'create' ? `/api/${currentType}` : `/api/${currentType}/${id}`;
+        const method = mode === 'create' ? 'POST' : 'PUT';
+
+        const payload = currentType === 'doll' ? {
+            doll_name: document.getElementById('doll_name').value,
+            doll_price: document.getElementById('doll_price').value,
+            doll_picture: document.getElementById('doll_picture').value
+        } : {
+            key_name: document.getElementById('doll_name').value,
+            key_price: document.getElementById('doll_price').value,
+            key_picture: document.getElementById('doll_picture').value
+        };
+
+        const res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify(payload)
+        });
+        handleResponse(res, mode === 'create' ? 'เพิ่มสำเร็จ!' : 'แก้ไขสำเร็จ!');
+    }
+
+    async function removeData(id, type) {
+        currentType = type;
         const confirm = await Swal.fire({
-            title: 'ยืนยันการลบ?',
-            text: "ข้อมูลนี้จะไม่สามารถกู้คืนได้",
+            title: 'ลบข้อมูลนี้?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#ec4899',
-            confirmButtonText: 'ใช่, ลบเลย!',
-            cancelButtonText: 'ยกเลิก'
+            confirmButtonColor: '#ef4444'
         });
-
         if (confirm.isConfirmed) {
-            const url = currentType === 'doll' ? '/api/doll/' + id : '/api/key/' + id;
-            const response = await fetch(url, {
+            const res = await fetch(`/api/${type}/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
-            handleResponse(response, 'ลบข้อมูลสำเร็จ 🗑️');
+            handleResponse(res, 'ลบเรียบร้อย!');
         }
     }
 
-    // --- 3. ส่วนจัดการการตอบกลับ (RESPONSE HANDLING) ---
-    async function handleResponse(response, successMsg) {
-        let data = {};
-        try { data = await response.json(); } catch(e) { console.log('Not a JSON response'); }
-
+    async function handleResponse(response, msg) {
         if (response.ok) {
-            Swal.fire('สำเร็จ!', successMsg, 'success').then(() => location.reload());
+            Swal.fire('สำเร็จ', msg, 'success').then(() => location.reload());
         } else {
-            if (response.status === 403) {
-                Swal.fire({
-                    title: 'สิทธิ์ไม่ได้รับการอนุญาต',
-                    text: data.message || 'เฉพาะ ADMIN เท่านั้น',
-                    icon: 'error',
-                    confirmButtonColor: '#ec4899'
-                });
-            } else if (response.status === 401) {
-                Swal.fire('ดำเนินการไม่สำเร็จ', 'กรุณา Login โดย ADMIN ก่อนค่ะ', 'warning');
-            } else {
-                Swal.fire('ผิดพลาด', data.message || 'เกิดข้อผิดพลาดบางอย่าง', 'error');
-            }
+            const err = await response.json();
+            Swal.fire('ผิดพลาด', err.message || 'ไม่มีสิทธิ์เข้าถึง', 'error');
         }
     }
 </script>

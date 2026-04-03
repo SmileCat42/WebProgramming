@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Doll Gift Shop</title>
+    <title>GIFT ME ร้านขายตุ๊กตา พวงกุญแจ กล่องสุ่มราคาพิเศษ</title>
+    <link rel="icon" type="image/png" href="/img/logo32.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function getAuthToken() {
@@ -20,6 +22,20 @@
 
             // 2. ถ้าใน URL ไม่มี ให้ไปดูใน LocalStorage
             return localStorage.getItem('my_token');
+        }
+        function logout() {
+            localStorage.removeItem('my_token'); // ลบ Token
+            localStorage.removeItem('user_fname'); // ลบชื่อ
+            // จากนั้นค่อยพาไปหน้า Login หรือหน้าแรก
+            window.location.href = '/auth/logout';
+        }
+        function handleLogout() {
+            // 1. ลบ Token ออกจาก LocalStorage ทันที
+            localStorage.removeItem('my_token');
+            localStorage.removeItem('user_fname');
+
+            // 2. ปล่อยให้มันวิ่งไปหา href="/auth/logout" เพื่อไปล้าง Session ที่ Server ต่อ
+            return true;
         }
     </script>
     <style>
@@ -76,8 +92,7 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
 
             <div class="flex items-center gap-2 group cursor-pointer">
-                <img src="/img/logo2.jpg"
-                alt="Gift Me โลโก้ร้านขายตุ๊กตาและของขวัญ">
+                <img src="/img/logo2.jpg" alt="Gift Me โลโก้ร้านขายตุ๊กตาและของขวัญ">
             </div>
 
 
@@ -99,7 +114,7 @@
                                 </span>
                             </div>
                             <div class="w-px h-4 bg-pink-200"></div>
-                            <a href="/auth/logout"
+                            <a href="/auth/logout" onclick="return handleLogout()"
                                 class="text-gray-400 hover:text-red-500 text-xs font-semibold transition-colors">
                                 ออกจากระบบ
                             </a>
@@ -116,12 +131,12 @@
                     class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium relative group">ติดต่อเรา</a>
             </div>
 
-        <div class="md:hidden text-pink-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-        </div>
+            <div class="md:hidden text-pink-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </div>
         </div>
     </nav>
     <script>
