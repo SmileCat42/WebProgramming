@@ -187,7 +187,7 @@ public void setCourseId(int courseId) {
                 ps2.executeUpdate();
             }
 
-            conn.commit(); // ✅ สำเร็จ commit
+            conn.commit(); //สำเร็จ commit
             courseList = dao.getAllCourses();
             
             FacesContext.getCurrentInstance()
