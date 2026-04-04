@@ -8,6 +8,8 @@
         <title><ui:insert name="title">Home</ui:insert></title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png"
+              href="#{resource['img:icon.png']}" />
 
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <h:outputStylesheet library="css" name="Kanit.css"/>
@@ -34,6 +36,46 @@
             .ui-menu {
                 width: 100% !important;
                 border: none !important;
+            }
+
+            .logout-menu .ui-menuitem-text {
+                color: #dc3545 !important;
+                font-weight: 500;
+            }
+            .logout-menu .ui-menuitem-icon {
+                color: #dc3545 !important;
+            }
+
+            .ui-menu.custom-side-menu .ui-menu-list.ui-widget-content {
+                background-color: #eef5f9 !important;
+            }
+
+            .custom-side-menu .ui-menuitem-link {
+                background-color: transparent !important;
+                color: #495057 !important;
+            }
+
+            .custom-side-menu .ui-menuitem-link:hover {
+                background-color: #dceaf3 !important;
+            }
+            .custom-side-menu .ui-menu-list.ui-widget-content {
+    background-color: #eef5f9 !important;
+}
+
+            /* hover effect */
+            .custom-side-menu .ui-menuitem-link:hover {
+                background-color: #dceaf3 !important;
+            }
+
+            .custom-side-menu.ui-menu,
+            .custom-side-menu .ui-menu-list {
+                background-color: #eef5f9 !important;
+            }
+            .sidebar-admin {
+                background: #ffffff;
+            }
+            .sidebar-admin {
+                background: #eef5f9;
             }
         </style>
     </h:head>
@@ -63,19 +105,20 @@
             </p:menubar>
         </h:form>
 
-        <h:graphicImage library="img" name="bg15.png" style="vertical-align: middle;" />
+        <a href="#">
+            <h:graphicImage library="img" name="bg18.png" style="vertical-align: middle;" /></a>
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 col-lg-2 d-none d-md-block sidebar-admin p-0 shadow-sm">
                     <div class="p-4 text-center border-bottom">
-                        <p:avatar size="xlarge" shape="circle">
+                        <p:avatar shape="circle" style="width:120px;height:120px">
                             <h:graphicImage library="img" name="pf.jpg" />
                         </p:avatar>
                     </div>
 
-                    <h:form>
-                        <p:menu toggleable="true" style="width:100%">
+                    <h:form style="background-color: #eef5f9;">
+                        <p:menu toggleable="true" style="width:100%" styleClass="custom-side-menu">
                             <p:submenu label="Main Menu">
                                 <p:menuitem value="Dashboard" outcome="dashboard" icon="pi pi-chart-bar"/>
                                 <p:menuitem value="Student List" outcome="template" icon="pi pi-users"/>
@@ -87,6 +130,10 @@
                             <p:submenu label="System">
                                 <p:menuitem value="Settings" outcome="template" icon="pi pi-cog"/>
                             </p:submenu>
+                            <p:menuitem value="Logout"
+                                        action="#{loginBean.logout}"
+                                        icon="pi pi-sign-out"
+                                        styleClass="logout-menu"/>
                         </p:menu>
                     </h:form>
                 </div>

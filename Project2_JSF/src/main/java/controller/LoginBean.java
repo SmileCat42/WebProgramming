@@ -34,6 +34,11 @@ public class LoginBean implements Serializable { // @ViewScoped ต้อง imp
         this.password = password;
     }
 
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login?faces-redirect=true";
+    }
+
     // ย้าย Logic จาก doPost มาไว้ที่นี่
     public String login() {
         try {
@@ -44,7 +49,7 @@ public class LoginBean implements Serializable { // @ViewScoped ต้อง imp
                 if ("ADMIN".equalsIgnoreCase(st.getRole())) {
                     FacesContext.getCurrentInstance().getExternalContext()
                             .getSessionMap().put("user", st);
-                    return "dashboard?faces-redirect=true";
+                    return "dashboard?faces-redirect=true";  //Programmatic
                 } else {
                     // ถ้าเป็น student แต่พยายามเข้าหน้า admin
                     FacesContext.getCurrentInstance().addMessage(null,
