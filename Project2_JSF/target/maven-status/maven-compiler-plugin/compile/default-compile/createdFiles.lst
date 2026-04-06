@@ -1,3 +1,4 @@
+controller\ThemeBean.class
 controller\LoginBean.class
 dao\LoginDAO.class
 model\Session.class

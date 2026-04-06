@@ -20,13 +20,7 @@
                 background-color: #f4f7f9;
             }
             .main-content {
-                padding: 20px;
                 min-height: 100vh;
-            }
-            .sidebar-admin {
-                background: #ffffff;
-                border-right: 1px solid #dee2e6;
-                height: 100vh;
             }
             .custom-navbar {
                 margin-bottom: 0;
@@ -45,37 +39,16 @@
             .logout-menu .ui-menuitem-icon {
                 color: #dc3545 !important;
             }
-
-            .ui-menu.custom-side-menu .ui-menu-list.ui-widget-content {
-                background-color: #eef5f9 !important;
+            .sidebar-admin {
+                background: var(--surface-a);
             }
 
             .custom-side-menu .ui-menuitem-link {
-                background-color: transparent !important;
-                color: #495057 !important;
+                color: var(--text-color);
             }
 
             .custom-side-menu .ui-menuitem-link:hover {
-                background-color: #dceaf3 !important;
-            }
-            .custom-side-menu .ui-menu-list.ui-widget-content {
-    background-color: #eef5f9 !important;
-}
-
-            /* hover effect */
-            .custom-side-menu .ui-menuitem-link:hover {
-                background-color: #dceaf3 !important;
-            }
-
-            .custom-side-menu.ui-menu,
-            .custom-side-menu .ui-menu-list {
-                background-color: #eef5f9 !important;
-            }
-            .sidebar-admin {
-                background: #ffffff;
-            }
-            .sidebar-admin {
-                background: #eef5f9;
+                background: var(--surface-hover);
             }
         </style>
     </h:head>
@@ -85,28 +58,37 @@
         <h:form>
             <p:menubar styleClass="custom-navbar px-4 shadow-sm">
                 <p:menuitem outcome="index">
-                    <h:graphicImage library="img" name="icon5.png" height="35" style="vertical-align: middle;" />
+                    <h:graphicImage library="img" name="df5.png" height="35" style="vertical-align: middle;" />
                 </p:menuitem>
 
                 <p:menuitem value="Home" outcome="index" icon="pi pi-home" />
                 <p:menuitem value="About" outcome="dashboard" icon="pi pi-info-circle" />
                 <p:menuitem value="News" outcome="dashboard" icon="pi pi-megaphone" />
-                <p:button value="Logout" icon="pi pi-sign-out" styleClass="ui-button-danger" />
+
+
 
                 <f:facet name="options">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                    <p:selectOneMenu value="#{themeBean.theme}" style="margin-left:10px;">
+                        <f:selectItem itemLabel="☀ Saga" itemValue="saga"/>
+                        <f:selectItem itemLabel="🌧 Vela" itemValue="vela"/>
+                        <f:selectItem itemLabel="🌙 Arya" itemValue="arya"/>
+                        <p:ajax update="@all"/>
+                    </p:selectOneMenu>
                     <div class="ui-input-icon-left mr-2" style="display: inline-block; margin-right: 10px;">
                         <i class="pi pi-search" />
                         <p:inputText placeholder="Search..."/>
                     </div>
                     <p:button value="Search" 
                               styleClass="ui-button-success rounded-pill shadow-sm"
-                              style="padding: 5px 20px; font-weight: 500; border: none; background: linear-gradient(135deg, #28a745 0%, #218838 100%);" />
+                              style="padding: 4px 20px; font-weight: 500; border: none; background: linear-gradient(135deg, #28a745 0%, #218838 100%);" />
+                    </div>
                 </f:facet>
             </p:menubar>
         </h:form>
 
         <a href="#">
-            <h:graphicImage library="img" name="bg18.png" style="vertical-align: middle;" /></a>
+            <h:graphicImage library="img" name="bg19.png" style="vertical-align: middle;" /></a>
 
         <div class="container-fluid">
             <div class="row">
@@ -139,7 +121,7 @@
                 </div>
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
-                    <p:card style="margin-top: 3px; min-height: 80vh;">
+                    <p:card style="min-height: 80vh;">
                         <ui:insert name="content" />
                     </p:card>
                 </main>
