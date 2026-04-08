@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<h1 class="text-3xl text-pink-600 font-bold mb-6 text-center">ติดต่อเรา</h1>
+
+<div class="flex items-center justify-center gap-10 mt-10">
+
+    <!-- 🖼️ รูป -->
+    <img src="/img/bear4.jpg" class="w-64 rounded-2xl">
+
+    <!-- 📩 ฟอร์ม -->
+    <div class="bg-pink-100 p-8 rounded-2xl shadow-lg w-[400px]">
+
+        <form action="/request" method="POST" class="space-y-4">
+
+            <input type="text" name="req_name" placeholder="ชื่อ"
+                class="w-full border rounded-xl p-3">
+
+            <input type="text" name="req_tel" placeholder="เบอร์โทร"
+                class="w-full border rounded-xl p-3">
+
+            <textarea name="req_mes" placeholder="ข้อความ (200 ตัวอักษร)"
+                class="w-full border rounded-xl p-3"></textarea>
+
+            <button class="w-full bg-pink-500 text-white py-3 rounded-xl">
+                ส่งคำร้อง
+            </button>
+
+        </form>
+    </div>
+
+</div>
+    <%- include('partials/footer') %>

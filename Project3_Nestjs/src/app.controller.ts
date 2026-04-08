@@ -30,6 +30,16 @@ export class AppController {
     };
   }
 
+  @Get('contact')
+  @Render('contact')
+  async getContact(@Session() session: any) {
+    return { 
+      dolls: await this.dollService.findAll(),
+      keys: await this.keyService.findAll(),
+      user: session.user || null
+    };
+  }
+
   @Get('/hello')
   getHello(): string {
     return this.appService.getHello();

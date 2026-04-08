@@ -9,7 +9,7 @@
 </script>
 
 <div class="flex justify-between items-center mb-8">
-    <h2 class="font-bold text-3xl text-purple-700">ระบบจัดการข้อมูลสินค้า (CMS)</h2>
+    <h2 class="font-bold text-3xl text-purple-700">ระบบจัดการข้อมูลสินค้า</h2>
     <button onclick="prepareCreate()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-bold shadow-lg transition-all">
         + เพิ่มสินค้าใหม่
     </button>
@@ -150,7 +150,7 @@
         document.getElementById('doll_picture').value = data[prefix + 'picture'];
         document.getElementById('img-preview').src = "/img/" + data[prefix + 'picture'];
 
-        document.getElementById('editor-title').innerText = "📝 แก้ไข" + (type === 'doll' ? 'ตุ๊กตา' : 'พวงกุญแจ');
+        document.getElementById('editor-title').innerText = "แก้ไข" + (type === 'doll' ? 'ตุ๊กตา' : 'พวงกุญแจ');
         document.getElementById('editor-section').classList.remove('hidden');
         document.getElementById('editor-section').scrollIntoView({ behavior: 'smooth' });
     }

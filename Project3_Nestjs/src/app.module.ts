@@ -11,6 +11,7 @@ import { KeyModule } from './key/key.module';
 import { PromotionModule } from './promotion/promotion.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './JWT/auth.module';
+import { RequestModule } from './request/req.module';
 
 import { AppController } from './app.controller'; 
 import { AppService } from './app.service';
@@ -42,6 +43,7 @@ import { AppService } from './app.service';
     PromotionModule,
     UserModule,
     AuthModule,
+    RequestModule,
   ],
   controllers: [AppController], 
   providers: [AppService],  
