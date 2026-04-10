@@ -10,9 +10,8 @@ export class PromotionService {
     private readonly promotionRepository: Repository<Promotion>,
   ) {}
 
-  // ฟังก์ชันดึงข้อมูลโปรโมชั่นทั้งหมด
-  findAll(): Promise<Promotion[]> {
-    return this.promotionRepository.find({
+  async findAll(): Promise<Promotion[]> {
+    return await this.promotionRepository.find({
       order: {
         promotion_id: 'DESC',
       },
