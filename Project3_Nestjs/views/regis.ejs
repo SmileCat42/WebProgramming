@@ -5,8 +5,8 @@
 <div class="min-h-screen flex items-center justify-center bg-pink-50 py-12 px-4">
     <div class="max-w-md w-full bg-white p-8 rounded-2xl shadow-lg border border-pink-100">
         <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-gray-800">สมัครสมาชิก 🧸</h2>
-            <p class="text-pink-400">เข้าร่วมครอบครัว Doll Gift Shop กับเรานะจ๊ะ</p>
+            <h2 class="text-3xl font-bold text-gray-800">สมัครสมาชิก</h2>
+            <p class="text-pink-400">เข้าร่วมครอบครัว Doll Gift Shop</p>
         </div>
 
         <form onsubmit="handleSignup(event)" class="space-y-4">
@@ -83,27 +83,27 @@
 
             if (response.ok) {
                 Swal.fire({
-                    title: 'สมัครสมาชิกสำเร็จ! 🧸',
-                    text: `ยินดีต้อนรับคุณ ${user_fname} เข้าสู่ร้านตุ๊กตาของเราจ้า`,
+                    title: 'สมัครสมาชิกสำเร็จ!',
+                    text: `ยินดีต้อนรับคุณ ${user_fname} เข้าสู่ร้านของเรา`,
                     icon: 'success',
                     confirmButtonColor: '#ec4899',
                     confirmButtonText: 'ไปหน้า Login กันเลย!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '/login'; 
+                        window.location.href = '/auth/login'; 
                     }
                 });
             } else {
                 Swal.fire({
-                    title: 'อุ๊ย! สมัครไม่สำเร็จ',
-                    text: data.message || 'ID นี้อาจจะถูกใช้ไปแล้วนะจ๊ะ',
+                    title: 'สมัครไม่สำเร็จ',
+                    text: data.message || 'ID นี้อาจจะถูกใช้ไปแล้ว',
                     icon: 'error',
                     confirmButtonColor: '#666'
                 });
             }
         } catch (error) {
             console.error('Error:', error);
-            Swal.fire('ระบบขัดข้อง', 'ลองใหม่อีกครั้งนะจ๊ะ', 'warning');
+            Swal.fire('ระบบขัดข้อง', 'ลองใหม่อีกครั้ง', 'warning');
         }
     }
 </script>

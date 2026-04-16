@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>GIFT ME ร้านขายตุ๊กตา พวงกุญแจ กล่องสุ่มราคาพิเศษ</title>
     <link rel="icon" type="image/png" href="/img/logo32.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -131,13 +132,39 @@
                     class="transition-all duration-300 hover:scale-110 text-gray-600 hover:text-pink-500 font-medium relative group">ติดต่อเรา</a>
             </div>
 
-            <div class="md:hidden text-pink-500">
+            <div class="md:hidden text-pink-500 cursor-pointer" onclick="toggleMenu()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </div>
         </div>
+
+        <div id="mobileMenu" class="hidden md:hidden flex flex-col gap-4 px-6 py-6 bg-pink-100">
+
+            <a href="/" class="text-gray-700 hover:text-pink-500">หน้าแรก</a>
+            <a href="/show" class="text-gray-700 hover:text-pink-500">สินค้า</a>
+            <a href="/promotion" class="text-gray-700 hover:text-pink-500">โปรโมชั่น</a>
+            <a href="/contact" class="text-gray-700 hover:text-pink-500">ติดต่อเรา</a>
+
+            <hr class="border-pink-200">
+
+            <% if (!user) { %>
+                <a href="/auth/login" class="bg-pink-400 text-white text-center py-2 rounded-full font-bold">
+                    เข้าสู่ระบบ
+                </a>
+                <% } else { %>
+                    <div class="text-pink-600 font-bold">
+                        🧸 <%= user.user_fname %>
+                    </div>
+
+                    <a href="/auth/logout" onclick="return handleLogout()" class="text-red-500 text-sm">
+                        ออกจากระบบ
+                    </a>
+                    <% } %>
+
+        </div>
+  
     </nav>
     <script>
         // ดึงชื่อที่เทอเก็บไว้ตอน Login สำเร็จออกมา
@@ -148,6 +175,9 @@
             document.getElementById('display-fname').innerText = userName;
         }
 
-
+        function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+}
     </script>
     <div class="max-w-7xl mx-auto p-10">

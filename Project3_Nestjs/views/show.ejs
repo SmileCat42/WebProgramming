@@ -8,7 +8,7 @@
 
     <h2 class="text-3xl font-bold mb-6 mt-20">Dolls</h2>
 
-    <div class="grid grid-cols-4 gap-6">
+    <div class="grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
         <% dolls.forEach(d=> { %>
 
@@ -37,7 +37,7 @@
 
     <h2 class="text-3xl font-bold mt-12 mb-6">Keychains</h2>
 
-    <div class="grid grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
 
         <% keys.forEach(k=> { %>
 
@@ -63,13 +63,13 @@
 
     </div>
 
-    <div class="flex items-center justify-center gap-10 mt-10">
+    <div class="flex flex-col md:flex-row items-center justify-center gap-6 mt-10 px-4">
 
     <!-- 🖼️ รูป -->
     <img src="/img/bear4.jpg" alt="ติดต่อฉัน ตุ๊กตาหมี" class="w-64 rounded-2xl">
 
     <!-- 📩 ฟอร์ม -->
-    <div class="bg-pink-100 p-8 rounded-2xl shadow-lg w-[400px]">
+    <div class="bg-pink-100 p-8 rounded-2xl shadow-lg w-full max-w-sm">
         <h2 class="text-2xl text-pink-600 font-bold mb-6 text-center">สอบถามสินค้า</h2>
 
         <form action="/request" method="POST" class="space-y-4">
