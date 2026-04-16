@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html">
+
+    <ui:composition>
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+
+            <!-- indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- images -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="#{resource['img:content3.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="d-block w-100"/>
+                </div>
+                <div class="carousel-item">
+                    <img src="#{resource['img:content8.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="d-block w-100"/>
+                </div>
+                <div class="carousel-item">
+                    <img src="#{resource['img:content7.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="d-block w-100"/>
+                </div>
+            </div>
+
+            <!-- controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+
+        <div class="container" style="font-family: 'Kanit', sans-serif;">
+
+            <div class="container my-5">
+                <div class="row g-4 justify-content-center">
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow">
+                            <img src="#{resource['img:content6.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="card-img-top" />
+                            <div class="card-body">
+                                <h5 class="card-title">How to do enrollment</h5>
+                                <p class="card-text">Admin ควรศึกษาขั้นตอนการลงทะเบียนเรียน 
+                                    รวมถึงการตรวจสอบข้อมูลการลงทะเบียนนักเรียนผ่านระบบ 
+                                    เพื่อสามารถพิจารณาการกดยอมรับได้ ทางโรงเรียนจะอัพเดทรายละเอียด
+                                    เนื้อหาประจำเดือนนี้ให้อีกครั้ง โปรด Admin ทุกท่าน ศึกษาอย่างละเอียด <br/>(Special thanks to PHINMA University of Iloilo for the image.</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow">
+                            <img src="#{resource['img:content2.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="card-img-top" />
+                            <div class="card-body">
+                                <h5 class="card-title">Power up! my English</h5>
+                                <p class="card-text">ข่าวดีประจำเดือนนี้! 
+                                    ทางโรงเรียนเปิดหลักสูตรภาษาอังกฤษสำหรับพนักงาน 
+                                    เพื่อเพิ่มประสิทธิภาพในการสื่อสารกับลูกค้าและสกิลในการทำงาน</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow">
+                            <img src="#{resource['img:content4.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="card-img-top" />
+                            <div class="card-body">
+                                <h5 class="card-title">Performance Evaluation</h5>
+                                <p class="card-text">ขอบคุณสำนักสร้างสรรค์โอกาสและนวัตกรรม</p>
+                                <a href="#" class="btn btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>

@@ -11,5 +11,6 @@ model\Course.class
 controller\CourseBean.class
 model\Student.class
 controller\DashboardBean.class
+controller\NavigationBean.class
 com\mycompany\mavenproject1\JakartaRestConfiguration.class
 filter\listFilter.class

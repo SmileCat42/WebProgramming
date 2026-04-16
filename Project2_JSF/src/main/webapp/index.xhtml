@@ -114,24 +114,25 @@
 
                 <f:facet name="options">
                     <div style="display: flex; align-items: center; gap: 10px;">
-                    <p:selectOneMenu value="#{themeBean.theme}" style="margin-left:10px;">
-                        <f:selectItem itemLabel="☀ Saga" itemValue="saga"/>
-                        <f:selectItem itemLabel="🌧 Vela" itemValue="vela"/>
-                        <f:selectItem itemLabel="🌙 Arya" itemValue="arya"/>
-                        <p:ajax update="@all"/>
-                    </p:selectOneMenu>
-                    <div class="ui-input-icon-left mr-2" style="display: inline-block; margin-right: 10px;">
-                        <i class="pi pi-search" />
-                        <p:inputText placeholder="Search..."/>
-                    </div>
-                    <p:button value="Search" 
-                              styleClass="ui-button-success rounded-pill shadow-sm"
-                              style="padding: 4px 20px; font-weight: 500; border: none; background: linear-gradient(135deg, #28a745 0%, #218838 100%);" />
-                    <p:button value="Login"
-                              outcome="login"
-                              icon="pi pi-sign-in"
-                              styleClass="ui-button-primary rounded-pill shadow-sm"
-                              style="margin-left:10px; padding: 5px 20px; font-weight: 500;" />
+                        <p:selectOneMenu value="#{themeBean.theme}" style="margin-left:10px;">
+                            <f:selectItem itemLabel="☀ Saga" itemValue="saga"/>
+                            <f:selectItem itemLabel="🌧 Vela" itemValue="vela"/>
+                            <f:selectItem itemLabel="🌙 Arya" itemValue="arya"/>
+                            <p:ajax update="@all"/>
+                        </p:selectOneMenu>
+                        <div class="ui-input-icon-left mr-2" style="display: inline-block; margin-right: 10px;">
+                            <i class="pi pi-search" />
+                            <p:inputText placeholder="Search..."/>
+                        </div>
+                        <p:button value="Search" 
+                                  styleClass="ui-button-success rounded-pill shadow-sm"
+                                  style="padding: 4px 20px; font-weight: 500; border: none; background: linear-gradient(135deg, #28a745 0%, #218838 100%);" />
+                        <p:commandButton value="Login"
+                                         action="#{navigationBean.navigate('login')}"
+                                         update="mainContent" 
+                                         icon="pi pi-sign-in"
+                                         styleClass="ui-button-primary rounded-pill shadow-sm"
+                                         style="margin-left:10px; padding: 5px 20px; font-weight: 500;" />
                     </div>
                 </f:facet>
             </p:menubar>
@@ -146,84 +147,11 @@
         </div>
 
 
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 
-            <!-- indicators -->
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
-            </div>
+            <h:panelGroup id="mainContent">
+                <ui:include src="#{navigationBean.currentPage}" />
+            </h:panelGroup>
 
-            <!-- images -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="#{resource['img:content3.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="d-block w-100"/>
-                </div>
-                <div class="carousel-item">
-                    <img src="#{resource['img:content8.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="d-block w-100"/>
-                </div>
-                <div class="carousel-item">
-                    <img src="#{resource['img:content7.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="d-block w-100"/>
-                </div>
-            </div>
-
-            <!-- controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-
-        </div>
-
-        <div class="container" style="font-family: 'Kanit', sans-serif;">
-
-            <div class="container my-5">
-                <div class="row g-4 justify-content-center">
-
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow">
-                            <img src="#{resource['img:content6.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">How to do enrollment</h5>
-                                <p class="card-text">Admin ควรศึกษาขั้นตอนการลงทะเบียนเรียน 
-                                    รวมถึงการตรวจสอบข้อมูลการลงทะเบียนนักเรียนผ่านระบบ 
-                                    เพื่อสามารถพิจารณาการกดยอมรับได้ ทางโรงเรียนจะอัพเดทรายละเอียด
-                                    เนื้อหาประจำเดือนนี้ให้อีกครั้ง โปรด Admin ทุกท่าน ศึกษาอย่างละเอียด <br/>(Special thanks to PHINMA University of Iloilo for the image.</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow">
-                            <img src="#{resource['img:content2.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">Power up! my English</h5>
-                                <p class="card-text">ข่าวดีประจำเดือนนี้! 
-                                    ทางโรงเรียนเปิดหลักสูตรภาษาอังกฤษสำหรับพนักงาน 
-                                    เพื่อเพิ่มประสิทธิภาพในการสื่อสารกับลูกค้าและสกิลในการทำงาน</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 shadow">
-                            <img src="#{resource['img:content4.jpg']}" alt="ประชาสัมพันธ์ ADMIN comsci school" class="card-img-top" />
-                            <div class="card-body">
-                                <h5 class="card-title">Performance Evaluation</h5>
-                                <p class="card-text">ขอบคุณสำนักสร้างสรรค์โอกาสและนวัตกรรม</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
         <!-- Bootstrap JS -->
         <h:outputScript library="js" name="bootstrap.bundle.min.js" />
